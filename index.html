@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIGA AGUSTINOS</title>
+    <title>LIGA 2 ESOA - GLOBAL SYNC</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         /* Texto un poco más pequeño globalmente */
@@ -115,7 +115,7 @@
     <div id="auth-modal" class="modal"><div class="modal-content"><h3>ADMIN LOGIN</h3><input type="text" id="user" placeholder="Usuario"><input type="password" id="pass" placeholder="Contraseña"><button onclick="login()">ENTRAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="error-modal" class="modal" onclick="closeModals()"><div class="modal-content"><div style="color:red; font-weight:bold;">Q NO ENTRES CABROONNN</div><button>CERRAR</button></div></div>
     
-    <div id="calendario-modal" class="modal"><div class="modal-content"><h3 id="cal-title">AÑADIR PARTIDO</h3><input type="hidden" id="cal-index"><input type="text" id="cal-e1" placeholder="EQUIPO 1"><input type="text" id="cal-e2" placeholder="EQUIPO 2"><input type="text" id="cal-hora" placeholder="HORA Y DIA"><button onclick="saveData('calendario')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
+    <div id="calendario-modal" class="modal"><div class="modal-content"><h3 id="cal-title">AÑADIR PARTIDO</h3><input type="hidden" id="cal-index"><input type="text" id="cal-e1" placeholder="EQUIPO 1"><input type="text" id="cal-e2" placeholder="EQUIPO 2"><input type="text" id="cal-hora" placeholder="DIA Y HORA"><button onclick="saveData('calendario')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="clausulazos-modal" class="modal"><div class="modal-content"><h3 id="cl-title">NUEVO CLAUSULAZO</h3><input type="hidden" id="cl-index"><textarea id="cl-text" rows="4" placeholder="Escribe el clausulazo..."></textarea><button onclick="saveData('clausulazos')">PUBLICAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="goleadores-modal" class="modal"><div class="modal-content"><h3 id="g-title">AÑADIR JUGADOR</h3><input type="hidden" id="g-index"><input type="text" id="g-name" placeholder="NOMBRE"><input type="number" id="g-goals" placeholder="GOLES"><input type="number" id="g-pj" placeholder="PJ"><button onclick="saveData('goleadores')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="clasificacion-modal" class="modal"><div class="modal-content"><h3 id="c-title">AÑADIR EQUIPO</h3><input type="hidden" id="c-index"><input type="text" id="c-team" placeholder="EQUIPO"><input type="number" id="c-pj" placeholder="PJ"><input type="number" id="c-pts" placeholder="PUNTOS"><input type="text" id="c-money" placeholder="DINERO"><button onclick="saveData('clasificacion')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
@@ -293,7 +293,7 @@
             });
             document.getElementById('clasificacion-table').innerHTML = cHtml + `</table>`;
 
-            let calHtml = `<table><tr><th>PARTIDO</th><th>HORA</th><th></th></tr>`;
+            let calHtml = `<table><tr><th>PARTIDO</th><th>DIA</th><th></th></tr>`;
             globalData.calendario.forEach((c, idx) => {
                 calHtml += `<tr><td>${c.e1} <span class="vs">VS</span> ${c.e2}</td><td>${c.hora}</td>
                 <td><div class="admin-controls" style="display:${disp}"><span class="btn-mini btn-edit" onclick="openEditModal('calendario', ${idx})">✎</span><span class="btn-mini btn-del" onclick="deleteItem('calendario', ${idx})">X</span></div></td></tr>`;
@@ -324,4 +324,3 @@
     </script>
 </body>
 </html>
-
