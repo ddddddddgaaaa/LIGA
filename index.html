@@ -99,7 +99,7 @@
     <div class="header">BIENVENIDOS</div>
 
     <div class="top-nav">
-        <button id="toggle-view-btn" class="plantilla-main-btn phone-btn" onclick="toggleView()">TELEFONO</button>
+        <button id="toggle-view-btn" class="plantilla-main-btn phone-btn" onclick="toggleView()">MODO MÓVIL</button>
         <button class="plantilla-main-btn" onclick="openModal('plantillas-modal')">PLANTILLA</button>
     </div>
 
@@ -130,14 +130,13 @@
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Fran"];
 
-        // Функция переключения режима TELEFONO / MODO IPAD
         function toggleView() {
             const container = document.getElementById('main-container');
             const btn = document.getElementById('toggle-view-btn');
             
             if (container.classList.contains('mobile-mode')) {
                 container.classList.remove('mobile-mode');
-                btn.innerText = "TELEFONO";
+                btn.innerText = "MODO MÓVIL";
             } else {
                 container.classList.add('mobile-mode');
                 btn.innerText = "MODO IPAD";
