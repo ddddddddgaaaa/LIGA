@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIGA AGUSTINOS</title>
+    <title>LIGA 2 ESOA - GLOBAL SYNC</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         /* Texto un poco más pequeño globalmente */
@@ -99,7 +99,7 @@
     <div class="header">BIENVENIDOS</div>
 
     <div class="top-nav">
-        <button id="toggle-view-btn" class="plantilla-main-btn phone-btn" onclick="toggleView()">TELÉFONO</button>
+        <button id="toggle-view-btn" class="plantilla-main-btn phone-btn" onclick="toggleView()">TELEFONO</button>
         <button class="plantilla-main-btn" onclick="openModal('plantillas-modal')">PLANTILLA</button>
     </div>
 
@@ -130,17 +130,17 @@
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Fran"];
 
-        // Función переключения режима Телефон / IPAD
+        // Функция переключения режима TELEFONO / MODO IPAD
         function toggleView() {
             const container = document.getElementById('main-container');
             const btn = document.getElementById('toggle-view-btn');
             
             if (container.classList.contains('mobile-mode')) {
                 container.classList.remove('mobile-mode');
-                btn.innerText = "TELÉFONO";
+                btn.innerText = "TELEFONO";
             } else {
                 container.classList.add('mobile-mode');
-                btn.innerText = "IPAD";
+                btn.innerText = "MODO IPAD";
             }
         }
 
@@ -324,4 +324,3 @@
     </script>
 </body>
 </html>
-
