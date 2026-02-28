@@ -6,13 +6,17 @@
     <title>LIGA 2 ESOA - GLOBAL SYNC</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { height:100vh; background:#0a0a14; color:#e0e0ff; font-family:Arial, sans-serif; overflow:hidden; }
-        .header { text-align:center; padding:10px; font-size:3rem; font-weight:bold; color:#ff00ea; text-shadow:0 0 20px #ff00ea; letter-spacing:10px; }
+        /* Texto un poco más pequeño globalmente */
+        body { height:100vh; background:#0a0a14; color:#e0e0ff; font-family:Arial, sans-serif; overflow:hidden; font-size: 0.9rem; }
+        .header { text-align:center; padding:10px; font-size:2.5rem; font-weight:bold; color:#ff00ea; text-shadow:0 0 20px #ff00ea; letter-spacing:10px; }
         
         .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; }
-        .plantilla-main-btn { background: #ff00ea; color: white; padding: 10px 30px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px #ff00ea66; transition: 0.3s; text-transform: uppercase; }
+        .plantilla-main-btn { background: #ff00ea; color: white; padding: 8px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px #ff00ea66; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .plantilla-main-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px #ff00ea; }
         
+        /* Marca de agua Vadym */
+        .watermark { position: fixed; top: 10px; left: 10px; font-size: 0.7rem; color: rgba(255, 255, 255, 0.2); z-index: 5; pointer-events: none; font-weight: bold; text-transform: uppercase; }
+
         /* Кнопка телефона */
         .phone-btn { background: #00e5ff; color: #000; box-shadow: 0 0 15px #00e5ff66; }
         .phone-btn:hover { box-shadow: 0 0 25px #00e5ff; }
@@ -35,7 +39,7 @@
         }
 
         .panel { background:rgba(20,20,40,0.8); border:1px solid #ff00ea44; border-radius:15px; padding:15px; position:relative; display:flex; flex-direction:column; backdrop-filter: blur(10px); height: 100%; overflow: hidden; }
-        .panel-title { text-align:center; color:#ff00ea; font-size:1.5rem; margin-bottom:15px; font-weight:bold; text-transform: uppercase; }
+        .panel-title { text-align:center; color:#ff00ea; font-size:1.2rem; margin-bottom:15px; font-weight:bold; text-transform: uppercase; }
         
         .data-box { flex-grow:1; background:rgba(0,0,0,0.3); border-radius:10px; overflow-y:auto; padding:10px; border: 1px solid rgba(255, 0, 234, 0.1); }
         .data-box::-webkit-scrollbar { width: 6px; }
@@ -52,44 +56,45 @@
             flex-shrink: 0; 
         }
 
-        .edit-btn { position:absolute; top:10px; right:10px; cursor:pointer; font-size:1.2rem; display:none; opacity:0.5; z-index: 10; transition: 0.3s; }
+        .edit-btn { position:absolute; top:10px; right:10px; cursor:pointer; font-size:1rem; display:none; opacity:0.5; z-index: 10; transition: 0.3s; }
         .edit-btn:hover { opacity:1; transform: scale(1.2); }
         
         .player-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .player-card { background: #1a237e; border-radius: 10px; padding: 12px; text-align: center; border-bottom: 4px solid #ff00ea; position: relative; min-height: 90px; display: flex; flex-direction: column; justify-content: center; }
-        .player-name { font-weight: bold; font-size: 0.85rem; color: white; text-transform: uppercase; margin-bottom: 2px; }
-        .player-goals-count { font-size: 0.75rem; color: #ff00ea; font-weight: bold; }
-        .captain-tag { color: #ffcc00; font-size: 0.65rem; font-weight: bold; letter-spacing: 1px; margin-top: 2px; }
+        .player-name { font-weight: bold; font-size: 0.75rem; color: white; text-transform: uppercase; margin-bottom: 2px; }
+        .player-goals-count { font-size: 0.7rem; color: #ff00ea; font-weight: bold; }
+        .captain-tag { color: #ffcc00; font-size: 0.6rem; font-weight: bold; letter-spacing: 1px; margin-top: 2px; }
         
         .player-admin-tools { position: absolute; top: 5px; right: 5px; display: none; }
-        .btn-p-edit { color: #00e5ff; font-size: 0.7rem; cursor: pointer; margin-left: 5px; }
-        .btn-p-del { color: #ff4444; font-size: 0.7rem; cursor: pointer; margin-left: 5px; }
+        .btn-p-edit { color: #00e5ff; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
+        .btn-p-del { color: #ff4444; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
 
-        .team-select-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid #ff00ea; color: white; padding: 15px; margin: 10px 0; border-radius: 10px; width: 100%; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .team-select-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid #ff00ea; color: white; padding: 12px; margin: 8px 0; border-radius: 10px; width: 100%; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.8rem; }
         .team-select-btn:hover { background: #ff00ea; }
 
-        table { width:100%; border-collapse:collapse; font-size:0.85rem; }
-        th { color:#ff00ea; border-bottom:1px solid #ff00ea44; padding:8px; text-align: center; font-size: 0.75rem; position: sticky; top: 0; background: #141428; z-index: 5; }
-        td { padding:10px; text-align:center; border-bottom:1px solid #ffffff05; }
-        .vs { color: #ff00ea; font-weight: bold; font-size: 0.7rem; }
+        table { width:100%; border-collapse:collapse; font-size:0.75rem; }
+        th { color:#ff00ea; border-bottom:1px solid #ff00ea44; padding:6px; text-align: center; font-size: 0.65rem; position: sticky; top: 0; background: #141428; z-index: 5; }
+        td { padding:8px; text-align:center; border-bottom:1px solid #ffffff05; }
+        .vs { color: #ff00ea; font-weight: bold; font-size: 0.65rem; }
         
         .admin-controls { display: none; margin-left: 5px; }
-        .btn-mini { background: none; border: none; cursor: pointer; font-size: 0.8rem; padding: 2px; transition: 0.2s; display: inline-block; width: auto; margin: 0 2px; }
+        .btn-mini { background: none; border: none; cursor: pointer; font-size: 0.75rem; padding: 2px; transition: 0.2s; display: inline-block; width: auto; margin: 0 2px; }
         .btn-del { color: #ff4444; }
         .btn-edit { color: #00e5ff; }
         .dinero-txt { color: #00ff88; font-weight: bold; }
 
         .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:100; align-items:center; justify-content:center; }
         .modal-content { background:#1a1a2e; padding:30px; border:1px solid #ff00ea; border-radius:15px; width:450px; text-align:center; box-shadow: 0 0 30px #ff00ea44; max-height: 85vh; overflow-y: auto; }
-        input, textarea { width:100%; padding:12px; margin:10px 0; background:#0a0a14; border:1px solid #ff00ea44; color:white; border-radius:8px; }
-        button { width:100%; padding:14px; background:#ff00ea; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; }
+        input, textarea { width:100%; padding:10px; margin:8px 0; background:#0a0a14; border:1px solid #ff00ea44; color:white; border-radius:8px; font-size: 0.85rem; }
+        button { width:100%; padding:12px; background:#ff00ea; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; font-size: 0.85rem; }
         
-        #auth-trigger { position:fixed; top:10px; right:10px; cursor:pointer; z-index:20; font-size:1.5rem; opacity: 0.2; transition: 0.5s; }
+        #auth-trigger { position:fixed; top:10px; right:10px; cursor:pointer; z-index:20; font-size:1.2rem; opacity: 0.2; transition: 0.5s; }
         #auth-trigger:hover { opacity: 1; }
     </style>
 </head>
 <body>
 
+    <div class="watermark">Hecho por Vadym</div>
     <div id="auth-trigger" onclick="openModal('auth-modal')">🔐</div>
     <div class="header">BIENVENIDOS</div>
 
@@ -125,7 +130,7 @@
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Fran"];
 
-        // Функция переключения режима Телефон / Десктоп
+        // Función переключения режима Телефон / IPAD
         function toggleView() {
             const container = document.getElementById('main-container');
             const btn = document.getElementById('toggle-view-btn');
@@ -135,7 +140,7 @@
                 btn.innerText = "TELÉFONO";
             } else {
                 container.classList.add('mobile-mode');
-                btn.innerText = "ESCRITORIO";
+                btn.innerText = "IPAD";
             }
         }
 
