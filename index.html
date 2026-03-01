@@ -125,6 +125,17 @@
             transform: scale(1.05);
             box-shadow: 0 0 25px #00e5ff;
         }
+        /* Полноэкранный модал для всех логов */
+        #full-logs-modal .modal-content {
+            width: 95%;
+            max-width: 1200px;
+            height: 95vh;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        #full-logs-list {
+            max-height: none;
+        }
     </style>
 </head>
 <body>
@@ -147,33 +158,46 @@
     <div id="welcome-modal" class="modal">
         <div class="modal-content">
             <h1 style="color:#ff00ea; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">¿QUIÉN ERES?</h1>
-
             <!-- 3 отдела по командам -->
             <div class="team-group">
                 <h3>PINGÜINOS LOCOS</h3>
                 <div id="team-pinguinos" class="names-cloud"></div>
             </div>
-
             <div class="team-group">
                 <h3>PAJILLAS</h3>
                 <div id="team-pajillas" class="names-cloud"></div>
             </div>
-
             <div class="team-group">
                 <h3>ATLÉTICO DE JHONSY</h3>
                 <div id="team-jhonsy" class="names-cloud"></div>
             </div>
-
             <!-- Кнопка добавления игрока — видна только админу -->
             <button id="add-player-btn" style="display:none;" onclick="addPlayerInWelcome()">+ Добавить игрока</button>
-
             <p style="font-size: 0.7rem; color: #777; margin-top: 20px;">Selecciona tu nombre para continuar</p>
             <div class="admin-access-circle" onclick="openModal('auth-modal')"></div>
         </div>
     </div>
 
+    <!-- Логи (8 последних + кнопка VER MÁS) -->
+    <div id="logs-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:#00e5ff;">LOGS DE ACCESO</h2>
+            <div id="logs-list" class="data-box" style="margin-top:20px; max-height:400px;"></div>
+            <button id="ver-mas-logs" style="display:none; margin-top:15px;" onclick="openFullLogs()">VER MÁS</button>
+            <button onclick="closeModals()">CERRAR</button>
+        </div>
+    </div>
+
+    <!-- Полноэкранный список всех логов -->
+    <div id="full-logs-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:#00e5ff;">TODOS LOS LOGS DE ACCESO</h2>
+            <div id="full-logs-list" class="data-box" style="margin-top:20px;"></div>
+            <button onclick="closeModals()">CERRAR</button>
+        </div>
+    </div>
+
     <!-- Остальные модальные окна без изменений -->
-    <div id="logs-modal" class="modal"><div class="modal-content"><h2 style="color:#00e5ff;">LOGS DE ACCESO</h2><div id="logs-list" class="data-box" style="margin-top:20px; max-height:400px;"></div><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="plantillas-modal" class="modal"><div class="modal-content"><h2 style="color:#ff00ea; margin-bottom:20px;">EQUIPOS</h2><button class="team-select-btn" onclick="showTeam('Pingüinos Locos')">Pingüinos Locos</button><button class="team-select-btn" onclick="showTeam('Atlético de Jhonsy')">Atlético de Jhonsy</button><button class="team-select-btn" onclick="showTeam('Pajillas')">Pajillas</button><button style="background:transparent; border:1px solid grey; margin-top:20px;" onclick="closeModals()">CERRAR</button></div></div>
     <div id="team-list-modal" class="modal"><div class="modal-content"><h2 id="team-name-title" style="color:#ff00ea; text-transform: uppercase;"></h2><div id="admin-team-controls" style="display:none; margin-bottom:10px;"><button onclick="addPlayerPrompt()" style="padding:5px; font-size:0.7rem; width:auto; background:#00e5ff;">+ AÑADIR JUGADOR</button></div><div id="players-list-content" class="player-grid"></div><button style="margin-top:20px; background: #333;" onclick="openModal('plantillas-modal')">VOLVER</button></div></div>
     <div id="auth-modal" class="modal"><div class="modal-content"><h3>ADMIN LOGIN</h3><input type="text" id="user" placeholder="Usuario"><input type="password" id="pass" placeholder="Contraseña"><button onclick="login()">ENTRAR</button><button onclick="closeModals()">CERRAR</button></div></div>
@@ -192,7 +216,6 @@
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
 
-        // ─── ОБНОВЛЁННАЯ ФУНКЦИЯ ПОКАЗА ОКНА ВЫБОРА ───
         function showWelcomeScreen() {
             const teamNames = {
                 "Pingüinos Locos": "team-pinguinos",
@@ -200,7 +223,6 @@
                 "Atlético de Jhonsy": "team-jhonsy"
             };
 
-            // Очищаем списки
             Object.values(teamNames).forEach(id => {
                 document.getElementById(id).innerHTML = '';
             });
@@ -236,47 +258,38 @@
                 document.getElementById('team-pinguinos').innerHTML = html;
             }
 
-            // Показываем кнопку добавления только админу
             document.getElementById('add-player-btn').style.display = isAdmin ? 'block' : 'none';
-
             openModal('welcome-modal');
         }
 
-        // ─── ФУНКЦИЯ ДОБАВЛЕНИЯ ИГРОКА ПРЯМО ИЗ ОКНА ВЫБОРА (ТОЛЬКО АДМИН) ───
         function addPlayerInWelcome() {
-            const name = prompt("Введите имя нового игрока:");
+            const name = prompt("Ingrese nombre del nuevo jugador:");
             if (!name || name.trim() === "") return;
 
-            const team = prompt("В какую команду добавить?\n1 - Pingüinos Locos\n2 - Pajillas\n3 - Atlético de Jhonsy", "1");
+            const team = prompt("¿En qué equipo añadir?\n1 - Pingüinos Locos\n2 - Pajillas\n3 - Atlético de Jhonsy", "1");
             let selectedTeam;
 
             if (team === "1") selectedTeam = "Pingüinos Locos";
             else if (team === "2") selectedTeam = "Pajillas";
             else if (team === "3") selectedTeam = "Atlético de Jhonsy";
             else {
-                alert("Неверный выбор команды.");
+                alert("Elección de equipo inválida.");
                 return;
             }
 
             if (!globalData.teams) globalData.teams = {};
             if (!globalData.teams[selectedTeam]) globalData.teams[selectedTeam] = [];
 
-            // Проверяем, нет ли уже такого игрока
             const exists = globalData.teams[selectedTeam].some(p => (typeof p === 'object' ? p.n : p) === name.trim());
             if (exists) {
-                alert("Игрок с таким именем уже есть в этой команде.");
+                alert("Ya existe un jugador con ese nombre en este equipo.");
                 return;
             }
 
             globalData.teams[selectedTeam].push({ n: name.trim(), g: 0 });
-
-            // Сохраняем изменения
             sync();
-
-            // Обновляем окно выбора
             showWelcomeScreen();
-
-            alert(`Игрок "${name}" добавлен в команду "${selectedTeam}"!`);
+            alert(`Jugador "${name}" añadido al equipo "${selectedTeam}"!`);
         }
 
         async function saveUserSession(name) {
@@ -292,17 +305,44 @@
             await sync();
         }
 
-        function renderLogs() {
-            if (!globalData.accessLogs) return;
+        function renderLogs(limit = 8) {
+            if (!globalData.accessLogs || globalData.accessLogs.length === 0) {
+                document.getElementById('logs-list').innerHTML = "No hay registros";
+                document.getElementById('ver-mas-logs').style.display = 'none';
+                return;
+            }
+
             let html = "";
-            globalData.accessLogs.forEach((log, idx) => {
+            // Показываем только последние limit записей (сверху новые)
+            const recentLogs = globalData.accessLogs.slice(0, limit);
+            recentLogs.forEach((log, idx) => {
                 html += `<div class="log-item"><span><b>${log.name}</b></span> <span style="color:#00e5ff;">${log.time}</span>
                 <div class="admin-controls" style="display:inline-block; margin-left: 10px;">
                     <span class="btn-mini btn-edit" onclick="editLog(${idx})">✎</span>
                     <span class="btn-mini btn-del" onclick="deleteLog(${idx})">X</span>
                 </div></div>`;
             });
-            document.getElementById('logs-list').innerHTML = html || "No hay registros";
+            document.getElementById('logs-list').innerHTML = html;
+
+            // Показываем кнопку VER MÁS, если логов больше 8
+            document.getElementById('ver-mas-logs').style.display = globalData.accessLogs.length > limit ? 'block' : 'none';
+        }
+
+        function openFullLogs() {
+            if (!globalData.accessLogs || globalData.accessLogs.length === 0) {
+                document.getElementById('full-logs-list').innerHTML = "No hay registros";
+            } else {
+                let html = "";
+                globalData.accessLogs.forEach((log, idx) => {
+                    html += `<div class="log-item"><span><b>${log.name}</b></span> <span style="color:#00e5ff;">${log.time}</span>
+                    <div class="admin-controls" style="display:inline-block; margin-left: 10px;">
+                        <span class="btn-mini btn-edit" onclick="editLog(${idx})">✎</span>
+                        <span class="btn-mini btn-del" onclick="deleteLog(${idx})">X</span>
+                    </div></div>`;
+                });
+                document.getElementById('full-logs-list').innerHTML = html;
+            }
+            openModal('full-logs-modal');
         }
 
         function deleteLog(idx) {
@@ -329,10 +369,7 @@
                 isAdmin = true;
                 document.querySelectorAll('.edit-btn').forEach(b => b.style.display = 'block');
                 document.getElementById('btn-logs-header').style.display = 'block';
-                // Показываем кнопку добавления в окне выбора (если оно открыто)
-                if (document.getElementById('add-player-btn')) {
-                    document.getElementById('add-player-btn').style.display = 'block';
-                }
+                document.getElementById('add-player-btn').style.display = 'block';
                 render();
                 renderLogs();
                 closeModals();
@@ -351,9 +388,7 @@
                     showWelcomeScreen();
                     if(isAdmin) {
                         renderLogs();
-                        if (document.getElementById('add-player-btn')) {
-                            document.getElementById('add-player-btn').style.display = 'block';
-                        }
+                        document.getElementById('add-player-btn').style.display = 'block';
                     }
                 }
             } catch (e) { console.error("Error loading"); }
@@ -485,7 +520,15 @@
             document.getElementById('clausulazos-list').innerHTML = clHtml || 'Sin noticias';
         }
 
-        function openModal(id) { closeModals(); document.getElementById(id).style.display = 'flex'; }
+        function openModal(id) { 
+            closeModals(); 
+            document.getElementById(id).style.display = 'flex'; 
+            // Если открываем логи — сразу рендерим 8 последних
+            if (id === 'logs-modal') {
+                renderLogs(8);
+            }
+        }
+
         function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
         function toggleView() {
             const container = document.getElementById('main-container');
