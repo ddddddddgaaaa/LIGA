@@ -8,14 +8,14 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body { height:100vh; background:#0a0a14; color:#e0e0ff; font-family:Arial, sans-serif; overflow:hidden; font-size: 0.9rem; }
         .header { text-align:center; padding:10px; font-size:2.5rem; font-weight:bold; color:#ff00ea; text-shadow:0 0 20px #ff00ea; letter-spacing:10px; }
-   
+ 
         @media (max-width: 600px) {
             .header { font-size: 1.5rem; letter-spacing: 5px; padding-top: 40px; }
         }
         .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; }
         .plantilla-main-btn { background: #ff00ea; color: white; padding: 8px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px #ff00ea66; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .plantilla-main-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px #ff00ea; }
-   
+ 
         .watermark { position: fixed; top: 10px; left: 10px; font-size: 0.7rem; color: rgba(255, 255, 255, 0.2); z-index: 5; pointer-events: none; font-weight: bold; text-transform: uppercase; }
         .phone-btn { background: #00e5ff; color: #000; box-shadow: 0 0 15px #00e5ff66; }
         .phone-btn:hover { box-shadow: 0 0 25px #00e5ff; }
@@ -24,7 +24,7 @@
         .container.mobile-mode .panel { min-height: 400px; margin-bottom: 15px; flex-shrink: 0; }
         .panel { background:rgba(20,20,40,0.8); border:1px solid #ff00ea44; border-radius:15px; padding:15px; position:relative; display:flex; flex-direction:column; backdrop-filter: blur(10px); height: 100%; overflow: hidden; }
         .panel-title { text-align:center; color:#ff00ea; font-size:1.2rem; margin-bottom:15px; font-weight:bold; text-transform: uppercase; }
-   
+ 
         .data-box { flex-grow:1; background:rgba(0,0,0,0.3); border-radius:10px; overflow-y:auto; padding:10px; border: 1px solid rgba(255, 0, 234, 0.1); }
         .data-box::-webkit-scrollbar { width: 6px; }
         .data-box::-webkit-scrollbar-thumb { background: #ff00ea; border-radius: 10px; }
@@ -35,22 +35,22 @@
         .clausulazo-item { background: rgba(255, 255, 255, 0.03); margin-bottom: 10px; padding: 10px; border-left: 4px solid #ff00ea; border-radius: 4px; }
         .edit-btn { position:absolute; top:10px; right:10px; cursor:pointer; font-size:1rem; display:none; opacity:0.5; z-index: 10; transition: 0.3s; }
         .edit-btn:hover { opacity:1; transform: scale(1.2); }
-   
+ 
         .player-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .player-card { background: #1a237e; border-radius: 10px; padding: 12px; text-align: center; border-bottom: 4px solid #ff00ea; position: relative; min-height: 90px; display: flex; flex-direction: column; justify-content: center; }
         .player-name { font-weight: bold; font-size: 0.75rem; color: white; text-transform: uppercase; }
         .player-goals-count { font-size: 0.7rem; color: #ff00ea; font-weight: bold; }
         .captain-tag { color: #ffcc00; font-size: 0.6rem; font-weight: bold; letter-spacing: 1px; margin-top: 2px; }
-   
+ 
         .player-admin-tools { position: absolute; top: 5px; right: 5px; display: none; }
         .btn-p-edit { color: #00e5ff; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
         .btn-p-del { color: #ff4444; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
         .team-select-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid #ff00ea; color: white; padding: 12px; margin: 8px 0; border-radius: 10px; width: 100%; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.8rem; }
-   
+ 
         table { width:100%; border-collapse:collapse; font-size:0.75rem; }
         th { color:#ff00ea; border-bottom:1px solid #ff00ea44; padding:6px; position: sticky; top: 0; background: #141428; z-index: 5; }
         td { padding:8px; text-align:center; border-bottom:1px solid #ffffff05; }
-   
+ 
         .admin-controls { display: none; margin-left: 5px; }
         .btn-mini { background: none; border: none; cursor: pointer; font-size: 0.75rem; padding: 2px; display: inline-block; margin: 0 2px; }
         .btn-del { color: #ff4444; }
@@ -64,10 +64,10 @@
         .dot:last-child { border: 2px solid white; box-shadow: 0 0 5px white; }
         .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; align-items:center; justify-content:center; }
         .modal-content { background:#1a1a2e; padding:30px; border:2px solid #ff00ea; border-radius:25px; width:550px; text-align:center; box-shadow: 0 0 30px #ff00ea66; max-height: 85vh; overflow-y: auto; position: relative; }
-   
+ 
         input, textarea { width:100%; padding:10px; margin:8px 0; background:#0a0a14; border:1px solid #ff00ea44; color:white; border-radius:8px; }
         button { width:100%; padding:12px; background:#ff00ea; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; }
-   
+ 
         .top-right-tools { position: fixed; top: 10px; right: 10px; display: flex; gap: 10px; align-items: center; z-index: 20; }
         .tool-icon { cursor: pointer; font-size: 1.3rem; opacity: 0.3; transition: 0.3s; }
         .tool-icon:hover { opacity: 1; transform: scale(1.1); }
@@ -92,6 +92,39 @@
             transform: scale(1.1);
             box-shadow: 0 0 30px #ff00ea, 0 0 60px #ff00ea;
         }
+        /* Дополнительные стили для разделения по командам (не увеличивают размер) */
+        .team-group {
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid #ff00ea44;
+            border-radius: 12px;
+            background: rgba(255,0,234,0.03);
+        }
+        .team-group h3 {
+            color: #00e5ff;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        /* Кнопка добавления игрока (только для админа) */
+        #add-player-btn {
+            background: #00e5ff;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 0 15px #00e5ff66;
+        }
+        #add-player-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #00e5ff;
+        }
     </style>
 </head>
 <body>
@@ -114,11 +147,32 @@
     <div id="welcome-modal" class="modal">
         <div class="modal-content">
             <h1 style="color:#ff00ea; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">¿QUIÉN ERES?</h1>
-            <div id="all-players-list" class="names-cloud"></div>
+
+            <!-- 3 отдела по командам -->
+            <div class="team-group">
+                <h3>PINGÜINOS LOCOS</h3>
+                <div id="team-pinguinos" class="names-cloud"></div>
+            </div>
+
+            <div class="team-group">
+                <h3>PAJILLAS</h3>
+                <div id="team-pajillas" class="names-cloud"></div>
+            </div>
+
+            <div class="team-group">
+                <h3>ATLÉTICO DE JHONSY</h3>
+                <div id="team-jhonsy" class="names-cloud"></div>
+            </div>
+
+            <!-- Кнопка добавления игрока — видна только админу -->
+            <button id="add-player-btn" style="display:none;" onclick="addPlayerInWelcome()">+ Добавить игрока</button>
+
             <p style="font-size: 0.7rem; color: #777; margin-top: 20px;">Selecciona tu nombre para continuar</p>
             <div class="admin-access-circle" onclick="openModal('auth-modal')"></div>
         </div>
     </div>
+
+    <!-- Остальные модальные окна без изменений -->
     <div id="logs-modal" class="modal"><div class="modal-content"><h2 style="color:#00e5ff;">LOGS DE ACCESO</h2><div id="logs-list" class="data-box" style="margin-top:20px; max-height:400px;"></div><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="plantillas-modal" class="modal"><div class="modal-content"><h2 style="color:#ff00ea; margin-bottom:20px;">EQUIPOS</h2><button class="team-select-btn" onclick="showTeam('Pingüinos Locos')">Pingüinos Locos</button><button class="team-select-btn" onclick="showTeam('Atlético de Jhonsy')">Atlético de Jhonsy</button><button class="team-select-btn" onclick="showTeam('Pajillas')">Pajillas</button><button style="background:transparent; border:1px solid grey; margin-top:20px;" onclick="closeModals()">CERRAR</button></div></div>
     <div id="team-list-modal" class="modal"><div class="modal-content"><h2 id="team-name-title" style="color:#ff00ea; text-transform: uppercase;"></h2><div id="admin-team-controls" style="display:none; margin-bottom:10px;"><button onclick="addPlayerPrompt()" style="padding:5px; font-size:0.7rem; width:auto; background:#00e5ff;">+ AÑADIR JUGADOR</button></div><div id="players-list-content" class="player-grid"></div><button style="margin-top:20px; background: #333;" onclick="openModal('plantillas-modal')">VOLVER</button></div></div>
@@ -128,6 +182,7 @@
     <div id="clausulazos-modal" class="modal"><div class="modal-content"><h3 id="cl-title">NUEVO CLAUSULAZO</h3><input type="hidden" id="cl-index"><textarea id="cl-text" rows="4" placeholder="Escribe el clausulazo..."></textarea><button onclick="saveData('clausulazos')">PUBLICAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="goleadores-modal" class="modal"><div class="modal-content"><h3 id="g-title">AÑADIR JUGADOR</h3><input type="hidden" id="g-index"><input type="text" id="g-name" placeholder="NOMBRE"><input type="number" id="g-goals" placeholder="GOLES"><input type="number" id="g-pj" placeholder="PJ"><button onclick="saveData('goleadores')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="clasificacion-modal" class="modal"><div class="modal-content"><h3 id="c-title">AÑADIR EQUIPO</h3><input type="hidden" id="c-index"><input type="text" id="c-team" placeholder="EQUIPO"><input type="number" id="c-pj" placeholder="PJ"><input type="number" id="c-pts" placeholder="PUNTOS"><input type="text" id="c-money" placeholder="DINERO"><input type="text" id="c-form" placeholder="ÚLTIMOS 5 (Ej: VVDEV)"> <button onclick="saveData('clasificacion')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
+
     <script>
         const BIN_ID = '69a1d862ae596e708f5006cd';
         const API_KEY = '$2a$10$.NLuB1Db9xzsid6tI3pxOu9Z59ibyaa5h74.q26Iik5b0DZVu/DS.';
@@ -136,34 +191,107 @@
         let isAdmin = false;
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
-        // ФУНКЦИЯ ТЕПЕРЬ ВСЕГДА ПОКАЗЫВАЕТ ОКНО
+
+        // ─── ОБНОВЛЁННАЯ ФУНКЦИЯ ПОКАЗА ОКНА ВЫБОРА ───
         function showWelcomeScreen() {
-            let allNames = [];
-            Object.values(globalData.teams).forEach(team => {
-                team.forEach(p => allNames.push(p.n));
+            const teamNames = {
+                "Pingüinos Locos": "team-pinguinos",
+                "Pajillas": "team-pajillas",
+                "Atlético de Jhonsy": "team-jhonsy"
+            };
+
+            // Очищаем списки
+            Object.values(teamNames).forEach(id => {
+                document.getElementById(id).innerHTML = '';
             });
-       
-            if (allNames.length === 0) allNames = ["Invitado", "Andrés", "Enol", "Moreno", "JAVI", "Marc"];
-       
-            let html = "";
-            [...new Set(allNames)].sort().forEach(name => {
-                html += `<div class="name-chip" onclick="saveUserSession('${name}')">${name}</div>`;
+
+            let hasPlayers = false;
+
+            Object.keys(teamNames).forEach(teamName => {
+                const containerId = teamNames[teamName];
+                const players = globalData.teams?.[teamName] || [];
+                let html = '';
+
+                if (players.length > 0) {
+                    hasPlayers = true;
+                    players.forEach(p => {
+                        const name = typeof p === 'object' ? p.n : p;
+                        if (name) {
+                            html += `<div class="name-chip" onclick="saveUserSession('${name.replace(/'/g, "\\'")}')">${name}</div>`;
+                        }
+                    });
+                } else {
+                    html = '<div style="color:#555; font-size:0.8rem; padding:10px;">Нет игроков</div>';
+                }
+
+                document.getElementById(containerId).innerHTML = html;
             });
-            document.getElementById('all-players-list').innerHTML = html;
+
+            if (!hasPlayers) {
+                const fallback = ["Invitado", "Andrés", "Enol", "Moreno", "JAVI", "Marc"];
+                let html = '';
+                fallback.forEach(name => {
+                    html += `<div class="name-chip" onclick="saveUserSession('${name}')">${name}</div>`;
+                });
+                document.getElementById('team-pinguinos').innerHTML = html;
+            }
+
+            // Показываем кнопку добавления только админу
+            document.getElementById('add-player-btn').style.display = isAdmin ? 'block' : 'none';
+
             openModal('welcome-modal');
         }
+
+        // ─── ФУНКЦИЯ ДОБАВЛЕНИЯ ИГРОКА ПРЯМО ИЗ ОКНА ВЫБОРА (ТОЛЬКО АДМИН) ───
+        function addPlayerInWelcome() {
+            const name = prompt("Введите имя нового игрока:");
+            if (!name || name.trim() === "") return;
+
+            const team = prompt("В какую команду добавить?\n1 - Pingüinos Locos\n2 - Pajillas\n3 - Atlético de Jhonsy", "1");
+            let selectedTeam;
+
+            if (team === "1") selectedTeam = "Pingüinos Locos";
+            else if (team === "2") selectedTeam = "Pajillas";
+            else if (team === "3") selectedTeam = "Atlético de Jhonsy";
+            else {
+                alert("Неверный выбор команды.");
+                return;
+            }
+
+            if (!globalData.teams) globalData.teams = {};
+            if (!globalData.teams[selectedTeam]) globalData.teams[selectedTeam] = [];
+
+            // Проверяем, нет ли уже такого игрока
+            const exists = globalData.teams[selectedTeam].some(p => (typeof p === 'object' ? p.n : p) === name.trim());
+            if (exists) {
+                alert("Игрок с таким именем уже есть в этой команде.");
+                return;
+            }
+
+            globalData.teams[selectedTeam].push({ n: name.trim(), g: 0 });
+
+            // Сохраняем изменения
+            sync();
+
+            // Обновляем окно выбора
+            showWelcomeScreen();
+
+            alert(`Игрок "${name}" добавлен в команду "${selectedTeam}"!`);
+        }
+
         async function saveUserSession(name) {
-            localStorage.setItem('user_name', name); // Сохраняем, но при загрузке это больше не блокирует окно
+            localStorage.setItem('user_name', name);
             const now = new Date();
             const timeStr = now.toLocaleDateString() + " " + now.toLocaleTimeString();
-       
+
             if(!globalData.accessLogs) globalData.accessLogs = [];
             globalData.accessLogs.unshift({ name: name, time: timeStr });
             if(globalData.accessLogs.length > 100) globalData.accessLogs.pop();
-       
+
             closeModals();
             await sync();
         }
+
         function renderLogs() {
             if (!globalData.accessLogs) return;
             let html = "";
@@ -176,6 +304,7 @@
             });
             document.getElementById('logs-list').innerHTML = html || "No hay registros";
         }
+
         function deleteLog(idx) {
             if (confirm("¿Eliminar log?")) {
                 globalData.accessLogs.splice(idx, 1);
@@ -183,6 +312,7 @@
                 sync();
             }
         }
+
         function editLog(idx) {
             const log = globalData.accessLogs[idx];
             const newName = prompt("Nuevo nombre:", log.name);
@@ -192,18 +322,24 @@
             renderLogs();
             sync();
         }
+
         function login() {
             const u = document.getElementById('user').value, p = document.getElementById('pass').value;
             if(u === '67' && p === '123456') {
                 isAdmin = true;
                 document.querySelectorAll('.edit-btn').forEach(b => b.style.display = 'block');
                 document.getElementById('btn-logs-header').style.display = 'block';
+                // Показываем кнопку добавления в окне выбора (если оно открыто)
+                if (document.getElementById('add-player-btn')) {
+                    document.getElementById('add-player-btn').style.display = 'block';
+                }
                 render();
                 renderLogs();
                 closeModals();
             }
             else { closeModals(); openModal('error-modal'); }
         }
+
         async function loadData() {
             try {
                 const res = await fetch(URL, { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': false }});
@@ -212,18 +348,26 @@
                     globalData = data;
                     render();
                     if(currentOpenTeam) renderTeamPlayers();
-                    showWelcomeScreen(); // ВСЕГДА вызывается здесь
-                    if(isAdmin) renderLogs();
+                    showWelcomeScreen();
+                    if(isAdmin) {
+                        renderLogs();
+                        if (document.getElementById('add-player-btn')) {
+                            document.getElementById('add-player-btn').style.display = 'block';
+                        }
+                    }
                 }
             } catch (e) { console.error("Error loading"); }
         }
+
         async function sync() { await fetch(URL, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY }, body: JSON.stringify(globalData) }); }
+
         function showTeam(name) {
             currentOpenTeam = name;
             document.getElementById('team-name-title').innerText = name;
             document.getElementById('admin-team-controls').style.display = isAdmin ? 'block' : 'none';
             renderTeamPlayers(); openModal('team-list-modal');
         }
+
         function renderTeamPlayers() {
             let players = globalData.teams[currentOpenTeam] || [];
             players.sort((a, b) => (captains.includes(b.n) ? 1 : 0) - (captains.includes(a.n) ? 1 : 0));
@@ -242,14 +386,18 @@
             });
             document.getElementById('players-list-content').innerHTML = html;
         }
+
         function editPlayer(idx) {
             const p = globalData.teams[currentOpenTeam][idx];
             const n = prompt("Nombre:", p.n), g = prompt("Goles:", p.g);
             if (n !== null) p.n = n; if (g !== null) p.g = parseInt(g);
             renderTeamPlayers(); sync();
         }
+
         function deletePlayer(idx) { if(confirm("¿?")) { globalData.teams[currentOpenTeam].splice(idx, 1); renderTeamPlayers(); sync(); } }
+
         function addPlayerPrompt() { const n = prompt("Nombre:"); if(n) { if(!globalData.teams[currentOpenTeam]) globalData.teams[currentOpenTeam]=[]; globalData.teams[currentOpenTeam].push({n: n, g: 0}); renderTeamPlayers(); sync(); } }
+
         function openEditModal(type, index) {
             const item = globalData[type][index];
             if (type === 'goleadores') {
@@ -270,7 +418,9 @@
                 openModal('clausulazos-modal');
             }
         }
+
         function clearModal(id) { document.querySelectorAll(`#${id} input, #${id} textarea`).forEach(i => i.value = ""); openModal(id); }
+
         async function saveData(type) {
             let pre = (type === 'goleadores' ? 'g' : type === 'clasificacion' ? 'c' : type === 'calendario' ? 'cal' : 'cl');
             let idx = document.getElementById(pre + '-index').value, item = (idx !== "") ? globalData[type][idx] : {};
@@ -287,7 +437,9 @@
             if (idx === "") (type === 'clausulazos') ? globalData[type].unshift(item) : globalData[type].push(item);
             render(); closeModals(); sync();
         }
+
         function deleteItem(type, index) { if(confirm("¿?")) { globalData[type].splice(index, 1); render(); sync(); } }
+
         function getFormHtml(formStr) {
             if(!formStr) return "";
             let html = '<div class="form-dots">';
@@ -299,6 +451,7 @@
             html += '</div>';
             return html;
         }
+
         function render() {
             const disp = isAdmin ? 'inline-block' : 'none';
             let gHtml = `<table><tr><th>NOMBRE</th><th>G</th><th>PJ</th><th></th></tr>`;
@@ -331,6 +484,7 @@
             });
             document.getElementById('clausulazos-list').innerHTML = clHtml || 'Sin noticias';
         }
+
         function openModal(id) { closeModals(); document.getElementById(id).style.display = 'flex'; }
         function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
         function toggleView() {
@@ -338,7 +492,9 @@
             container.classList.toggle('mobile-mode');
             document.getElementById('toggle-view-btn').innerText = container.classList.contains('mobile-mode') ? "MODO IPAD" : "MODO MÓVIL";
         }
+
         loadData();
+
         let fromWelcome = false;
         document.querySelector('.admin-access-circle').addEventListener('click', () => { fromWelcome = true; });
         document.querySelector('#auth-modal button:nth-of-type(2)').addEventListener('click', () => {
@@ -350,4 +506,3 @@
     </script>
 </body>
 </html>
-
