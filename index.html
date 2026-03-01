@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIGA AGUSTINOS</title>
+    <title>LIGA 2 ESOA - GLOBAL SYNC</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body { height:100vh; background:#0a0a14; color:#e0e0ff; font-family:Arial, sans-serif; overflow:hidden; font-size: 0.9rem; }
@@ -22,31 +22,8 @@
         .phone-btn { background: #00e5ff; color: #000; box-shadow: 0 0 15px #00e5ff66; }
         .phone-btn:hover { box-shadow: 0 0 25px #00e5ff; }
 
-        .rank-mini-btn { 
-            background: #7000ff; 
-            color: white; 
-            padding: 4px 10px; 
-            border-radius: 12px; 
-            font-size: 0.6rem; 
-            border: none; 
-            cursor: pointer; 
-            font-weight: bold; 
-            box-shadow: 0 0 10px #7000ff66; 
-            transition: 0.3s;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-        .rank-mini-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px #7000ff; }
-
         .container { display:grid; grid-template-columns: repeat(4, 1fr); height:calc(100vh - 120px); gap:15px; padding:20px; transition: 0.5s; }
-        
-        .container.mobile-mode { 
-            display: flex; 
-            flex-direction: column; 
-            height: calc(100vh - 120px); 
-            overflow-y: auto; 
-            padding: 10px;
-        }
+        .container.mobile-mode { display: flex; flex-direction: column; height: calc(100vh - 120px); overflow-y: auto; padding: 10px; }
         .container.mobile-mode .panel { min-height: 400px; margin-bottom: 15px; flex-shrink: 0; }
 
         .panel { background:rgba(20,20,40,0.8); border:1px solid #ff00ea44; border-radius:15px; padding:15px; position:relative; display:flex; flex-direction:column; backdrop-filter: blur(10px); height: 100%; overflow: hidden; }
@@ -56,14 +33,12 @@
         .data-box::-webkit-scrollbar { width: 6px; }
         .data-box::-webkit-scrollbar-thumb { background: #ff00ea; border-radius: 10px; }
 
-        .clausulazo-item { 
-            background: rgba(255, 255, 255, 0.03); 
-            margin-bottom: 10px; 
-            padding: 10px; 
-            border-left: 4px solid #ff00ea; 
-            border-radius: 4px;
-        }
+        /* УМЕНЬШЕННЫЙ СТИЛЬ ДЛЯ ТАБЛИЦЫ КЛАССИФИКАЦИИ */
+        #clasificacion-table table { font-size: 0.65rem; }
+        #clasificacion-table td { padding: 4px 2px; }
+        #clasificacion-table .dot { width: 14px; height: 14px; font-size: 8px; }
 
+        .clausulazo-item { background: rgba(255, 255, 255, 0.03); margin-bottom: 10px; padding: 10px; border-left: 4px solid #ff00ea; border-radius: 4px; }
         .edit-btn { position:absolute; top:10px; right:10px; cursor:pointer; font-size:1rem; display:none; opacity:0.5; z-index: 10; transition: 0.3s; }
         .edit-btn:hover { opacity:1; transform: scale(1.2); }
         
@@ -89,26 +64,29 @@
         .btn-edit { color: #00e5ff; }
         .dinero-txt { color: #00ff88; font-weight: bold; }
 
-        /* Форма последних 5 матчей */
         .form-dots { display: flex; justify-content: center; gap: 4px; }
         .dot { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
         .dot-v { background: #28a745; }
         .dot-d { background: #dc3545; }
         .dot-e { background: #6c757d; }
-        /* Эффект выделения последнего матча как на фото */
         .dot:last-child { border: 2px solid white; box-shadow: 0 0 5px white; }
 
-        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:100; align-items:center; justify-content:center; }
-        .modal-content { background:#1a1a2e; padding:30px; border:1px solid #ff00ea; border-radius:15px; width:450px; text-align:center; box-shadow: 0 0 30px #ff00ea44; max-height: 85vh; overflow-y: auto; }
+        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; align-items:center; justify-content:center; }
+        .modal-content { background:#1a1a2e; padding:30px; border:2px solid #ff00ea; border-radius:25px; width:550px; text-align:center; box-shadow: 0 0 30px #ff00ea66; max-height: 85vh; overflow-y: auto; }
+        
         input, textarea { width:100%; padding:10px; margin:8px 0; background:#0a0a14; border:1px solid #ff00ea44; color:white; border-radius:8px; }
         button { width:100%; padding:12px; background:#ff00ea; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; }
         
-        .top-right-tools { position: fixed; top: 10px; right: 10px; display: flex; gap: 8px; align-items: center; z-index: 20; }
-        .tool-icon { cursor: pointer; font-size: 1.1rem; opacity: 0.2; transition: 0.5s; }
-        .tool-icon:hover { opacity: 1; transform: scale(1.2); }
+        .top-right-tools { position: fixed; top: 10px; right: 10px; display: flex; gap: 10px; align-items: center; z-index: 20; }
+        .tool-icon { cursor: pointer; font-size: 1.3rem; opacity: 0.3; transition: 0.3s; }
+        .tool-icon:hover { opacity: 1; transform: scale(1.1); }
 
-        .genero-option { background: rgba(255,255,255,0.05); border: 1px solid #ff00ea; padding: 15px; margin: 10px 0; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .genero-count-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #ff00ea22; }
+        .names-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
+        .name-chip { font-size: 0.75rem; background: rgba(255,0,234,0.1); padding: 5px 12px; border-radius: 15px; cursor: pointer; transition: 0.2s; border: 1px solid rgba(255,0,234,0.3); color: white; font-weight: bold; }
+        .name-chip:hover { background: #ff00ea; transform: scale(1.1); }
+
+        .log-item { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #ffffff11; font-size: 0.75rem; text-align: left; }
+        #btn-logs-header { display: none; background: #7000ff; color: white; padding: 4px 12px; border-radius: 10px; font-size: 0.65rem; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -116,7 +94,7 @@
     <div class="watermark">Hecho por Vadym</div>
     
     <div class="top-right-tools">
-        <button class="rank-mini-btn" onclick="openModal('generos-rank-modal')">TOP GÉNEROS</button>
+        <button id="btn-logs-header" onclick="openModal('logs-modal')">LOGS</button>
         <div class="tool-icon" onclick="openModal('auth-modal')" title="Admin Login">🔐</div>
     </div>
 
@@ -134,29 +112,19 @@
         <div class="panel"><div class="edit-btn" onclick="clearModal('clasificacion-modal')">✏️</div><div class="panel-title">CLASIFICACIÓN</div><div class="data-box" id="clasificacion-table"></div></div>
     </div>
 
-    <div id="genero-modal" class="modal">
+    <div id="welcome-modal" class="modal">
         <div class="modal-content">
-            <h2 style="color:#ff00ea;">ELIGE GÉNERO</h2>
-            <div class="genero-option" onclick="selectGenero('HOMBRE')">HOMBRE</div>
-            <div class="genero-option" onclick="selectGenero('MUJER')">MUJER</div>
-            <input type="text" id="otro-genero" placeholder="OTRO (PON CUÁL)">
-            <button onclick="selectGenero('OTRO')">CONFIRMAR OTRO</button>
+            <h1 style="color:#ff00ea; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">¿QUIÉN ERES?</h1>
+            <div id="all-players-list" class="names-cloud"></div>
+            <p style="font-size: 0.7rem; color: #777; margin-top: 20px;">Selecciona tu nombre para continuar</p>
         </div>
     </div>
 
-    <div id="generos-rank-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color:#ff00ea;">TOP DE GÉNEROS</h2>
-            <div id="generos-rank-list" class="data-box" style="margin-top:20px; max-height:300px;"></div>
-            <button onclick="closeModals()">CERRAR</button>
-        </div>
-    </div>
-
+    <div id="logs-modal" class="modal"><div class="modal-content"><h2 style="color:#00e5ff;">LOGS DE ACCESO</h2><div id="logs-list" class="data-box" style="margin-top:20px; max-height:400px;"></div><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="plantillas-modal" class="modal"><div class="modal-content"><h2 style="color:#ff00ea; margin-bottom:20px;">EQUIPOS</h2><button class="team-select-btn" onclick="showTeam('Pingüinos Locos')">Pingüinos Locos</button><button class="team-select-btn" onclick="showTeam('Atlético de Jhonsy')">Atlético de Jhonsy</button><button class="team-select-btn" onclick="showTeam('Pajillas')">Pajillas</button><button style="background:transparent; border:1px solid grey; margin-top:20px;" onclick="closeModals()">CERRAR</button></div></div>
     <div id="team-list-modal" class="modal"><div class="modal-content"><h2 id="team-name-title" style="color:#ff00ea; text-transform: uppercase;"></h2><div id="admin-team-controls" style="display:none; margin-bottom:10px;"><button onclick="addPlayerPrompt()" style="padding:5px; font-size:0.7rem; width:auto; background:#00e5ff;">+ AÑADIR JUGADOR</button></div><div id="players-list-content" class="player-grid"></div><button style="margin-top:20px; background: #333;" onclick="openModal('plantillas-modal')">VOLVER</button></div></div>
     <div id="auth-modal" class="modal"><div class="modal-content"><h3>ADMIN LOGIN</h3><input type="text" id="user" placeholder="Usuario"><input type="password" id="pass" placeholder="Contraseña"><button onclick="login()">ENTRAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="error-modal" class="modal" onclick="closeModals()"><div class="modal-content"><div style="color:red; font-weight:bold;">Q NO ENTRES CABROONNN</div><button>CERRAR</button></div></div>
-    
     <div id="calendario-modal" class="modal"><div class="modal-content"><h3 id="cal-title">AÑADIR PARTIDO</h3><input type="hidden" id="cal-index"><input type="text" id="cal-e1" placeholder="EQUIPO 1"><input type="text" id="cal-e2" placeholder="EQUIPO 2"><input type="text" id="cal-hora" placeholder="DIA Y HORA"><button onclick="saveData('calendario')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="clausulazos-modal" class="modal"><div class="modal-content"><h3 id="cl-title">NUEVO CLAUSULAZO</h3><input type="hidden" id="cl-index"><textarea id="cl-text" rows="4" placeholder="Escribe el clausulazo..."></textarea><button onclick="saveData('clausulazos')">PUBLICAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="goleadores-modal" class="modal"><div class="modal-content"><h3 id="g-title">AÑADIR JUGADOR</h3><input type="hidden" id="g-index"><input type="text" id="g-name" placeholder="NOMBRE"><input type="number" id="g-goals" placeholder="GOLES"><input type="number" id="g-pj" placeholder="PJ"><button onclick="saveData('goleadores')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
@@ -167,60 +135,78 @@
         const API_KEY = '$2a$10$.NLuB1Db9xzsid6tI3pxOu9Z59ibyaa5h74.q26Iik5b0DZVu/DS.'; 
         const URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
-        let globalData = { goleadores: [], clasificacion: [], clausulazos: [], calendario: [], teams: {}, generos: {} };
+        let globalData = { goleadores: [], clasificacion: [], clausulazos: [], calendario: [], teams: {}, accessLogs: [] };
         let isAdmin = false;
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
 
-        function checkGenero() { if (!localStorage.getItem('user_genero')) openModal('genero-modal'); }
-
-        async function selectGenero(tipo) {
-            let gen = (tipo === 'OTRO') ? document.getElementById('otro-genero').value.toUpperCase() : tipo;
-            if (!gen) return;
-            if (!globalData.generos) globalData.generos = {};
-            globalData.generos[gen] = (globalData.generos[gen] || 0) + 1;
-            localStorage.setItem('user_genero', gen);
-            closeModals(); renderGeneros(); await sync();
-        }
-
-        function renderGeneros() {
-            if (!globalData.generos) return;
-            const sorted = Object.entries(globalData.generos).sort((a, b) => b[1] - a[1]);
-            let html = "";
-            sorted.forEach(([gen, count]) => {
-                html += `
-                <div class="genero-count-item">
-                    <div><b>${gen}</b><br><span style="color:#00e5ff; font-size:0.7rem;">${count} PERSONAS</span></div>
-                    <div class="admin-controls" style="display:${isAdmin ? 'block' : 'none'}">
-                        <span class="btn-mini btn-edit" onclick="editGen('${gen}')">✎</span>
-                        <span class="btn-mini btn-del" onclick="delGen('${gen}')">X</span>
-                    </div>
-                </div>`;
+        // ФУНКЦИЯ ТЕПЕРЬ ВСЕГДА ПОКАЗЫВАЕТ ОКНО
+        function showWelcomeScreen() {
+            let allNames = [];
+            Object.values(globalData.teams).forEach(team => {
+                team.forEach(p => allNames.push(p.n));
             });
-            document.getElementById('generos-rank-list').innerHTML = html;
+            
+            if (allNames.length === 0) allNames = ["Invitado", "Andrés", "Enol", "Moreno", "JAVI", "MARC"];
+            
+            let html = "";
+            [...new Set(allNames)].sort().forEach(name => {
+                html += `<div class="name-chip" onclick="saveUserSession('${name}')">${name}</div>`;
+            });
+            document.getElementById('all-players-list').innerHTML = html;
+            openModal('welcome-modal');
         }
 
-        async function editGen(gen) {
-            let newVal = prompt(`Gente para ${gen}:`, globalData.generos[gen]);
-            if(newVal !== null) { globalData.generos[gen] = parseInt(newVal) || 0; renderGeneros(); await sync(); }
+        async function saveUserSession(name) {
+            localStorage.setItem('user_name', name); // Сохраняем, но при загрузке это больше не блокирует окно
+            const now = new Date();
+            const timeStr = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+            
+            if(!globalData.accessLogs) globalData.accessLogs = [];
+            globalData.accessLogs.unshift({ name: name, time: timeStr });
+            if(globalData.accessLogs.length > 100) globalData.accessLogs.pop();
+            
+            closeModals();
+            await sync();
         }
 
-        async function delGen(gen) { if(confirm("¿Eliminar?")) { delete globalData.generos[gen]; renderGeneros(); await sync(); } }
+        function renderLogs() {
+            if (!globalData.accessLogs) return;
+            let html = "";
+            globalData.accessLogs.forEach(log => {
+                html += `<div class="log-item"><span><b>${log.name}</b></span> <span style="color:#00e5ff;">${log.time}</span></div>`;
+            });
+            document.getElementById('logs-list').innerHTML = html || "No hay registros";
+        }
 
-        function toggleView() {
-            const container = document.getElementById('main-container');
-            const btn = document.getElementById('toggle-view-btn');
-            container.classList.toggle('mobile-mode');
-            btn.innerText = container.classList.contains('mobile-mode') ? "MODO IPAD" : "MODO MÓVIL";
+        function login() {
+            const u = document.getElementById('user').value, p = document.getElementById('pass').value;
+            if(u === '67' && p === '123456') { 
+                isAdmin = true; 
+                document.querySelectorAll('.edit-btn').forEach(b => b.style.display = 'block'); 
+                document.getElementById('btn-logs-header').style.display = 'block';
+                render(); 
+                renderLogs();
+                closeModals();
+            } 
+            else { closeModals(); openModal('error-modal'); }
         }
 
         async function loadData() {
             try {
                 const res = await fetch(URL, { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': false }});
                 const data = await res.json();
-                if (data) { globalData = data; render(); renderGeneros(); if(currentOpenTeam) renderTeamPlayers(); checkGenero(); }
-            } catch (e) { console.error("Error al cargar"); }
+                if (data) { 
+                    globalData = data; 
+                    render(); 
+                    if(currentOpenTeam) renderTeamPlayers(); 
+                    showWelcomeScreen(); // ВСЕГДА вызывается здесь
+                    if(isAdmin) renderLogs();
+                }
+            } catch (e) { console.error("Error loading"); }
         }
+
+        async function sync() { await fetch(URL, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY }, body: JSON.stringify(globalData) }); }
 
         function showTeam(name) {
             currentOpenTeam = name;
@@ -258,8 +244,6 @@
         function deletePlayer(idx) { if(confirm("¿?")) { globalData.teams[currentOpenTeam].splice(idx, 1); renderTeamPlayers(); sync(); } }
         function addPlayerPrompt() { const n = prompt("Nombre:"); if(n) { if(!globalData.teams[currentOpenTeam]) globalData.teams[currentOpenTeam]=[]; globalData.teams[currentOpenTeam].push({n: n, g: 0}); renderTeamPlayers(); sync(); } }
 
-        async function sync() { await fetch(URL, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY }, body: JSON.stringify(globalData) }); }
-
         function openEditModal(type, index) {
             const item = globalData[type][index];
             if (type === 'goleadores') {
@@ -269,8 +253,7 @@
             } else if (type === 'clasificacion') {
                 document.getElementById('c-index').value = index; document.getElementById('c-team').value = item.team;
                 document.getElementById('c-pts').value = item.pts; document.getElementById('c-pj').value = item.pj;
-                document.getElementById('c-money').value = item.money; 
-                document.getElementById('c-form').value = item.form || ""; 
+                document.getElementById('c-money').value = item.money; document.getElementById('c-form').value = item.form || ""; 
                 openModal('clasificacion-modal');
             } else if (type === 'calendario') {
                 document.getElementById('cal-index').value = index; document.getElementById('cal-e1').value = item.e1;
@@ -293,9 +276,7 @@
                 item.pts = parseInt(document.getElementById('c-pts').value) || 0; 
                 item.pj = document.getElementById('c-pj').value; 
                 item.money = document.getElementById('c-money').value; 
-                // ЛОГИКА АВТОУДАЛЕНИЯ: Берем только последние 5 символов
-                let rawForm = document.getElementById('c-form').value;
-                item.form = rawForm.slice(-5); 
+                item.form = document.getElementById('c-form').value.slice(-5).toUpperCase(); 
             }
             else if (type === 'calendario') { item.e1 = document.getElementById('cal-e1').value; item.e2 = document.getElementById('cal-e2').value; item.hora = document.getElementById('cal-hora').value; }
             else if (type === 'clausulazos') { item.title = "NOTICIA"; item.body = document.getElementById('cl-text').value; }
@@ -308,9 +289,7 @@
         function getFormHtml(formStr) {
             if(!formStr) return "";
             let html = '<div class="form-dots">';
-            // Берем последние 5 на случай, если в базе старые длинные данные
-            let lastFive = formStr.slice(-5);
-            lastFive.split('').forEach(char => {
+            formStr.split('').forEach(char => {
                 let cls = char.toUpperCase() === 'V' ? 'dot-v' : char.toUpperCase() === 'D' ? 'dot-d' : 'dot-e';
                 let icon = char.toUpperCase() === 'V' ? '✓' : char.toUpperCase() === 'D' ? '✕' : '-';
                 html += `<div class="dot ${cls}">${icon}</div>`;
@@ -329,7 +308,7 @@
             });
             document.getElementById('goleadores-table').innerHTML = gHtml + `</table>`;
 
-            let cHtml = `<table><tr><th>EQUIPO</th><th>PTS</th><th>PJ</th><th>ÚLTIMOS 5</th><th>DINERO</th><th></th></tr>`;
+            let cHtml = `<table><tr><th>EQUIPO</th><th>PTS</th><th>PJ</th><th>F</th><th>€</th><th></th></tr>`;
             [...globalData.clasificacion].sort((a, b) => b.pts - a.pts).forEach((i) => {
                 const oi = globalData.clasificacion.indexOf(i);
                 cHtml += `<tr><td>${i.team}</td><td style="color:#ff00ea; font-weight:bold;">${i.pts}</td><td>${i.pj}</td><td>${getFormHtml(i.form)}</td><td class="dinero-txt">${i.money || '0€'}</td>
@@ -339,7 +318,7 @@
 
             let calHtml = `<table><tr><th>PARTIDO</th><th>DIA</th><th></th></tr>`;
             globalData.calendario.forEach((c, idx) => {
-                calHtml += `<tr><td>${c.e1} <span class="vs">VS</span> ${c.e2}</td><td>${c.hora}</td>
+                calHtml += `<tr><td>${c.e1} VS ${c.e2}</td><td>${c.hora}</td>
                 <td><div class="admin-controls" style="display:${disp}"><span class="btn-mini btn-edit" onclick="openEditModal('calendario', ${idx})">✎</span><span class="btn-mini btn-del" onclick="deleteItem('calendario', ${idx})">X</span></div></td></tr>`;
             });
             document.getElementById('calendario-table').innerHTML = calHtml + `</table>`;
@@ -355,17 +334,15 @@
             document.getElementById('clausulazos-list').innerHTML = clHtml || 'Sin noticias';
         }
 
-        function login() {
-            const u = document.getElementById('user').value, p = document.getElementById('pass').value;
-            if(u === '67' && p === '123456') { isAdmin = true; document.querySelectorAll('.edit-btn').forEach(b => b.style.display = 'block'); render(); renderGeneros(); closeModals(); } 
-            else { closeModals(); openModal('error-modal'); }
-        }
-
         function openModal(id) { closeModals(); document.getElementById(id).style.display = 'flex'; }
         function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
+        function toggleView() {
+            const container = document.getElementById('main-container');
+            container.classList.toggle('mobile-mode');
+            document.getElementById('toggle-view-btn').innerText = container.classList.contains('mobile-mode') ? "MODO IPAD" : "MODO MÓVIL";
+        }
+
         loadData();
-        setInterval(loadData, 30000);
     </script>
 </body>
 </html>
-
