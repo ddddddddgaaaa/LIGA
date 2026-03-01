@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIGA AGUSTINOS</title>
+    <title>LIGA 2 ESOA - GLOBAL SYNC</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body { height:100vh; background:#0a0a14; color:#e0e0ff; font-family:Arial, sans-serif; overflow:hidden; font-size: 0.9rem; }
         .header { text-align:center; padding:10px; font-size:2.5rem; font-weight:bold; color:#ff00ea; text-shadow:0 0 20px #ff00ea; letter-spacing:10px; }
         
-        /* Адаптивность заголовка для телефонов */
         @media (max-width: 600px) {
             .header { font-size: 1.5rem; letter-spacing: 5px; padding-top: 40px; }
         }
@@ -23,7 +22,6 @@
         .phone-btn { background: #00e5ff; color: #000; box-shadow: 0 0 15px #00e5ff66; }
         .phone-btn:hover { box-shadow: 0 0 25px #00e5ff; }
 
-        /* Кнопка TOP GÉNEROS */
         .rank-mini-btn { 
             background: #7000ff; 
             color: white; 
@@ -49,11 +47,7 @@
             overflow-y: auto; 
             padding: 10px;
         }
-        .container.mobile-mode .panel { 
-            min-height: 400px; 
-            margin-bottom: 15px; 
-            flex-shrink: 0;
-        }
+        .container.mobile-mode .panel { min-height: 400px; margin-bottom: 15px; flex-shrink: 0; }
 
         .panel { background:rgba(20,20,40,0.8); border:1px solid #ff00ea44; border-radius:15px; padding:15px; position:relative; display:flex; flex-direction:column; backdrop-filter: blur(10px); height: 100%; overflow: hidden; }
         .panel-title { text-align:center; color:#ff00ea; font-size:1.2rem; margin-bottom:15px; font-weight:bold; text-transform: uppercase; }
@@ -95,12 +89,20 @@
         .btn-edit { color: #00e5ff; }
         .dinero-txt { color: #00ff88; font-weight: bold; }
 
+        /* Форма последних 5 матчей */
+        .form-dots { display: flex; justify-content: center; gap: 4px; }
+        .dot { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
+        .dot-v { background: #28a745; }
+        .dot-d { background: #dc3545; }
+        .dot-e { background: #6c757d; }
+        /* Эффект выделения последнего матча как на фото */
+        .dot:last-child { border: 2px solid white; box-shadow: 0 0 5px white; }
+
         .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:100; align-items:center; justify-content:center; }
         .modal-content { background:#1a1a2e; padding:30px; border:1px solid #ff00ea; border-radius:15px; width:450px; text-align:center; box-shadow: 0 0 30px #ff00ea44; max-height: 85vh; overflow-y: auto; }
         input, textarea { width:100%; padding:10px; margin:8px 0; background:#0a0a14; border:1px solid #ff00ea44; color:white; border-radius:8px; }
         button { width:100%; padding:12px; background:#ff00ea; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; }
         
-        /* Улучшенная панель инструментов для мобильных */
         .top-right-tools { position: fixed; top: 10px; right: 10px; display: flex; gap: 8px; align-items: center; z-index: 20; }
         .tool-icon { cursor: pointer; font-size: 1.1rem; opacity: 0.2; transition: 0.5s; }
         .tool-icon:hover { opacity: 1; transform: scale(1.2); }
@@ -158,7 +160,7 @@
     <div id="calendario-modal" class="modal"><div class="modal-content"><h3 id="cal-title">AÑADIR PARTIDO</h3><input type="hidden" id="cal-index"><input type="text" id="cal-e1" placeholder="EQUIPO 1"><input type="text" id="cal-e2" placeholder="EQUIPO 2"><input type="text" id="cal-hora" placeholder="DIA Y HORA"><button onclick="saveData('calendario')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="clausulazos-modal" class="modal"><div class="modal-content"><h3 id="cl-title">NUEVO CLAUSULAZO</h3><input type="hidden" id="cl-index"><textarea id="cl-text" rows="4" placeholder="Escribe el clausulazo..."></textarea><button onclick="saveData('clausulazos')">PUBLICAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="goleadores-modal" class="modal"><div class="modal-content"><h3 id="g-title">AÑADIR JUGADOR</h3><input type="hidden" id="g-index"><input type="text" id="g-name" placeholder="NOMBRE"><input type="number" id="g-goals" placeholder="GOLES"><input type="number" id="g-pj" placeholder="PJ"><button onclick="saveData('goleadores')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
-    <div id="clasificacion-modal" class="modal"><div class="modal-content"><h3 id="c-title">AÑADIR EQUIPO</h3><input type="hidden" id="c-index"><input type="text" id="c-team" placeholder="EQUIPO"><input type="number" id="c-pj" placeholder="PJ"><input type="number" id="c-pts" placeholder="PUNTOS"><input type="text" id="c-money" placeholder="DINERO"><button onclick="saveData('clasificacion')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
+    <div id="clasificacion-modal" class="modal"><div class="modal-content"><h3 id="c-title">AÑADIR EQUIPO</h3><input type="hidden" id="c-index"><input type="text" id="c-team" placeholder="EQUIPO"><input type="number" id="c-pj" placeholder="PJ"><input type="number" id="c-pts" placeholder="PUNTOS"><input type="text" id="c-money" placeholder="DINERO"><input type="text" id="c-form" placeholder="ÚLTIMOS 5 (Ej: VVDEV)"> <button onclick="saveData('clasificacion')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
 
     <script>
         const BIN_ID = '69a1d862ae596e708f5006cd'; 
@@ -168,7 +170,7 @@
         let globalData = { goleadores: [], clasificacion: [], clausulazos: [], calendario: [], teams: {}, generos: {} };
         let isAdmin = false;
         let currentOpenTeam = "";
-        const captains = ["Enol", "Moreno", "Fran"];
+        const captains = ["Enol", "Moreno", "Carlos Fernández"];
 
         function checkGenero() { if (!localStorage.getItem('user_genero')) openModal('genero-modal'); }
 
@@ -203,9 +205,7 @@
             if(newVal !== null) { globalData.generos[gen] = parseInt(newVal) || 0; renderGeneros(); await sync(); }
         }
 
-        async function delGen(gen) {
-            if(confirm("¿Eliminar?")) { delete globalData.generos[gen]; renderGeneros(); await sync(); }
-        }
+        async function delGen(gen) { if(confirm("¿Eliminar?")) { delete globalData.generos[gen]; renderGeneros(); await sync(); } }
 
         function toggleView() {
             const container = document.getElementById('main-container');
@@ -269,7 +269,9 @@
             } else if (type === 'clasificacion') {
                 document.getElementById('c-index').value = index; document.getElementById('c-team').value = item.team;
                 document.getElementById('c-pts').value = item.pts; document.getElementById('c-pj').value = item.pj;
-                document.getElementById('c-money').value = item.money; openModal('clasificacion-modal');
+                document.getElementById('c-money').value = item.money; 
+                document.getElementById('c-form').value = item.form || ""; 
+                openModal('clasificacion-modal');
             } else if (type === 'calendario') {
                 document.getElementById('cal-index').value = index; document.getElementById('cal-e1').value = item.e1;
                 document.getElementById('cal-e2').value = item.e2; document.getElementById('cal-hora').value = item.hora;
@@ -286,7 +288,15 @@
             let pre = (type === 'goleadores' ? 'g' : type === 'clasificacion' ? 'c' : type === 'calendario' ? 'cal' : 'cl');
             let idx = document.getElementById(pre + '-index').value, item = (idx !== "") ? globalData[type][idx] : {};
             if (type === 'goleadores') { item.name = document.getElementById('g-name').value; item.goals = parseInt(document.getElementById('g-goals').value) || 0; item.pj = document.getElementById('g-pj').value; }
-            else if (type === 'clasificacion') { item.team = document.getElementById('c-team').value; item.pts = parseInt(document.getElementById('c-pts').value) || 0; item.pj = document.getElementById('c-pj').value; item.money = document.getElementById('c-money').value; }
+            else if (type === 'clasificacion') { 
+                item.team = document.getElementById('c-team').value; 
+                item.pts = parseInt(document.getElementById('c-pts').value) || 0; 
+                item.pj = document.getElementById('c-pj').value; 
+                item.money = document.getElementById('c-money').value; 
+                // ЛОГИКА АВТОУДАЛЕНИЯ: Берем только последние 5 символов
+                let rawForm = document.getElementById('c-form').value;
+                item.form = rawForm.slice(-5); 
+            }
             else if (type === 'calendario') { item.e1 = document.getElementById('cal-e1').value; item.e2 = document.getElementById('cal-e2').value; item.hora = document.getElementById('cal-hora').value; }
             else if (type === 'clausulazos') { item.title = "NOTICIA"; item.body = document.getElementById('cl-text').value; }
             if (idx === "") (type === 'clausulazos') ? globalData[type].unshift(item) : globalData[type].push(item);
@@ -294,6 +304,20 @@
         }
 
         function deleteItem(type, index) { if(confirm("¿?")) { globalData[type].splice(index, 1); render(); sync(); } }
+
+        function getFormHtml(formStr) {
+            if(!formStr) return "";
+            let html = '<div class="form-dots">';
+            // Берем последние 5 на случай, если в базе старые длинные данные
+            let lastFive = formStr.slice(-5);
+            lastFive.split('').forEach(char => {
+                let cls = char.toUpperCase() === 'V' ? 'dot-v' : char.toUpperCase() === 'D' ? 'dot-d' : 'dot-e';
+                let icon = char.toUpperCase() === 'V' ? '✓' : char.toUpperCase() === 'D' ? '✕' : '-';
+                html += `<div class="dot ${cls}">${icon}</div>`;
+            });
+            html += '</div>';
+            return html;
+        }
 
         function render() {
             const disp = isAdmin ? 'inline-block' : 'none';
@@ -305,10 +329,10 @@
             });
             document.getElementById('goleadores-table').innerHTML = gHtml + `</table>`;
 
-            let cHtml = `<table><tr><th>EQUIPO</th><th>PTS</th><th>PJ</th><th>DINERO</th><th></th></tr>`;
+            let cHtml = `<table><tr><th>EQUIPO</th><th>PTS</th><th>PJ</th><th>ÚLTIMOS 5</th><th>DINERO</th><th></th></tr>`;
             [...globalData.clasificacion].sort((a, b) => b.pts - a.pts).forEach((i) => {
                 const oi = globalData.clasificacion.indexOf(i);
-                cHtml += `<tr><td>${i.team}</td><td style="color:#ff00ea; font-weight:bold;">${i.pts}</td><td>${i.pj}</td><td class="dinero-txt">${i.money || '0€'}</td>
+                cHtml += `<tr><td>${i.team}</td><td style="color:#ff00ea; font-weight:bold;">${i.pts}</td><td>${i.pj}</td><td>${getFormHtml(i.form)}</td><td class="dinero-txt">${i.money || '0€'}</td>
                 <td><div class="admin-controls" style="display:${disp}"><span class="btn-mini btn-edit" onclick="openEditModal('clasificacion', ${oi})">✎</span><span class="btn-mini btn-del" onclick="deleteItem('clasificacion', ${oi})">X</span></div></td></tr>`;
             });
             document.getElementById('clasificacion-table').innerHTML = cHtml + `</table>`;
@@ -344,4 +368,3 @@
     </script>
 </body>
 </html>
-
