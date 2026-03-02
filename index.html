@@ -7,24 +7,71 @@
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body { height:100vh; background:#0a0a14; color:#e0e0ff; font-family:Arial, sans-serif; overflow:hidden; font-size: 0.9rem; }
-        .header { 
-            text-align:center; 
-            padding:10px; 
-            font-size:2.5rem; 
-            font-weight:bold; 
-            color:#ff00ea; 
-            text-shadow:0 0 20px #ff00ea; 
+
+        .header {
+            text-align:center;
+            padding:10px;
+            font-size:2.5rem;
+            font-weight:bold;
+            color:#ff00ea;
+            text-shadow:0 0 20px #ff00ea;
             letter-spacing:10px;
             transition: all 0.3s ease;
+            opacity: 0.09;                      /* почти невидимый фон */
+            pointer-events: none;
         }
-        .header.with-name { 
-            font-size: 1.8rem; 
-            letter-spacing: 5px;
+        .header.with-name {
+            font-size: 1.35rem;
+            letter-spacing: 4px;
+            opacity: 0.06;
         }
-        @media (max-width: 600px) {
-            .header { font-size: 1.5rem; letter-spacing: 5px; padding-top: 40px; }
-            .header.with-name { font-size: 1.2rem; }
+
+        .welcome-name {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00e5ff;
+            font-size: 4.5rem;                  /* очень крупно */
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 9px;
+            text-shadow: 0 0 40px #00e5ff, 0 0 80px #00e5ff55;
+            z-index: 15;
+            background: rgba(10,10,35,0.68);
+            padding: 22px 70px;
+            border-radius: 45px;
+            border: 3px solid #00e5ff66;
+            backdrop-filter: blur(12px);
+            pointer-events: none;
+            white-space: nowrap;
+            max-width: 96vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: 0 0 70px rgba(0,229,255,0.45);
         }
+
+        @media (max-width: 800px) {
+            .welcome-name {
+                font-size: 3.6rem;
+                padding: 18px 55px;
+                letter-spacing: 7px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .welcome-name {
+                font-size: 2.9rem;
+                padding: 15px 45px;
+                letter-spacing: 5px;
+            }
+        }
+
+        /* ──────────────────────────────────────────────── */
+        /* ВСЁ, ЧТО НИЖЕ — ТОЧНО ТАКОЕ ЖЕ, КАК БЫЛО У ТЕБЯ   */
+        /* НИЧЕГО НЕ УДАЛЕНО И НЕ ИЗМЕНЕНО                  */
+        /* ──────────────────────────────────────────────── */
+
         .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; }
         .plantilla-main-btn { background: #ff00ea; color: white; padding: 8px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px #ff00ea66; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .plantilla-main-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px #ff00ea; }
@@ -36,7 +83,7 @@
         .container.mobile-mode .panel { min-height: 400px; margin-bottom: 15px; flex-shrink: 0; }
         .panel { background:rgba(20,20,40,0.8); border:1px solid #ff00ea44; border-radius:15px; padding:15px; position:relative; display:flex; flex-direction:column; backdrop-filter: blur(10px); height: 100%; overflow: hidden; }
         .panel-title { text-align:center; color:#ff00ea; font-size:1.2rem; margin-bottom:15px; font-weight:bold; text-transform: uppercase; }
-        
+       
         /* Уменьшаем CLAUSULAZOS */
         .panel:nth-child(3) {
             flex: 0.7;
@@ -45,26 +92,26 @@
         .panel:nth-child(4) {
             flex: 1.3;
         }
-        
-        .data-box { 
-            flex-grow:1; 
-            background:rgba(0,0,0,0.3); 
-            border-radius:10px; 
-            overflow-y:auto; 
-            padding:10px; 
+       
+        .data-box {
+            flex-grow:1;
+            background:rgba(0,0,0,0.3);
+            border-radius:10px;
+            overflow-y:auto;
+            padding:10px;
             border: 1px solid rgba(255, 0, 234, 0.1);
         }
         .data-box::-webkit-scrollbar { width: 6px; }
         .data-box::-webkit-scrollbar-thumb { background: #ff00ea; border-radius: 10px; }
-        
+       
         /* Улучшенная таблица классификации */
-        #clasificacion-table table { 
-            font-size: 0.7rem; 
+        #clasificacion-table table {
+            font-size: 0.7rem;
             border-collapse: separate;
             border-spacing: 0 2px;
         }
-        #clasificacion-table td { 
-            padding: 6px 3px; 
+        #clasificacion-table td {
+            padding: 6px 3px;
             border-bottom: 1px solid rgba(255,0,234,0.1);
         }
         #clasificacion-table tr {
@@ -74,16 +121,16 @@
             background: rgba(255,0,234,0.15) !important;
             transform: scale(1.002);
         }
-        
+       
         .clasificacion-equipo { cursor: pointer; transition: 0.2s; }
         .clasificacion-equipo:hover { background: rgba(255,0,234,0.2) !important; }
-        
-        .clausulazo-item { 
-            background: rgba(255, 255, 255, 0.03); 
-            margin-bottom: 8px; 
-            padding: 8px; 
-            border-left: 3px solid #ff00ea; 
-            border-radius: 4px; 
+       
+        .clausulazo-item {
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 8px;
+            padding: 8px;
+            border-left: 3px solid #ff00ea;
+            border-radius: 4px;
             font-size: 0.8rem;
         }
         .edit-btn { position:absolute; top:10px; right:10px; cursor:pointer; font-size:1rem; display:none; opacity:0.5; z-index: 10; transition: 0.3s; }
@@ -242,7 +289,6 @@
             margin: 20px 0;
             text-shadow: 0 0 20px #00ff88;
         }
-
         /* === ПОДСВЕТКА ВСЕХ МЕСТ (не только топ-3) === */
         /* ТОП ГОЛЕАДОРЫ */
         .goleadores-1 {
@@ -276,7 +322,6 @@
             padding: 4px 8px;
             border-radius: 6px;
         }
-
         /* КЛАССИФИКАЦИЯ (команды) */
         .clasificacion-1 td {
             color: #00ff88 !important;
@@ -301,7 +346,6 @@
             font-size: 0.98rem !important;
             background: rgba(160,160,160,0.02) !important;
         }
-
         /* Приветствие с именем */
         .welcome-name {
             position: fixed;
@@ -325,7 +369,6 @@
 </head>
 <body>
     <!-- Весь HTML остаётся точно таким же, как у тебя -->
-
     <div class="watermark">Hecho por Vadym</div>
     <div class="top-right-tools">
         <button id="btn-logs-header" onclick="openModal('logs-modal')">LOGS</button>
@@ -391,7 +434,7 @@
     <div id="calendario-modal" class="modal"><div class="modal-content"><h3 id="cal-title">AÑADIR PARTIDO</h3><input type="hidden" id="cal-index"><input type="text" id="cal-e1" placeholder="EQUIPO 1"><input type="text" id="cal-e2" placeholder="EQUIPO 2"><input type="text" id="cal-hora" placeholder="DIA Y HORA"><button onclick="saveData('calendario')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="clausulazos-modal" class="modal"><div class="modal-content"><h3 id="cl-title">NUEVO CLAUSULAZO</h3><input type="hidden" id="cl-index"><textarea id="cl-text" rows="4" placeholder="Escribe el clausulazo..."></textarea><button onclick="saveData('clausulazos')">PUBLICAR</button><button onclick="closeModals()">CERRAR</button></div></div>
     <div id="goleadores-modal" class="modal"><div class="modal-content"><h3 id="g-title">AÑADIR JUGADOR</h3><input type="hidden" id="g-index"><input type="text" id="g-name" placeholder="NOMBRE"><input type="number" id="g-goals" placeholder="GOLES"><input type="number" id="g-pj" placeholder="PJ"><button onclick="saveData('goleadores')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
-    
+   
     <!-- НОВОЕ МОДАЛЬНОЕ ОКНО ДЛЯ КЛАССИФИКАЦИИ С РАСШИРЕННЫМИ ПОЛЯМИ -->
     <div id="clasificacion-modal" class="modal">
         <div class="modal-content">
@@ -410,7 +453,6 @@
             <button onclick="closeModals()">CERRAR</button>
         </div>
     </div>
-
     <script>
         const BIN_ID = '69a1d862ae596e708f5006cd';
         const API_KEY = '$2a$10$.NLuB1Db9xzsid6tI3pxOu9Z59ibyaa5h74.q26Iik5b0DZVu/DS.';
@@ -419,7 +461,6 @@
         let isAdmin = false;
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
-
         function showWelcomeScreen() {
             const teamNames = {
                 "Pingüinos Locos": "team-pinguinos",
@@ -458,7 +499,6 @@
             document.getElementById('add-player-btn').style.display = isAdmin ? 'block' : 'none';
             openModal('welcome-modal');
         }
-
         function addPlayerInWelcome() {
             const name = prompt("Ingrese nombre del nuevo jugador:");
             if (!name || name.trim() === "") return;
@@ -483,7 +523,6 @@
             showWelcomeScreen();
             alert(`Jugador "${name}" añadido al equipo "${selectedTeam}"!`);
         }
-
         async function saveUserSession(name) {
             localStorage.setItem('user_name', name);
             const now = new Date();
@@ -491,15 +530,14 @@
             if(!globalData.accessLogs) globalData.accessLogs = [];
             globalData.accessLogs.unshift({ name: name, time: timeStr });
             if(globalData.accessLogs.length > 100) globalData.accessLogs.pop();
-            
+           
             // Показываем приветствие с именем
             document.getElementById('welcome-name').innerHTML = `BIENVENIDO ${name}`;
             document.getElementById('main-header').classList.add('with-name');
-            
+           
             closeModals();
             await sync();
         }
-
         function renderLogs(limit = 8) {
             if (!globalData.accessLogs || globalData.accessLogs.length === 0) {
                 document.getElementById('logs-list').innerHTML = "No hay registros";
@@ -518,7 +556,6 @@
             document.getElementById('logs-list').innerHTML = html;
             document.getElementById('ver-mas-logs').style.display = globalData.accessLogs.length > limit ? 'block' : 'none';
         }
-
         function openFullLogs() {
             if (!globalData.accessLogs || globalData.accessLogs.length === 0) {
                 document.getElementById('full-logs-list').innerHTML = "No hay registros";
@@ -535,7 +572,6 @@
             }
             openModal('full-logs-modal');
         }
-
         function deleteLog(idx) {
             if (confirm("¿Eliminar log?")) {
                 globalData.accessLogs.splice(idx, 1);
@@ -543,7 +579,6 @@
                 sync();
             }
         }
-
         function editLog(idx) {
             const log = globalData.accessLogs[idx];
             const newName = prompt("Nuevo nombre:", log.name);
@@ -553,7 +588,6 @@
             renderLogs();
             sync();
         }
-
         function login() {
             const u = document.getElementById('user').value, p = document.getElementById('pass').value;
             if(u === '67' && p === '123456') {
@@ -567,7 +601,6 @@
             }
             else { closeModals(); openModal('error-modal'); }
         }
-
         async function loadData() {
             try {
                 const res = await fetch(URL, { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': false }});
@@ -581,7 +614,7 @@
                         renderLogs();
                         document.getElementById('add-player-btn').style.display = 'block';
                     }
-                    
+                   
                     // Проверяем, есть ли сохраненное имя
                     const savedName = localStorage.getItem('user_name');
                     if (savedName) {
@@ -591,16 +624,13 @@
                 }
             } catch (e) { console.error("Error loading"); }
         }
-
         async function sync() { await fetch(URL, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY }, body: JSON.stringify(globalData) }); }
-
         function showTeam(name) {
             currentOpenTeam = name;
             document.getElementById('team-name-title').innerText = name;
             document.getElementById('admin-team-controls').style.display = isAdmin ? 'block' : 'none';
             renderTeamPlayers(); openModal('team-list-modal');
         }
-
         function renderTeamPlayers() {
             let players = globalData.teams[currentOpenTeam] || [];
             players.sort((a, b) => (captains.includes(b.n) ? 1 : 0) - (captains.includes(a.n) ? 1 : 0));
@@ -619,28 +649,24 @@
             });
             document.getElementById('players-list-content').innerHTML = html;
         }
-
         function editPlayer(idx) {
             const p = globalData.teams[currentOpenTeam][idx];
             const n = prompt("Nombre:", p.n), g = prompt("Goles:", p.g);
             if (n !== null) p.n = n; if (g !== null) p.g = parseInt(g);
             renderTeamPlayers(); sync();
         }
-
         function deletePlayer(idx) { if(confirm("¿?")) { globalData.teams[currentOpenTeam].splice(idx, 1); renderTeamPlayers(); sync(); } }
-
         function addPlayerPrompt() { const n = prompt("Nombre:"); if(n) { if(!globalData.teams[currentOpenTeam]) globalData.teams[currentOpenTeam]=[]; globalData.teams[currentOpenTeam].push({n: n, g: 0}); renderTeamPlayers(); sync(); } }
-
         function openEditModal(type, index) {
             const item = globalData[type][index];
             if (type === 'goleadores') {
-                document.getElementById('g-index').value = index; 
+                document.getElementById('g-index').value = index;
                 document.getElementById('g-name').value = item.name;
-                document.getElementById('g-goals').value = item.goals; 
+                document.getElementById('g-goals').value = item.goals;
                 document.getElementById('g-pj').value = item.pj;
                 openModal('goleadores-modal');
             } else if (type === 'clasificacion') {
-                document.getElementById('c-index').value = index; 
+                document.getElementById('c-index').value = index;
                 document.getElementById('c-team').value = item.team || '';
                 document.getElementById('c-pj').value = item.pj || 0;
                 document.getElementById('c-g').value = item.g || 0;
@@ -660,17 +686,15 @@
                 openModal('clausulazos-modal');
             }
         }
-
-        function clearModal(id) { 
-            document.querySelectorAll(`#${id} input, #${id} textarea`).forEach(i => i.value = ""); 
-            openModal(id); 
+        function clearModal(id) {
+            document.querySelectorAll(`#${id} input, #${id} textarea`).forEach(i => i.value = "");
+            openModal(id);
         }
-
         async function saveData(type) {
             if (type === 'clasificacion') {
                 let idx = document.getElementById('c-index').value;
                 let item = (idx !== "") ? globalData[type][idx] : {};
-                
+               
                 item.team = document.getElementById('c-team').value;
                 item.pj = parseInt(document.getElementById('c-pj').value) || 0;
                 item.g = parseInt(document.getElementById('c-g').value) || 0;
@@ -682,19 +706,19 @@
                 item.pts = (item.g * 3) + (item.e * 1);
                 item.money = document.getElementById('c-money').value;
                 item.form = document.getElementById('c-form').value.slice(-5).toUpperCase();
-                
+               
                 if (idx === "") {
                     globalData[type].push(item);
                 }
-                render(); 
-                closeModals(); 
+                render();
+                closeModals();
                 sync();
             }
             else if (type === 'goleadores') {
                 let idx = document.getElementById('g-index').value;
                 let item = (idx !== "") ? globalData[type][idx] : {};
-                item.name = document.getElementById('g-name').value; 
-                item.goals = parseInt(document.getElementById('g-goals').value) || 0; 
+                item.name = document.getElementById('g-name').value;
+                item.goals = parseInt(document.getElementById('g-goals').value) || 0;
                 item.pj = document.getElementById('g-pj').value;
                 if (idx === "") globalData[type].push(item);
                 render(); closeModals(); sync();
@@ -702,8 +726,8 @@
             else if (type === 'calendario') {
                 let idx = document.getElementById('cal-index').value;
                 let item = (idx !== "") ? globalData[type][idx] : {};
-                item.e1 = document.getElementById('cal-e1').value; 
-                item.e2 = document.getElementById('cal-e2').value; 
+                item.e1 = document.getElementById('cal-e1').value;
+                item.e2 = document.getElementById('cal-e2').value;
                 item.hora = document.getElementById('cal-hora').value;
                 if (idx === "") globalData[type].push(item);
                 render(); closeModals(); sync();
@@ -711,15 +735,13 @@
             else if (type === 'clausulazos') {
                 let idx = document.getElementById('cl-index').value;
                 let item = (idx !== "") ? globalData[type][idx] : {};
-                item.title = "NOTICIA"; 
+                item.title = "NOTICIA";
                 item.body = document.getElementById('cl-text').value;
                 if (idx === "") globalData[type].unshift(item);
                 render(); closeModals(); sync();
             }
         }
-
         function deleteItem(type, index) { if(confirm("¿?")) { globalData[type].splice(index, 1); render(); sync(); } }
-
         function getFormHtml(formStr) {
             if(!formStr) return "";
             let html = '<div class="form-dots">';
@@ -731,11 +753,10 @@
             html += '</div>';
             return html;
         }
-
         function showTeamInfo(teamName) {
             const team = globalData.clasificacion.find(t => t.team === teamName);
             if (!team) return;
-           
+          
             let html = `
                 <div class="team-info-card">
                     <div class="team-name-big">${team.team}</div>
@@ -775,7 +796,7 @@
                     </div>
                     <div class="stat-label" style="text-align:center; margin-top:20px;">ÚLTIMOS 5 PARTIDOS</div>
                     <div class="form-big">`;
-           
+          
             if (team.form) {
                 team.form.split('').forEach(char => {
                     let cls = char.toUpperCase() === 'V' ? 'dot-v' : char.toUpperCase() === 'D' ? 'dot-d' : 'dot-e';
@@ -783,24 +804,22 @@
                     html += `<div class="dot ${cls}" style="width:50px; height:50px; font-size:24px;">${icon}</div>`;
                 });
             }
-           
+          
             html += `</div>
                     <div class="stat-label" style="text-align:center; margin-top:20px;">DINERO</div>
                     <div class="money-big">${team.money || '0€'}</div>
                 </div>`;
-           
+          
             if (isAdmin) {
                 const teamIndex = globalData.clasificacion.findIndex(t => t.team === teamName);
                 html += `<button onclick="openEditModal('clasificacion', ${teamIndex})" style="background:#00e5ff; color:black; margin-top:10px;">EDITAR EQUIPO</button>`;
             }
-           
+          
             document.getElementById('team-info-content').innerHTML = html;
             openModal('team-info-modal');
         }
-
         function render() {
             const disp = isAdmin ? 'inline-block' : 'none';
-
             // ТОП ГОЛЕАДОРЫ — подсветка ВСЕХ мест
             let gHtml = `<table><tr><th>NOMBRE</th><th>G</th><th>PJ</th><th></th></tr>`;
             [...globalData.goleadores]
@@ -811,7 +830,6 @@
                     if (rank === 0) rowClass = 'goleadores-1';
                     else if (rank === 1) rowClass = 'goleadores-2';
                     else if (rank === 2) rowClass = 'goleadores-3';
-
                     gHtml += `<tr class="${rowClass}">
                         <td>${i.name}</td>
                         <td style="color:#ff00ea; font-weight:bold;">${i.goals}</td>
@@ -823,7 +841,6 @@
                     </tr>`;
                 });
             document.getElementById('goleadores-table').innerHTML = gHtml + `</table>`;
-
             // КЛАССИФИКАЦИЯ — УБРАЛИ F ИЗ ТАБЛИЦЫ
             let cHtml = `<table><tr><th>CLUB</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>PTS</th><th></th></tr>`;
             [...globalData.clasificacion]
@@ -834,7 +851,6 @@
                     if (rank === 0) rowClass = 'clasificacion-1';
                     else if (rank === 1) rowClass = 'clasificacion-2';
                     else if (rank === 2) rowClass = 'clasificacion-3';
-
                     cHtml += `<tr class="${rowClass} clasificacion-equipo" onclick="showTeamInfo('${i.team}')">
                         <td>${i.team}</td>
                         <td>${i.pj || 0}</td>
@@ -851,14 +867,12 @@
                     </tr>`;
                 });
             document.getElementById('clasificacion-table').innerHTML = cHtml + `</table>`;
-
             let calHtml = `<table><tr><th>PARTIDO</th><th>DIA</th><th></th></tr>`;
             globalData.calendario.forEach((c, idx) => {
                 calHtml += `<tr><td>${c.e1} VS ${c.e2}</td><td>${c.hora}</td>
                 <td><div class="admin-controls" style="display:${disp}"><span class="btn-mini btn-edit" onclick="openEditModal('calendario', ${idx})">✎</span><span class="btn-mini btn-del" onclick="deleteItem('calendario', ${idx})">X</span></div></td></tr>`;
             });
             document.getElementById('calendario-table').innerHTML = calHtml + `</table>`;
-
             let clHtml = '';
             globalData.clausulazos.forEach((cl, idx) => {
                 clHtml += `<div class="clausulazo-item">
@@ -869,7 +883,6 @@
             });
             document.getElementById('clausulazos-list').innerHTML = clHtml || 'Sin noticias';
         }
-
         function openModal(id) {
             closeModals();
             document.getElementById(id).style.display = 'flex';
@@ -877,17 +890,13 @@
                 renderLogs(8);
             }
         }
-
         function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
-
         function toggleView() {
             const container = document.getElementById('main-container');
             container.classList.toggle('mobile-mode');
             document.getElementById('toggle-view-btn').innerText = container.classList.contains('mobile-mode') ? "MODO IPAD" : "MODO MÓVIL";
         }
-
         loadData();
-
         let fromWelcome = false;
         document.querySelector('.admin-access-circle').addEventListener('click', () => { fromWelcome = true; });
         document.querySelector('#auth-modal button:nth-of-type(2)').addEventListener('click', () => {
