@@ -74,7 +74,214 @@
             }
         }
 
-        /* Puntos suspensivos para TOP 5 */
+        /* Botón ÚLTIMOS PARTIDOS - поднят выше */
+        .ultimos-partidos-btn {
+            position: fixed;
+            top: 45px;  /* Было 10px, поднял выше, чтобы не перекрывалось с MODO MÓVIL */
+            left: 140px;
+            width: 110px;
+            height: 35px;
+            background: #00e5ff;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.7rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px #00e5ff66;
+            z-index: 20;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .ultimos-partidos-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #00e5ff;
+        }
+
+        /* Modal casi pantalla completa */
+        .modal-full {
+            display: none;
+            position: fixed;
+            inset: 20px;
+            background: rgba(10,10,25,0.98);
+            border: 2px solid #ff00ea;
+            border-radius: 30px;
+            z-index: 2000;
+            padding: 30px;
+            overflow-y: auto;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 50px #ff00ea;
+        }
+        .modal-full .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ff00ea44;
+            padding-bottom: 15px;
+        }
+        .modal-full h2 {
+            color: #ff00ea;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .modal-full .close-btn {
+            background: none;
+            border: 2px solid #ff00ea;
+            color: #ff00ea;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .modal-full .close-btn:hover {
+            background: #ff00ea;
+            color: black;
+        }
+        .add-partido-btn {
+            background: #00e5ff;
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            box-shadow: 0 0 20px #00e5ff;
+            width: auto;
+            display: inline-block;
+        }
+        .partidos-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .partido-item {
+            background: rgba(255,255,255,0.03);
+            border-left: 5px solid #ff00ea;
+            padding: 15px 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .partido-item:hover {
+            background: rgba(255,0,234,0.1);
+            border-left-width: 8px;
+        }
+        .partido-info {
+            font-weight: bold;
+            color: white;
+        }
+        .partido-admin-tools {
+            display: flex;
+            gap: 10px;
+        }
+        .partido-admin-tools button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: auto;
+            margin: 0;
+            padding: 5px 10px;
+        }
+        .btn-edit-partido {
+            color: #00e5ff;
+        }
+        .btn-del-partido {
+            color: #ff4444;
+        }
+
+        /* Modal de detalle de partido */
+        .detalle-partido {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .detalle-header {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff00ea;
+            text-shadow: 0 0 20px #ff00ea;
+            letter-spacing: 2px;
+        }
+        .detalle-resultado {
+            text-align: center;
+            font-size: 4rem;
+            font-weight: bold;
+            color: #00e5ff;
+            text-shadow: 0 0 30px #00e5ff;
+            margin: 10px 0;
+        }
+        .goleadores-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .goleadores-col {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #ff00ea66;
+        }
+        .goleadores-col h3 {
+            color: #00e5ff;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+        .goleador-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            border-bottom: 1px solid #ff00ea22;
+            font-size: 1.2rem;
+        }
+        .goleador-item:last-child {
+            border-bottom: none;
+        }
+        .goleador-nombre {
+            color: white;
+        }
+        .goleador-acciones {
+            display: flex;
+            gap: 8px;
+        }
+        .goleador-acciones button {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            width: auto;
+            margin: 0;
+            padding: 2px 5px;
+        }
+        .btn-add-goleador {
+            background: #00e5ff;
+            color: black;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-top: 15px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Остальные стили без изменений */
         .goleadores-more-indicator {
             text-align: center;
             padding: 8px;
@@ -92,7 +299,6 @@
             text-shadow: 0 0 10px #00e5ff;
         }
         
-        /* Para el scroll de goleadores */
         .goleadores-scroll-container {
             max-height: 300px;
             overflow-y: auto;
@@ -106,7 +312,6 @@
             border-radius: 10px;
         }
 
-        /* Прозрачная кнопка админа (без цвета и яркости) - ПРАВАЯ НЕРАБОЧАЯ */
         .admin-access-circle {
             position: absolute;
             bottom: 10px;
@@ -126,7 +331,6 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
         
-        /* Дубликат кнопки админа слева снизу без обводки - РАБОЧАЯ */
         .admin-access-circle-left {
             position: absolute;
             bottom: 10px;
@@ -144,7 +348,6 @@
             opacity: 0.3;
         }
 
-        /* Текст для правой кнопки - появляется при наведении */
         .admin-access-circle::after {
             content: "SI ERES FAJARDO... CASI CRACK";
             position: absolute;
@@ -172,12 +375,11 @@
             visibility: visible;
         }
 
-        /* Убираем замок с главного экрана */
         .top-right-tools .tool-icon[title="Admin Login"] {
             display: none;
         }
 
-        .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; }
+        .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; margin-top: 60px; } /* Добавил отступ сверху, чтобы не перекрывать кнопку */
         .plantilla-main-btn { background: #ff00ea; color: white; padding: 8px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px #ff00ea66; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .plantilla-main-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px #ff00ea; }
         .watermark { position: fixed; top: 10px; left: 10px; font-size: 0.7rem; color: rgba(255, 255, 255, 0.2); z-index: 5; pointer-events: none; font-weight: bold; text-transform: uppercase; }
@@ -189,11 +391,9 @@
         .panel { background:rgba(20,20,40,0.8); border:1px solid #ff00ea44; border-radius:15px; padding:15px; position:relative; display:flex; flex-direction:column; backdrop-filter: blur(10px); height: 100%; overflow: hidden; }
         .panel-title { text-align:center; color:#ff00ea; font-size:1.2rem; margin-bottom:15px; font-weight:bold; text-transform: uppercase; }
        
-        /* Уменьшаем CLAUSULAZOS */
         .panel:nth-child(3) {
             flex: 0.7;
         }
-        /* Увеличиваем CLASIFICACION */
         .panel:nth-child(4) {
             flex: 1.3;
         }
@@ -209,7 +409,6 @@
         .data-box::-webkit-scrollbar { width: 6px; }
         .data-box::-webkit-scrollbar-thumb { background: #ff00ea; border-radius: 10px; }
        
-        /* Estilos para logos en clasificación */
         .team-cell {
             display: flex;
             align-items: center;
@@ -230,7 +429,6 @@
             text-overflow: ellipsis;
         }
         
-        /* Logo en selector de plantillas */
         .team-select-btn {
             display: flex;
             flex-direction: column;
@@ -267,7 +465,6 @@
             letter-spacing: 1px;
         }
        
-        /* Logo en información del equipo */
         .team-logo-big {
             width: 100px;
             height: 100px;
@@ -284,7 +481,6 @@
             gap: 10px;
         }
        
-        /* Logo en el modal de equipo (plantilla) */
         .team-header-logo {
             width: 80px;
             height: 80px;
@@ -322,7 +518,7 @@
         .btn-p-del { color: #ff4444; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
         table { width:100%; border-collapse:collapse; font-size:0.75rem; }
         th { color:#ff00ea; border-bottom:1px solid #ff00ea44; padding:6px; position: sticky; top: 0; background: #141428; z-index: 5; font-size:0.75rem; }
-        td { padding:8px; text-align:center; border-bottom:1px solid #ffffff05; font-size:1.1rem; } /* Текст внутри таблицы уменьшен до 1.1rem */
+        td { padding:8px; text-align:center; border-bottom:1px solid #ffffff05; font-size:1.1rem; }
         .admin-controls { display: none; margin-left: 5px; }
         .btn-mini { background: none; border: none; cursor: pointer; font-size: 0.75rem; padding: 2px; display: inline-block; margin: 0 2px; }
         .btn-del { color: #ff4444; }
@@ -334,7 +530,7 @@
         .dot-d { background: #dc3545; }
         .dot-e { background: #6c757d; }
         .dot:last-child { border: 2px solid white; box-shadow: 0 0 5px white; }
-        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; align-items:center; justify-content:center; }
+        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:3000; align-items:center; justify-content:center; } /* Повышен z-index */
         .modal-content { background:#1a1a2e; padding:30px; border:2px solid #ff00ea; border-radius:25px; width:550px; text-align:center; box-shadow: 0 0 30px #ff00ea66; max-height: 85vh; overflow-y: auto; position: relative; }
         input, textarea { width:100%; padding:10px; margin:8px 0; background:#0a0a14; border:1px solid #ff00ea44; color:white; border-radius:8px; }
         button { width:100%; padding:12px; background:#ff00ea; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; }
@@ -539,6 +735,7 @@
 </head>
 <body>
     <div class="watermark">Hecho por Vadym</div>
+    <button class="ultimos-partidos-btn" onclick="openModalFull('ultimos-partidos-full')">ÚLTIMOS PARTIDOS</button>
     <div class="top-right-tools">
         <button id="btn-logs-header" onclick="openModal('logs-modal')">LOGS</button>
     </div>
@@ -570,6 +767,54 @@
             <div class="data-box" id="clasificacion-table"></div>
         </div>
     </div>
+
+    <!-- Modal full screen para ÚLTIMOS PARTIDOS -->
+    <div id="ultimos-partidos-full" class="modal-full">
+        <div class="modal-header">
+            <h2>ÚLTIMOS PARTIDOS</h2>
+            <button class="close-btn" onclick="closeModalFull()">×</button>
+        </div>
+        <div style="text-align: center;">
+            <button id="add-partido-full-btn" class="add-partido-btn" style="display:none;" onclick="abrirModalAddPartido()">+ AÑADIR PARTIDO</button>
+        </div>
+        <div id="ultimos-partidos-list" class="partidos-list"></div>
+    </div>
+
+    <!-- Modal para añadir/editar partido -->
+    <div id="partido-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="partido-modal-title">AÑADIR PARTIDO</h3>
+            <input type="hidden" id="partido-index">
+            <input type="text" id="partido-equipo1" placeholder="EQUIPO 1 (ej: Pingüinos Locos)">
+            <input type="text" id="partido-equipo2" placeholder="EQUIPO 2 (ej: Pajillas)">
+            <input type="text" id="partido-resultado" placeholder="RESULTADO (ej: 3-1)">
+            <button onclick="guardarPartido()">GUARDAR</button>
+            <button onclick="closeModals()">CANCELAR</button>
+        </div>
+    </div>
+
+    <!-- Modal para detalle del partido (goleadores) -->
+    <div id="detalle-partido-modal" class="modal">
+        <div class="modal-content" style="width:800px; max-width:90vw;">
+            <h2 style="color:#ff00ea; margin-bottom:20px;">DETALLE DEL PARTIDO</h2>
+            <div id="detalle-partido-content"></div>
+            <button onclick="closeModals()">CERRAR</button>
+        </div>
+    </div>
+
+    <!-- Modal para añadir goleador -->
+    <div id="add-goleador-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="add-goleador-title">AÑADIR GOLEADOR</h3>
+            <input type="hidden" id="goleador-partido-idx">
+            <input type="hidden" id="goleador-equipo">
+            <input type="text" id="goleador-nombre" placeholder="Nombre del jugador">
+            <button onclick="guardarGoleador()">AÑADIR</button>
+            <button onclick="closeModals()">CANCELAR</button>
+        </div>
+    </div>
+
+    <!-- Остальные модальные окна без изменений -->
     <div id="welcome-modal" class="modal">
         <div class="modal-content">
             <h1 style="color:#ff00ea; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">¿QUIÉN ERES?</h1>
@@ -678,7 +923,6 @@
         </div>
     </div>
     
-    <!-- Modal específico para login de Enol -->
     <div id="enol-auth-modal" class="modal">
         <div class="modal-content">
             <h3>ACCESO PARA ENOL</h3>
@@ -694,9 +938,17 @@
         const BIN_ID = '69a1d862ae596e708f5006cd';
         const API_KEY = '$2a$10$.NLuB1Db9xzsid6tI3pxOu9Z59ibyaa5h74.q26Iik5b0DZVu/DS.';
         const URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-        let globalData = { goleadores: [], clasificacion: [], clausulazos: [], calendario: [], teams: {}, accessLogs: [] };
+        let globalData = { 
+            goleadores: [], 
+            clasificacion: [], 
+            clausulazos: [], 
+            calendario: [], 
+            teams: {}, 
+            accessLogs: [],
+            ultimosPartidos: [] 
+        };
         let isAdmin = false;
-        let isEnolMode = false; // Para modo especial de Enol (solo clausulazos)
+        let isEnolMode = false;
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
         
@@ -748,7 +1000,6 @@
                     players.forEach(p => {
                         const name = typeof p === 'object' ? p.n : p;
                         if (name) {
-                            // Si el nombre es "Enol", abrimos modal especial
                             if (name === "Enol") {
                                 html += `<div class="name-chip" onclick="openModal('enol-auth-modal')">${name}</div>`;
                             } else {
@@ -790,11 +1041,9 @@
             
             if(u === '12' && p === '21') {
                 isEnolMode = true;
-                isAdmin = false; // Asegurar que no sea admin normal
+                isAdmin = false;
                 
-                // Mostrar solo el botón de edición para CLAUSULAZOS
                 document.querySelectorAll('.edit-btn').forEach(b => {
-                    // Solo mostrar el edit-btn del panel de CLAUSULAZOS (tercer panel)
                     if (b.closest('.panel') && b.closest('.panel').querySelector('.panel-title').innerText === 'CLAUSULAZOS') {
                         b.style.display = 'block';
                     } else {
@@ -804,13 +1053,12 @@
                 
                 document.getElementById('btn-logs-header').style.display = 'none';
                 document.getElementById('add-player-btn').style.display = 'none';
+                document.getElementById('add-partido-full-btn').style.display = 'none';
                 
-                // Guardar sesión como Enol
                 localStorage.setItem('user_name', 'Enol');
                 document.getElementById('welcome-name').innerHTML = `BIENVENIDO ENOL`;
                 document.getElementById('main-header').classList.add('with-name');
                 
-                // Registrar en logs
                 const now = new Date();
                 const timeStr = now.toLocaleDateString() + " " + now.toLocaleTimeString();
                 if(!globalData.accessLogs) globalData.accessLogs = [];
@@ -929,13 +1177,13 @@
             const u = document.getElementById('user').value;
             const p = document.getElementById('pass').value;
             
-            // Новые credentials: usuario = "Ы", contraseña = "И"
             if(u === 'Ы' && p === 'И') {
                 isAdmin = true;
                 isEnolMode = false;
                 document.querySelectorAll('.edit-btn').forEach(b => b.style.display = 'block');
                 document.getElementById('btn-logs-header').style.display = 'block';
                 document.getElementById('add-player-btn').style.display = 'block';
+                document.getElementById('add-partido-full-btn').style.display = 'inline-block';
                 render();
                 renderLogs();
                 closeModals();
@@ -952,6 +1200,7 @@
                 const data = await res.json();
                 if (data) {
                     globalData = data;
+                    if (!globalData.ultimosPartidos) globalData.ultimosPartidos = [];
                     syncGoleadoresWithTeams();
                     render();
                     if(currentOpenTeam) renderTeamPlayers();
@@ -959,6 +1208,7 @@
                     if(isAdmin) {
                         renderLogs();
                         document.getElementById('add-player-btn').style.display = 'block';
+                        document.getElementById('add-partido-full-btn').style.display = 'inline-block';
                     }
                    
                     const savedName = localStorage.getItem('user_name');
@@ -986,7 +1236,6 @@
             currentOpenTeam = name;
             document.getElementById('team-name-title').innerText = name;
             
-            // Показать логотип команды, если есть
             const team = globalData.clasificacion.find(t => t.team === name);
             const logoImg = document.getElementById('team-modal-logo');
             if (team && team.logo) {
@@ -1073,7 +1322,6 @@
         }
         
         function openEditModal(type, index) {
-            // Si es modo Enol, solo permitir editar clausulazos
             if (isEnolMode && type !== 'clausulazos') {
                 alert("Solo puedes editar CLAUSULAZOS");
                 return;
@@ -1113,7 +1361,6 @@
         }
         
         function clearModal(id) {
-            // Si es modo Enol, solo permitir limpiar clausulazos
             if (isEnolMode && id !== 'clausulazos-modal') {
                 alert("Solo puedes editar CLAUSULAZOS");
                 return;
@@ -1123,7 +1370,6 @@
         }
         
         async function saveData(type) {
-            // Si es modo Enol, solo permitir guardar clausulazos
             if (isEnolMode && type !== 'clausulazos') {
                 alert("Solo puedes editar CLAUSULAZOS");
                 closeModals();
@@ -1200,7 +1446,6 @@
         }
         
         function deleteItem(type, index) { 
-            // Si es modo Enol, no permitir eliminar nada
             if (isEnolMode) {
                 alert("No tienes permiso para eliminar");
                 return;
@@ -1304,12 +1549,216 @@
             openModal('team-info-modal');
         }
         
+        // ================== Funciones para ÚLTIMOS PARTIDOS ==================
+        function openModalFull(id) {
+            document.getElementById(id).style.display = 'block';
+            renderUltimosPartidos();
+        }
+
+        function closeModalFull() {
+            document.querySelectorAll('.modal-full').forEach(m => m.style.display = 'none');
+        }
+
+        function abrirModalAddPartido() {
+            document.getElementById('partido-modal-title').innerText = 'AÑADIR PARTIDO';
+            document.getElementById('partido-index').value = '';
+            document.getElementById('partido-equipo1').value = '';
+            document.getElementById('partido-equipo2').value = '';
+            document.getElementById('partido-resultado').value = '';
+            openModal('partido-modal');
+        }
+
+        function editarPartido(e, index) {
+            e.stopPropagation(); // Предотвращаем открытие деталей
+            const p = globalData.ultimosPartidos[index];
+            document.getElementById('partido-modal-title').innerText = 'EDITAR PARTIDO';
+            document.getElementById('partido-index').value = index;
+            document.getElementById('partido-equipo1').value = p.equipo1;
+            document.getElementById('partido-equipo2').value = p.equipo2;
+            document.getElementById('partido-resultado').value = p.resultado;
+            openModal('partido-modal');
+        }
+
+        function eliminarPartido(e, index) {
+            e.stopPropagation();
+            if (confirm("¿Eliminar este partido?")) {
+                globalData.ultimosPartidos.splice(index, 1);
+                renderUltimosPartidos();
+                sync();
+            }
+        }
+
+        function guardarPartido() {
+            const idx = document.getElementById('partido-index').value;
+            const equipo1 = document.getElementById('partido-equipo1').value.trim();
+            const equipo2 = document.getElementById('partido-equipo2').value.trim();
+            const resultado = document.getElementById('partido-resultado').value.trim();
+            
+            if (!equipo1 || !equipo2 || !resultado) {
+                alert("Todos los campos son obligatorios");
+                return;
+            }
+
+            // Si es nuevo, inicializar goles vacíos
+            const partido = { 
+                equipo1, 
+                equipo2, 
+                resultado,
+                goles: {
+                    [equipo1]: [],
+                    [equipo2]: []
+                }
+            };
+            
+            if (idx === "") {
+                globalData.ultimosPartidos.unshift(partido);
+            } else {
+                // Conservar los goles existentes al editar
+                const old = globalData.ultimosPartidos[parseInt(idx)];
+                partido.goles = old.goles || { [equipo1]: [], [equipo2]: [] };
+                globalData.ultimosPartidos[parseInt(idx)] = partido;
+            }
+            
+            renderUltimosPartidos();
+            closeModals();
+            sync();
+        }
+
+        function verDetallePartido(index) {
+            const partido = globalData.ultimosPartidos[index];
+            if (!partido) return;
+
+            // Asegurar estructura de goles
+            if (!partido.goles) {
+                partido.goles = {};
+                partido.goles[partido.equipo1] = [];
+                partido.goles[partido.equipo2] = [];
+            }
+
+            let html = `
+                <div class="detalle-partido">
+                    <div class="detalle-header">${partido.equipo1} - ${partido.equipo2}</div>
+                    <div class="detalle-resultado">${partido.resultado}</div>
+                    <div class="goleadores-grid">
+                        <div class="goleadores-col">
+                            <h3>${partido.equipo1}</h3>
+                            <div id="goleadores-${index}-eq1">
+            `;
+            
+            const golesEq1 = partido.goles[partido.equipo1] || [];
+            golesEq1.forEach((goleador, i) => {
+                html += `
+                    <div class="goleador-item">
+                        <span class="goleador-nombre">${goleador}</span>
+                        <div class="goleador-acciones" style="display:${isAdmin && !isEnolMode ? 'flex' : 'none'}">
+                            <button class="btn-edit-partido" onclick="eliminarGoleador(${index}, '${partido.equipo1}', ${i})">✖</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                            </div>
+                            ${isAdmin && !isEnolMode ? `<button class="btn-add-goleador" onclick="abrirModalAddGoleador(${index}, '${partido.equipo1}')">+ AÑADIR GOLEADOR</button>` : ''}
+                        </div>
+                        <div class="goleadores-col">
+                            <h3>${partido.equipo2}</h3>
+                            <div id="goleadores-${index}-eq2">
+            `;
+
+            const golesEq2 = partido.goles[partido.equipo2] || [];
+            golesEq2.forEach((goleador, i) => {
+                html += `
+                    <div class="goleador-item">
+                        <span class="goleador-nombre">${goleador}</span>
+                        <div class="goleador-acciones" style="display:${isAdmin && !isEnolMode ? 'flex' : 'none'}">
+                            <button class="btn-edit-partido" onclick="eliminarGoleador(${index}, '${partido.equipo2}', ${i})">✖</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                            </div>
+                            ${isAdmin && !isEnolMode ? `<button class="btn-add-goleador" onclick="abrirModalAddGoleador(${index}, '${partido.equipo2}')">+ AÑADIR GOLEADOR</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detalle-partido-content').innerHTML = html;
+            openModal('detalle-partido-modal');
+        }
+
+        function abrirModalAddGoleador(partidoIdx, equipo) {
+            document.getElementById('add-goleador-title').innerText = `AÑADIR GOLEADOR - ${equipo}`;
+            document.getElementById('goleador-partido-idx').value = partidoIdx;
+            document.getElementById('goleador-equipo').value = equipo;
+            document.getElementById('goleador-nombre').value = '';
+            openModal('add-goleador-modal');
+        }
+
+        function guardarGoleador() {
+            const partidoIdx = parseInt(document.getElementById('goleador-partido-idx').value);
+            const equipo = document.getElementById('goleador-equipo').value;
+            const nombre = document.getElementById('goleador-nombre').value.trim();
+            
+            if (!nombre) {
+                alert("Ingresa un nombre");
+                return;
+            }
+
+            const partido = globalData.ultimosPartidos[partidoIdx];
+            if (!partido.goles) partido.goles = {};
+            if (!partido.goles[equipo]) partido.goles[equipo] = [];
+            
+            partido.goles[equipo].push(nombre);
+            
+            closeModals();
+            // Переоткрыть детали, чтобы обновить список
+            verDetallePartido(partidoIdx);
+            sync();
+        }
+
+        function eliminarGoleador(partidoIdx, equipo, goleadorIdx) {
+            if (!isAdmin || isEnolMode) return;
+            const partido = globalData.ultimosPartidos[partidoIdx];
+            if (partido.goles && partido.goles[equipo]) {
+                partido.goles[equipo].splice(goleadorIdx, 1);
+                verDetallePartido(partidoIdx);
+                sync();
+            }
+        }
+
+        function renderUltimosPartidos() {
+            const list = document.getElementById('ultimos-partidos-list');
+            let html = '';
+            
+            if (!globalData.ultimosPartidos || globalData.ultimosPartidos.length === 0) {
+                html = '<div style="text-align:center; color:#888; padding:50px;">No hay partidos registrados</div>';
+            } else {
+                globalData.ultimosPartidos.forEach((p, idx) => {
+                    html += `
+                        <div class="partido-item" onclick="verDetallePartido(${idx})">
+                            <span class="partido-info">${p.equipo1} - ${p.equipo2}  ${p.resultado}</span>
+                            <div class="partido-admin-tools" style="display:${isAdmin && !isEnolMode ? 'flex' : 'none'}" onclick="event.stopPropagation()">
+                                <button class="btn-edit-partido" onclick="editarPartido(event, ${idx})">✎</button>
+                                <button class="btn-del-partido" onclick="eliminarPartido(event, ${idx})">✖</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            list.innerHTML = html;
+        }
+
+        // ================== Основной рендер ==================
         function render() {
             const disp = (isAdmin && !isEnolMode) ? 'inline-block' : 'none';
             
             syncGoleadoresWithTeams();
             
-            // TOP GOLEADORES con scroll y TOP 5 visible
+            // TOP GOLEADORES
             let gHtml = `<div class="goleadores-scroll-container">`;
             gHtml += `<table><tr><th>NOMBRE</th><th>G</th><th>PJ</th><th></th></tr>`;
             
@@ -1322,7 +1771,6 @@
                 else if (rank === 1) rowClass = 'goleadores-2';
                 else if (rank === 2) rowClass = 'goleadores-3';
                 
-                // Mostrar TOP 5 con estilo especial
                 if (rank < 5) {
                     gHtml += `<tr class="${rowClass}">
                         <td>${i.name}</td>
@@ -1338,11 +1786,9 @@
             
             gHtml += `</table>`;
             
-            // Indicador de más goleadores si hay más de 5
             if (goleadoresOrdenados.length > 5) {
                 gHtml += `<div class="goleadores-more-indicator">▼ VER MÁS GOLEADORES ▼</div>`;
                 
-                // Mostrar el resto de goleadores (del 6 en adelante)
                 goleadoresOrdenados.forEach((i, rank) => {
                     if (rank >= 5) {
                         const oi = globalData.goleadores.indexOf(i);
@@ -1358,7 +1804,7 @@
             gHtml += `</div>`;
             document.getElementById('goleadores-table').innerHTML = gHtml;
             
-            // CLASIFICACIÓN con desempate por diferencia de goles
+            // CLASIFICACIÓN
             let cHtml = `<table><tr><th>CLUB</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>PTS</th><th></th></tr>`;
             
             [...globalData.clasificacion]
@@ -1413,7 +1859,6 @@
             
             let clHtml = '';
             globalData.clausulazos.forEach((cl, idx) => {
-                // Mostrar botones de edición para Enol solo en clausulazos
                 const enolEdit = (isEnolMode) ? 'inline-block' : disp;
                 clHtml += `<div class="clausulazo-item">
                     <div style="font-weight:bold; color:#ff00ea; font-size:0.7rem;">NOTICIA</div>
@@ -1450,6 +1895,12 @@
                 document.getElementById('logo-pajillas').style.display = 'inline-block';
             } else {
                 document.getElementById('logo-pajillas').style.display = 'none';
+            }
+
+            document.getElementById('add-partido-full-btn').style.display = (isAdmin && !isEnolMode) ? 'inline-block' : 'none';
+            
+            if (document.getElementById('ultimos-partidos-full').style.display === 'block') {
+                renderUltimosPartidos();
             }
         }
         
