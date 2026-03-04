@@ -209,29 +209,97 @@
         .data-box::-webkit-scrollbar { width: 6px; }
         .data-box::-webkit-scrollbar-thumb { background: #ff00ea; border-radius: 10px; }
        
-        /* Уменьшенная таблица классификации (в 2-3 раза меньше) */
-        #clasificacion-table table {
-            font-size: 0.35rem;
-            border-collapse: separate;
-            border-spacing: 0 1px;
+        /* Estilos para logos en clasificación */
+        .team-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        #clasificacion-table td {
-            padding: 2px 1px;
-            border-bottom: 1px solid rgba(255,0,234,0.1);
+        .team-logo-small {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #ff00ea66;
         }
-        #clasificacion-table tr {
-            transition: 0.2s;
+        .team-name-with-logo {
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        #clasificacion-table tr:hover {
-            background: rgba(255,0,234,0.15) !important;
+        
+        /* Logo en selector de plantillas */
+        .team-select-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #ff00ea;
+            color: white;
+            padding: 15px;
+            margin: 8px 0;
+            border-radius: 15px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            font-size: 0.8rem;
         }
-        #clasificacion-table th {
-            font-size: 0.4rem;
-            padding: 3px;
+        .team-select-btn:hover {
+            transform: scale(1.02);
+            background: rgba(255,0,234,0.1);
+        }
+        .team-logo-select {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #ff00ea;
+            margin-bottom: 5px;
+        }
+        .team-name-select {
+            font-size: 1rem;
+            letter-spacing: 1px;
         }
        
-        .clasificacion-equipo { cursor: pointer; transition: 0.2s; }
-        .clasificacion-equipo:hover { background: rgba(255,0,234,0.2) !important; }
+        /* Logo en información del equipo */
+        .team-logo-big {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 3px solid #ff00ea;
+            margin-bottom: 15px;
+        }
+        .team-header-with-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+       
+        /* Logo en el modal de equipo (plantilla) */
+        .team-header-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 3px solid #ff00ea;
+            margin: 10px auto;
+        }
+        .team-title-with-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
        
         .clausulazo-item {
             background: rgba(255, 255, 255, 0.03);
@@ -252,10 +320,9 @@
         .player-admin-tools { position: absolute; top: 5px; right: 5px; display: none; }
         .btn-p-edit { color: #00e5ff; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
         .btn-p-del { color: #ff4444; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
-        .team-select-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid #ff00ea; color: white; padding: 12px; margin: 8px 0; border-radius: 10px; width: 100%; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.8rem; }
         table { width:100%; border-collapse:collapse; font-size:0.75rem; }
-        th { color:#ff00ea; border-bottom:1px solid #ff00ea44; padding:6px; position: sticky; top: 0; background: #141428; z-index: 5; }
-        td { padding:8px; text-align:center; border-bottom:1px solid #ffffff05; }
+        th { color:#ff00ea; border-bottom:1px solid #ff00ea44; padding:6px; position: sticky; top: 0; background: #141428; z-index: 5; font-size:0.75rem; }
+        td { padding:8px; text-align:center; border-bottom:1px solid #ffffff05; font-size:1.1rem; } /* Текст внутри таблицы уменьшен до 1.1rem */
         .admin-controls { display: none; margin-left: 5px; }
         .btn-mini { background: none; border: none; cursor: pointer; font-size: 0.75rem; padding: 2px; display: inline-block; margin: 0 2px; }
         .btn-del { color: #ff4444; }
@@ -429,25 +496,25 @@
         }
         .clasificacion-1 td {
             color: #00ff88 !important;
-            font-size: 0.45rem !important;
+            font-size: 1.1rem !important;
             font-weight: bold;
             background: rgba(0,255,136,0.06) !important;
         }
         .clasificacion-2 td {
             color: #d0d0d0 !important;
-            font-size: 0.42rem !important;
+            font-size: 1.1rem !important;
             font-weight: bold;
             background: rgba(200,200,200,0.04) !important;
         }
         .clasificacion-3 td {
             color: #cd7f32 !important;
-            font-size: 0.4rem !important;
+            font-size: 1.1rem !important;
             font-weight: bold;
             background: rgba(205,127,50,0.06) !important;
         }
         .clasificacion-other td {
             color: #a0a0a0 !important;
-            font-size: 0.38rem !important;
+            font-size: 1.1rem !important;
             background: rgba(160,160,160,0.02) !important;
         }
         .welcome-name {
@@ -546,8 +613,37 @@
             <button onclick="closeModals()">CERRAR</button>
         </div>
     </div>
-    <div id="plantillas-modal" class="modal"><div class="modal-content"><h2 style="color:#ff00ea; margin-bottom:20px;">EQUIPOS</h2><button class="team-select-btn" onclick="showTeam('Pingüinos Locos')">Pingüinos Locos</button><button class="team-select-btn" onclick="showTeam('Atlético de Jhonsy')">Atlético de Jhonsy</button><button class="team-select-btn" onclick="showTeam('Pajillas')">Pajillas</button><button style="background:transparent; border:1px solid grey; margin-top:20px;" onclick="closeModals()">CERRAR</button></div></div>
-    <div id="team-list-modal" class="modal"><div class="modal-content"><h2 id="team-name-title" style="color:#ff00ea; text-transform: uppercase;"></h2><div id="admin-team-controls" style="display:none; margin-bottom:10px;"><button onclick="addPlayerPrompt()" style="padding:5px; font-size:0.7rem; width:auto; background:#00e5ff;">+ AÑADIR JUGADOR</button></div><div id="players-list-content" class="player-grid"></div><button style="margin-top:20px; background: #333;" onclick="openModal('plantillas-modal')">VOLVER</button></div></div>
+    <div id="plantillas-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:#ff00ea; margin-bottom:20px;">EQUIPOS</h2>
+            <button class="team-select-btn" onclick="showTeam('Pingüinos Locos')">
+                <img class="team-logo-select" id="logo-pinguinos" src="" alt="logo" onerror="this.style.display='none'">
+                <span class="team-name-select">Pingüinos Locos</span>
+            </button>
+            <button class="team-select-btn" onclick="showTeam('Atlético de Jhonsy')">
+                <img class="team-logo-select" id="logo-jhonsy" src="" alt="logo" onerror="this.style.display='none'">
+                <span class="team-name-select">Atlético de Jhonsy</span>
+            </button>
+            <button class="team-select-btn" onclick="showTeam('Pajillas')">
+                <img class="team-logo-select" id="logo-pajillas" src="" alt="logo" onerror="this.style.display='none'">
+                <span class="team-name-select">Pajillas</span>
+            </button>
+            <button style="background:transparent; border:1px solid grey; margin-top:20px;" onclick="closeModals()">CERRAR</button>
+        </div>
+    </div>
+    <div id="team-list-modal" class="modal">
+        <div class="modal-content">
+            <div id="team-header-with-logo" class="team-title-with-logo">
+                <img id="team-modal-logo" class="team-header-logo" src="" alt="logo" style="display:none;">
+                <h2 id="team-name-title" style="color:#ff00ea; text-transform: uppercase;"></h2>
+            </div>
+            <div id="admin-team-controls" style="display:none; margin-bottom:10px;">
+                <button onclick="addPlayerPrompt()" style="padding:5px; font-size:0.7rem; width:auto; background:#00e5ff;">+ AÑADIR JUGADOR</button>
+            </div>
+            <div id="players-list-content" class="player-grid"></div>
+            <button style="margin-top:20px; background: #333;" onclick="openModal('plantillas-modal')">VOLVER</button>
+        </div>
+    </div>
     <div id="auth-modal" class="modal">
         <div class="modal-content">
             <h3>ACCESO ESPECIAL</h3>
@@ -568,6 +664,7 @@
             <h3 id="c-title">AÑADIR/EDITAR EQUIPO</h3>
             <input type="hidden" id="c-index">
             <input type="text" id="c-team" placeholder="CLUB (Ej: PINGÜINOS LOCOS)">
+            <input type="text" id="c-logo" placeholder="LOGO URL (ej: https://...png)">
             <input type="number" id="c-pj" placeholder="PARTIDOS JUGADOS (PJ)">
             <input type="number" id="c-g" placeholder="GANADOS (G)">
             <input type="number" id="c-e" placeholder="EMPATES (E)">
@@ -829,8 +926,11 @@
         }
         
         function login() {
-            const u = document.getElementById('user').value, p = document.getElementById('pass').value;
-            if(u === '67' && p === '12') {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            
+            // Новые credentials: usuario = "Ы", contraseña = "И"
+            if(u === 'Ы' && p === 'И') {
                 isAdmin = true;
                 isEnolMode = false;
                 document.querySelectorAll('.edit-btn').forEach(b => b.style.display = 'block');
@@ -885,6 +985,17 @@
         function showTeam(name) {
             currentOpenTeam = name;
             document.getElementById('team-name-title').innerText = name;
+            
+            // Показать логотип команды, если есть
+            const team = globalData.clasificacion.find(t => t.team === name);
+            const logoImg = document.getElementById('team-modal-logo');
+            if (team && team.logo) {
+                logoImg.src = team.logo;
+                logoImg.style.display = 'block';
+            } else {
+                logoImg.style.display = 'none';
+            }
+            
             document.getElementById('admin-team-controls').style.display = (isAdmin && !isEnolMode) ? 'block' : 'none';
             renderTeamPlayers(); 
             openModal('team-list-modal');
@@ -978,6 +1089,7 @@
             } else if (type === 'clasificacion') {
                 document.getElementById('c-index').value = index;
                 document.getElementById('c-team').value = item.team || '';
+                document.getElementById('c-logo').value = item.logo || '';
                 document.getElementById('c-pj').value = item.pj || 0;
                 document.getElementById('c-g').value = item.g || 0;
                 document.getElementById('c-e').value = item.e || 0;
@@ -1023,6 +1135,7 @@
                 let item = (idx !== "") ? globalData[type][idx] : {};
                
                 item.team = document.getElementById('c-team').value;
+                item.logo = document.getElementById('c-logo').value;
                 item.pj = parseInt(document.getElementById('c-pj').value) || 0;
                 item.g = parseInt(document.getElementById('c-g').value) || 0;
                 item.e = parseInt(document.getElementById('c-e').value) || 0;
@@ -1128,7 +1241,10 @@
           
             let html = `
                 <div class="team-info-card">
-                    <div class="team-name-big">${team.team}</div>
+                    <div class="team-header-with-logo">
+                        ${team.logo ? `<img class="team-logo-big" src="${team.logo}" alt="${team.team}" onerror="this.style.display='none'">` : ''}
+                        <div class="team-name-big">${team.team}</div>
+                    </div>
                     <div class="team-info-stats">
                         <div class="stat-item">
                             <div class="stat-label">PUNTOS</div>
@@ -1266,7 +1382,12 @@
                     const dgStr = dg > 0 ? `+${dg}` : dg;
                     
                     cHtml += `<tr class="${rowClass} clasificacion-equipo" onclick="showTeamInfo('${i.team}')">
-                        <td>${i.team}</td>
+                        <td>
+                            <div class="team-cell">
+                                ${i.logo ? `<img class="team-logo-small" src="${i.logo}" alt="${i.team}" onerror="this.style.display='none'">` : ''}
+                                <span class="team-name-with-logo">${i.team}</span>
+                            </div>
+                        </td>
                         <td>${i.pj || 0}</td>
                         <td>${i.g || 0}</td>
                         <td>${i.e || 0}</td>
@@ -1274,7 +1395,7 @@
                         <td>${i.gf || 0}</td>
                         <td>${i.gc || 0}</td>
                         <td style="color:${dg > 0 ? '#00ff88' : dg < 0 ? '#ff4444' : '#888'}; font-weight:bold;">${dgStr}</td>
-                        <td style="color:#ff00ea; font-weight:bold; font-size: 0.45rem;">${i.pts}</td>
+                        <td style="color:#ff00ea; font-weight:bold;">${i.pts}</td>
                         <td><div class="admin-controls" style="display:${disp}">
                             <span class="btn-mini btn-edit" onclick="event.stopPropagation(); openEditModal('clasificacion', ${oi})">✎</span>
                             <span class="btn-mini btn-del" onclick="event.stopPropagation(); deleteItem('clasificacion', ${oi})">X</span>
@@ -1304,6 +1425,32 @@
                 </div>`;
             });
             document.getElementById('clausulazos-list').innerHTML = clHtml || 'Sin noticias';
+
+            // Actualizar logos en el modal de plantillas
+            const pinguinos = globalData.clasificacion.find(t => t.team === 'Pingüinos Locos');
+            const jhonsy = globalData.clasificacion.find(t => t.team === 'Atlético de Jhonsy');
+            const pajillas = globalData.clasificacion.find(t => t.team === 'Pajillas');
+            
+            if (pinguinos && pinguinos.logo) {
+                document.getElementById('logo-pinguinos').src = pinguinos.logo;
+                document.getElementById('logo-pinguinos').style.display = 'inline-block';
+            } else {
+                document.getElementById('logo-pinguinos').style.display = 'none';
+            }
+            
+            if (jhonsy && jhonsy.logo) {
+                document.getElementById('logo-jhonsy').src = jhonsy.logo;
+                document.getElementById('logo-jhonsy').style.display = 'inline-block';
+            } else {
+                document.getElementById('logo-jhonsy').style.display = 'none';
+            }
+            
+            if (pajillas && pajillas.logo) {
+                document.getElementById('logo-pajillas').src = pajillas.logo;
+                document.getElementById('logo-pajillas').style.display = 'inline-block';
+            } else {
+                document.getElementById('logo-pajillas').style.display = 'none';
+            }
         }
         
         function openModal(id) {
