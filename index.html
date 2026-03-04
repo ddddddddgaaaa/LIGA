@@ -74,13 +74,14 @@
             }
         }
 
-        /* Botón ÚLTIMOS PARTIDOS - поднят выше */
+        /* Botón ÚLTIMOS PARTIDOS - alineado con watermark */
         .ultimos-partidos-btn {
             position: fixed;
-            top: 45px;  /* Было 10px, поднял выше, чтобы не перекрывалось с MODO MÓVIL */
-            left: 140px;
-            width: 110px;
+            top: 10px;
+            left: 110px;
+            width: auto;
             height: 35px;
+            padding: 0 15px;
             background: #00e5ff;
             color: #000;
             border: none;
@@ -93,6 +94,7 @@
             transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
         .ultimos-partidos-btn:hover {
             transform: scale(1.05);
@@ -169,7 +171,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1.3rem;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -178,8 +179,21 @@
             border-left-width: 8px;
         }
         .partido-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .partido-teams {
+            font-size: 1.3rem;
             font-weight: bold;
             color: white;
+        }
+        .partido-score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00e5ff;
+            text-shadow: 0 0 15px #00e5ff, 0 0 30px #00e5ff;
+            letter-spacing: 2px;
         }
         .partido-admin-tools {
             display: flex;
@@ -281,7 +295,6 @@
             cursor: pointer;
         }
 
-        /* Остальные стили без изменений */
         .goleadores-more-indicator {
             text-align: center;
             padding: 8px;
@@ -379,7 +392,7 @@
             display: none;
         }
 
-        .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; margin-top: 60px; } /* Добавил отступ сверху, чтобы не перекрывать кнопку */
+        .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; margin-top: 60px; }
         .plantilla-main-btn { background: #ff00ea; color: white; padding: 8px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px #ff00ea66; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .plantilla-main-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px #ff00ea; }
         .watermark { position: fixed; top: 10px; left: 10px; font-size: 0.7rem; color: rgba(255, 255, 255, 0.2); z-index: 5; pointer-events: none; font-weight: bold; text-transform: uppercase; }
@@ -530,7 +543,7 @@
         .dot-d { background: #dc3545; }
         .dot-e { background: #6c757d; }
         .dot:last-child { border: 2px solid white; box-shadow: 0 0 5px white; }
-        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:3000; align-items:center; justify-content:center; } /* Повышен z-index */
+        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:3000; align-items:center; justify-content:center; }
         .modal-content { background:#1a1a2e; padding:30px; border:2px solid #ff00ea; border-radius:25px; width:550px; text-align:center; box-shadow: 0 0 30px #ff00ea66; max-height: 85vh; overflow-y: auto; position: relative; }
         input, textarea { width:100%; padding:10px; margin:8px 0; background:#0a0a14; border:1px solid #ff00ea44; color:white; border-radius:8px; }
         button { width:100%; padding:12px; background:#ff00ea; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; }
@@ -731,6 +744,15 @@
             backdrop-filter: blur(5px);
             pointer-events: none;
         }
+        /* Estilo para preview de logo */
+        .logo-preview {
+            max-width: 100px;
+            max-height: 100px;
+            margin: 10px auto;
+            border-radius: 10px;
+            border: 2px solid #ff00ea;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -814,7 +836,7 @@
         </div>
     </div>
 
-    <!-- Остальные модальные окна без изменений -->
+    <!-- Modal de bienvenida -->
     <div id="welcome-modal" class="modal">
         <div class="modal-content">
             <h1 style="color:#ff00ea; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">¿QUIÉN ERES?</h1>
@@ -837,6 +859,8 @@
             <div class="admin-access-circle-left" onclick="openModal('auth-modal')"></div>
         </div>
     </div>
+
+    <!-- Modal de logs -->
     <div id="logs-modal" class="modal">
         <div class="modal-content">
             <h2 style="color:#00e5ff;">LOGS DE ACCESO</h2>
@@ -845,6 +869,8 @@
             <button onclick="closeModals()">CERRAR</button>
         </div>
     </div>
+
+    <!-- Modal de logs completo -->
     <div id="full-logs-modal" class="modal">
         <div class="modal-content">
             <h2 style="color:#00e5ff;">TODOS LOS LOGS DE ACCESO</h2>
@@ -852,12 +878,16 @@
             <button onclick="closeModals()">CERRAR</button>
         </div>
     </div>
+
+    <!-- Modal de información de equipo -->
     <div id="team-info-modal" class="modal">
         <div class="modal-content">
             <div id="team-info-content"></div>
             <button onclick="closeModals()">CERRAR</button>
         </div>
     </div>
+
+    <!-- Modal de plantillas -->
     <div id="plantillas-modal" class="modal">
         <div class="modal-content">
             <h2 style="color:#ff00ea; margin-bottom:20px;">EQUIPOS</h2>
@@ -876,6 +906,8 @@
             <button style="background:transparent; border:1px solid grey; margin-top:20px;" onclick="closeModals()">CERRAR</button>
         </div>
     </div>
+
+    <!-- Modal de lista de jugadores de un equipo -->
     <div id="team-list-modal" class="modal">
         <div class="modal-content">
             <div id="team-header-with-logo" class="team-title-with-logo">
@@ -889,6 +921,8 @@
             <button style="margin-top:20px; background: #333;" onclick="openModal('plantillas-modal')">VOLVER</button>
         </div>
     </div>
+
+    <!-- Modal de autenticación admin -->
     <div id="auth-modal" class="modal">
         <div class="modal-content">
             <h3>ACCESO ESPECIAL</h3>
@@ -898,18 +932,35 @@
             <button onclick="closeModals()">CERRAR</button>
         </div>
     </div>
+
+    <!-- Modal de error -->
     <div id="error-modal" class="modal"><div class="modal-content"><div style="color:red; font-weight:bold;">ACCESO DENEGADO</div><button onclick="openModal('welcome-modal')">Cerrar</button></div></div>
+
+    <!-- Modal de error de Enol -->
     <div id="enol-error-modal" class="modal"><div class="modal-content"><div style="color:red; font-weight:bold;">CREDENCIALES INCORRECTAS</div><button onclick="closeModals(); openModal('welcome-modal');">Cerrar</button></div></div>
+
+    <!-- Modal de calendario -->
     <div id="calendario-modal" class="modal"><div class="modal-content"><h3 id="cal-title">AÑADIR PARTIDO</h3><input type="hidden" id="cal-index"><input type="text" id="cal-e1" placeholder="EQUIPO 1"><input type="text" id="cal-e2" placeholder="EQUIPO 2"><input type="text" id="cal-hora" placeholder="DIA Y HORA"><button onclick="saveData('calendario')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
+
+    <!-- Modal de clausulazos -->
     <div id="clausulazos-modal" class="modal"><div class="modal-content"><h3 id="cl-title">NUEVO CLAUSULAZO</h3><input type="hidden" id="cl-index"><textarea id="cl-text" rows="4" placeholder="Escribe el clausulazo..."></textarea><button onclick="saveData('clausulazos')">PUBLICAR</button><button onclick="closeModals()">CERRAR</button></div></div>
+
+    <!-- Modal de goleadores -->
     <div id="goleadores-modal" class="modal"><div class="modal-content"><h3 id="g-title">AÑADIR JUGADOR</h3><input type="hidden" id="g-index"><input type="text" id="g-name" placeholder="NOMBRE"><input type="number" id="g-goals" placeholder="GOLES"><input type="number" id="g-pj" placeholder="PJ"><button onclick="saveData('goleadores')">GUARDAR</button><button onclick="closeModals()">CERRAR</button></div></div>
    
+    <!-- Modal de clasificación (con carga de archivo) -->
     <div id="clasificacion-modal" class="modal">
         <div class="modal-content">
             <h3 id="c-title">AÑADIR/EDITAR EQUIPO</h3>
             <input type="hidden" id="c-index">
             <input type="text" id="c-team" placeholder="CLUB (Ej: PINGÜINOS LOCOS)">
-            <input type="text" id="c-logo" placeholder="LOGO URL (ej: https://...png)">
+            
+            <!-- Campo para subir imagen -->
+            <label style="color:#00e5ff; font-size:0.8rem; display:block; text-align:left; margin-top:10px;">SUBIR LOGO:</label>
+            <input type="file" id="c-logo-file" accept="image/*" onchange="previewLogo()">
+            <img id="logo-preview" class="logo-preview" src="#" alt="Vista previa" style="display:none;">
+            
+            <input type="text" id="c-logo" placeholder="O PEGA URL DEL LOGO">
             <input type="number" id="c-pj" placeholder="PARTIDOS JUGADOS (PJ)">
             <input type="number" id="c-g" placeholder="GANADOS (G)">
             <input type="number" id="c-e" placeholder="EMPATES (E)">
@@ -923,6 +974,7 @@
         </div>
     </div>
     
+    <!-- Modal de autenticación de Enol -->
     <div id="enol-auth-modal" class="modal">
         <div class="modal-content">
             <h3>ACCESO PARA ENOL</h3>
@@ -951,6 +1003,21 @@
         let isEnolMode = false;
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
+        
+        // Función para previsualizar el logo seleccionado
+        function previewLogo() {
+            const file = document.getElementById('c-logo-file').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('c-logo').value = e.target.result;
+                    const preview = document.getElementById('logo-preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
         
         function syncGoleadoresWithTeams() {
             const playerGoalsMap = new Map();
@@ -1096,7 +1163,7 @@
             globalData.teams[selectedTeam].push({ n: name.trim(), g: 0, pj: 0 });
             syncGoleadoresWithTeams();
             sync();
-            showWelcomeScreen();
+            showWelcomeScreen(); // Actualizar la pantalla de bienvenida
             alert(`Jugador "${name}" añadido al equipo "${selectedTeam}"!`);
         }
         
@@ -1294,6 +1361,7 @@
             syncGoleadoresWithTeams();
             renderTeamPlayers(); 
             render();
+            showWelcomeScreen(); // Actualizar pantalla de bienvenida
             sync();
         }
         
@@ -1304,6 +1372,7 @@
                 syncGoleadoresWithTeams();
                 renderTeamPlayers(); 
                 render();
+                showWelcomeScreen(); // Actualizar pantalla de bienvenida
                 sync(); 
             } 
         }
@@ -1317,6 +1386,7 @@
                 syncGoleadoresWithTeams();
                 renderTeamPlayers(); 
                 render();
+                showWelcomeScreen(); // Actualizar pantalla de bienvenida
                 sync(); 
             } 
         }
@@ -1346,6 +1416,16 @@
                 document.getElementById('c-gc').value = item.gc || 0;
                 document.getElementById('c-money').value = item.money || '';
                 document.getElementById('c-form').value = item.form || "";
+                
+                // Mostrar vista previa del logo si existe
+                const preview = document.getElementById('logo-preview');
+                if (item.logo) {
+                    preview.src = item.logo;
+                    preview.style.display = 'block';
+                } else {
+                    preview.style.display = 'none';
+                }
+                
                 openModal('clasificacion-modal');
             } else if (type === 'calendario') {
                 document.getElementById('cal-index').value = index; 
@@ -1366,6 +1446,10 @@
                 return;
             }
             document.querySelectorAll(`#${id} input, #${id} textarea`).forEach(i => i.value = "");
+            // Ocultar preview de logo si es el modal de clasificación
+            if (id === 'clasificacion-modal') {
+                document.getElementById('logo-preview').style.display = 'none';
+            }
             openModal(id);
         }
         
@@ -1569,7 +1653,7 @@
         }
 
         function editarPartido(e, index) {
-            e.stopPropagation(); // Предотвращаем открытие деталей
+            e.stopPropagation();
             const p = globalData.ultimosPartidos[index];
             document.getElementById('partido-modal-title').innerText = 'EDITAR PARTIDO';
             document.getElementById('partido-index').value = index;
@@ -1599,7 +1683,6 @@
                 return;
             }
 
-            // Si es nuevo, inicializar goles vacíos
             const partido = { 
                 equipo1, 
                 equipo2, 
@@ -1613,7 +1696,6 @@
             if (idx === "") {
                 globalData.ultimosPartidos.unshift(partido);
             } else {
-                // Conservar los goles existentes al editar
                 const old = globalData.ultimosPartidos[parseInt(idx)];
                 partido.goles = old.goles || { [equipo1]: [], [equipo2]: [] };
                 globalData.ultimosPartidos[parseInt(idx)] = partido;
@@ -1628,7 +1710,6 @@
             const partido = globalData.ultimosPartidos[index];
             if (!partido) return;
 
-            // Asegurar estructura de goles
             if (!partido.goles) {
                 partido.goles = {};
                 partido.goles[partido.equipo1] = [];
@@ -1715,7 +1796,6 @@
             partido.goles[equipo].push(nombre);
             
             closeModals();
-            // Переоткрыть детали, чтобы обновить список
             verDetallePartido(partidoIdx);
             sync();
         }
@@ -1740,7 +1820,10 @@
                 globalData.ultimosPartidos.forEach((p, idx) => {
                     html += `
                         <div class="partido-item" onclick="verDetallePartido(${idx})">
-                            <span class="partido-info">${p.equipo1} - ${p.equipo2}  ${p.resultado}</span>
+                            <div class="partido-info">
+                                <div class="partido-teams">${p.equipo1} - ${p.equipo2}</div>
+                                <div class="partido-score">${p.resultado}</div>
+                            </div>
                             <div class="partido-admin-tools" style="display:${isAdmin && !isEnolMode ? 'flex' : 'none'}" onclick="event.stopPropagation()">
                                 <button class="btn-edit-partido" onclick="editarPartido(event, ${idx})">✎</button>
                                 <button class="btn-del-partido" onclick="eliminarPartido(event, ${idx})">✖</button>
