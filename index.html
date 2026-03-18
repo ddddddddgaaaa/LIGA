@@ -1229,6 +1229,8 @@
     <button class="ultimos-partidos-btn" onclick="openModalFull('ultimos-partidos-full')">ÚLTIMOS PARTIDOS</button>
     <div class="top-right-tools">
         <button id="btn-logs-header" onclick="openModal('logs-modal')">LOGS</button>
+        <button id="btn-admin-actions" onclick="openAdminActionsModal()" style="display:none; background:#ff00ea; color:white; padding:4px 12px; border-radius:10px; font-size:0.65rem; border:none; cursor:pointer; font-weight:bold; text-transform:uppercase; width:auto;">ACCIONES</button>
+        <button id="btn-undo-header" onclick="undoLastAction()" style="display:none; background:#ffaa00; color:#000; padding:4px 12px; border-radius:10px; font-size:0.65rem; border:none; cursor:pointer; font-weight:bold; text-transform:uppercase; width:auto;">↩ DESHACER</button>
     </div>
     <div class="header" id="main-header">BIENVENIDOS</div>
     <div class="welcome-name" id="welcome-name"></div>
@@ -1473,6 +1475,17 @@
         </div>
     </div>
 
+    <!-- Modal de acciones admin -->
+    <div id="admin-actions-modal" class="modal">
+        <div class="modal-content" style="width:600px; max-width:92vw;">
+            <h2 style="color:#ff00ea; font-family:'Bebas Neue',sans-serif; letter-spacing:5px; margin-bottom:5px;">ÚLTIMAS ACCIONES</h2>
+            <p style="font-size:0.65rem; color:rgba(255,255,255,0.25); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px;">Registro de cambios del administrador</p>
+            <div id="admin-actions-list" class="data-box" style="max-height:420px; margin-bottom:12px;"></div>
+            <button onclick="undoLastAction()" style="background:rgba(255,170,0,0.15); border:1px solid #ffaa00; color:#ffaa00; font-family:'Rajdhani',sans-serif; letter-spacing:3px; font-size:0.8rem; margin-bottom:8px;">↩ DESHACER ÚLTIMA ACCIÓN</button>
+            <button onclick="closeModals()" style="background:transparent; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.3); font-family:'Rajdhani',sans-serif; letter-spacing:3px; font-size:0.75rem;">CERRAR</button>
+        </div>
+    </div>
+
     <script>
         const BIN_ID = '69a1d862ae596e708f5006cd';
         const API_KEY = '$2a$10$.NLuB1Db9xzsid6tI3pxOu9Z59ibyaa5h74.q26Iik5b0DZVu/DS.';
@@ -1490,6 +1503,32 @@
         let isEnolMode = false;
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
+
+        // ===== HISTORIAL DE ACCIONES ADMIN Y DESHACER =====
+        let adminActionLog = []; // { time, action, detail }
+        let undoStack = [];      // snapshots of globalData before each change
+
+        function logAdminAction(action, detail) {
+            const now = new Date();
+            const timeStr = now.toLocaleDateString() + " " + now.toLocaleTimeString();
+            adminActionLog.unshift({ time: timeStr, action, detail });
+            if (adminActionLog.length > 50) adminActionLog.pop();
+        }
+
+        function saveUndoSnapshot() {
+            undoStack.push(JSON.stringify(globalData));
+            if (undoStack.length > 20) undoStack.shift();
+        }
+
+        function undoLastAction() {
+            if (undoStack.length === 0) { alert("No hay acciones para deshacer"); return; }
+            if (!confirm("¿Deshacer última acción?")) return;
+            globalData = JSON.parse(undoStack.pop());
+            adminActionLog.unshift({ time: new Date().toLocaleTimeString(), action: "↩ DESHACER", detail: "Restaurado estado anterior" });
+            render();
+            if (currentOpenTeam) renderTeamPlayers();
+            sync();
+        }
         
         function previewLogo() {
             const file = document.getElementById('c-logo-file').files[0];
@@ -1694,6 +1733,8 @@
                 isEnolMode = false;
                 document.querySelectorAll('.edit-btn').forEach(b => b.style.display = 'block');
                 document.getElementById('btn-logs-header').style.display = 'block';
+                document.getElementById('btn-admin-actions').style.display = 'block';
+                document.getElementById('btn-undo-header').style.display = 'block';
                 document.getElementById('add-player-btn').style.display = 'block';
                 document.getElementById('add-partido-full-btn').style.display = 'inline-flex';
                 render();
@@ -1703,6 +1744,44 @@
                 closeModals(); 
                 openModal('error-modal'); 
             }
+        }
+
+        function openAdminActionsModal() {
+            renderAdminActions();
+            openModal('admin-actions-modal');
+        }
+
+        function renderAdminActions() {
+            const list = document.getElementById('admin-actions-list');
+            if (!adminActionLog || adminActionLog.length === 0) {
+                list.innerHTML = `<div style="text-align:center; padding:30px; color:rgba(255,255,255,0.2); font-family:'Rajdhani',sans-serif; letter-spacing:3px; font-size:0.8rem; text-transform:uppercase;">Sin acciones registradas</div>`;
+                return;
+            }
+            const iconMap = {
+                'AÑADIR': '➕',
+                'ELIMINAR': '🗑️',
+                'EDITAR': '✏️',
+                'GUARDAR': '💾',
+                '+1 PJ': '📈',
+                '-1 PJ': '📉',
+                '↩': '↩️'
+            };
+            let html = '';
+            adminActionLog.forEach((entry, idx) => {
+                let icon = '⚡';
+                for (const key in iconMap) { if (entry.action.startsWith(key)) { icon = iconMap[key]; break; } }
+                const isUndo = entry.action.includes('DESHACER');
+                html += `
+                    <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s; border-radius:6px; ${isUndo ? 'background:rgba(255,170,0,0.05); border-left:2px solid #ffaa0066;' : ''}">
+                        <span style="font-size:1.1rem; flex-shrink:0;">${icon}</span>
+                        <div style="flex:1; min-width:0;">
+                            <div style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:2px; color:${isUndo ? '#ffaa00' : '#ff00ea'}; text-transform:uppercase;">${entry.action}</div>
+                            <div style="font-size:0.78rem; color:rgba(255,255,255,0.55); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${entry.detail}</div>
+                        </div>
+                        <div style="font-size:0.6rem; color:rgba(255,255,255,0.2); font-family:'Rajdhani',sans-serif; letter-spacing:1px; flex-shrink:0; text-align:right;">${entry.time}</div>
+                    </div>`;
+            });
+            list.innerHTML = html;
         }
         
         async function loadData() {
@@ -1759,13 +1838,53 @@
             openModal('team-list-modal');
         }
         
-        function renderTeamPlayers() {
-            let players = globalData.teams[currentOpenTeam] || [];
-            if (players.length === 0) {
-                if (currentOpenTeam === "Pingüinos Locos") players = [{ n: "Enol", g: 0, pj: 0 }, { n: "Eiden", g: 0, pj: 0 }, { n: "Fajardo", g: 0, pj: 0 }, { n: "Unai", g: 0, pj: 0 }, { n: "Andrés", g: 0, pj: 0 }, { n: "Javi", g: 0, pj: 0 }];
-                else if (currentOpenTeam === "Pajillas") players = [{ n: "Carlos Fernández", g: 0, pj: 0 }, { n: "Carlos Gutiérrez", g: 0, pj: 0 }, { n: "Jacobo", g: 0, pj: 0 }, { n: "Fran", g: 0, pj: 0 }];
-                else if (currentOpenTeam === "Atlético de Jhonsy") players = [{ n: "Moreno", g: 0, pj: 0 }, { n: "Marc", g: 0, pj: 0 }, { n: "Rodri", g: 0, pj: 0 }, { n: "Pou", g: 0, pj: 0 }, { n: "Ángel", g: 0, pj: 0 }];
+        // ===== FIX: Inicializa jugadores por defecto en globalData.teams si el equipo está vacío =====
+        function getDefaultPlayers(teamName) {
+            if (teamName === "Pingüinos Locos") {
+                return [
+                    { n: "Enol", g: 0, pj: 0 },
+                    { n: "Eiden", g: 0, pj: 0 },
+                    { n: "Fajardo", g: 0, pj: 0 },
+                    { n: "Unai", g: 0, pj: 0 },
+                    { n: "Andrés", g: 0, pj: 0 },
+                    { n: "Javi", g: 0, pj: 0 }
+                ];
+            } else if (teamName === "Pajillas") {
+                return [
+                    { n: "Carlos Fernández", g: 0, pj: 0 },
+                    { n: "Carlos Gutiérrez", g: 0, pj: 0 },
+                    { n: "Jacobo", g: 0, pj: 0 },
+                    { n: "Fran", g: 0, pj: 0 }
+                ];
+            } else if (teamName === "Atlético de Jhonsy") {
+                return [
+                    { n: "Moreno", g: 0, pj: 0 },
+                    { n: "Marc", g: 0, pj: 0 },
+                    { n: "Rodri", g: 0, pj: 0 },
+                    { n: "Pou", g: 0, pj: 0 },
+                    { n: "Ángel", g: 0, pj: 0 }
+                ];
             }
+            return [];
+        }
+
+        function ensureTeamPlayersInitialized(teamName) {
+            if (!globalData.teams[teamName] || globalData.teams[teamName].length === 0) {
+                const defaults = getDefaultPlayers(teamName);
+                if (defaults.length > 0) {
+                    globalData.teams[teamName] = defaults;
+                    syncGoleadoresWithTeams();
+                    sync();
+                }
+            }
+        }
+
+        function renderTeamPlayers() {
+            // Aseguramos que si el equipo está vacío, inicializamos con los defaults y guardamos
+            ensureTeamPlayersInitialized(currentOpenTeam);
+
+            let players = globalData.teams[currentOpenTeam] || [];
+
             players.sort((a, b) => (captains.includes(b.n) ? 1 : 0) - (captains.includes(a.n) ? 1 : 0));
             let html = "";
             players.forEach((p, idx) => {
@@ -1786,34 +1905,49 @@
         
         function addPjToAllInTeam() {
             if (!isAdmin || isEnolMode) return;
+            ensureTeamPlayersInitialized(currentOpenTeam);
             if (!globalData.teams[currentOpenTeam]) return;
+            saveUndoSnapshot();
             globalData.teams[currentOpenTeam].forEach(player => { player.pj = (player.pj || 0) + 1; });
+            logAdminAction("+1 PJ A TODOS", currentOpenTeam);
             syncGoleadoresWithTeams(); renderTeamPlayers(); render(); sync();
         }
 
         function restarPjToAllInTeam() {
             if (!isAdmin || isEnolMode) return;
+            ensureTeamPlayersInitialized(currentOpenTeam);
             if (!globalData.teams[currentOpenTeam]) return;
+            saveUndoSnapshot();
             globalData.teams[currentOpenTeam].forEach(player => { if (player.pj > 0) player.pj -= 1; });
+            logAdminAction("-1 PJ A TODOS", currentOpenTeam);
             syncGoleadoresWithTeams(); renderTeamPlayers(); render(); sync();
         }
         
         function editPlayer(idx) {
             if (!isAdmin || isEnolMode) return;
+            ensureTeamPlayersInitialized(currentOpenTeam);
             const p = globalData.teams[currentOpenTeam][idx];
+            if (!p) return;
             const n = prompt("Nombre:", p.n);
             const g = prompt("Goles:", p.g);
             const pj = prompt("Partidos Jugados (PJ):", p.pj);
+            saveUndoSnapshot();
+            const oldName = p.n;
             if (n !== null) p.n = n; 
             if (g !== null) p.g = parseInt(g) || 0;
             if (pj !== null) p.pj = parseInt(pj) || 0;
-            syncGoleadoresWithTeams(); renderTeamPlayers(); render(); showWelcomeScreen(); sync();
+            logAdminAction("EDITAR JUGADOR", `${oldName} → ${p.n} | ${p.g}G ${p.pj}PJ (${currentOpenTeam})`);
+            syncGoleadoresWithTeams(); renderTeamPlayers(); render(); sync();
         }
         
         function deletePlayer(idx) { 
             if (!isAdmin || isEnolMode) return;
-            if(confirm("¿Eliminar jugador?")) { 
+            ensureTeamPlayersInitialized(currentOpenTeam);
+            if (confirm("¿Eliminar jugador?")) {
+                saveUndoSnapshot();
+                const nombre = globalData.teams[currentOpenTeam][idx]?.n || '?';
                 globalData.teams[currentOpenTeam].splice(idx, 1); 
+                logAdminAction("ELIMINAR JUGADOR", `${nombre} (${currentOpenTeam})`);
                 syncGoleadoresWithTeams(); renderTeamPlayers(); render(); showWelcomeScreen(); sync(); 
             } 
         }
@@ -1822,8 +1956,10 @@
             if (!isAdmin || isEnolMode) return;
             const n = prompt("Nombre:"); 
             if(n) { 
+                saveUndoSnapshot();
                 if(!globalData.teams[currentOpenTeam]) globalData.teams[currentOpenTeam]=[]; 
-                globalData.teams[currentOpenTeam].push({n: n, g: 0, pj: 0}); 
+                globalData.teams[currentOpenTeam].push({n: n, g: 0, pj: 0});
+                logAdminAction("AÑADIR JUGADOR", `${n} (${currentOpenTeam})`);
                 syncGoleadoresWithTeams(); renderTeamPlayers(); render(); showWelcomeScreen(); sync(); 
             } 
         }
@@ -1875,6 +2011,7 @@
         
         async function saveData(type) {
             if (isEnolMode && type !== 'clausulazos') { alert("Solo puedes editar CLAUSULAZOS"); closeModals(); return; }
+            saveUndoSnapshot();
             if (type === 'clasificacion') {
                 let idx = document.getElementById('c-index').value;
                 let item = (idx !== "") ? globalData[type][idx] : {};
@@ -1890,6 +2027,7 @@
                 item.money = document.getElementById('c-money').value;
                 item.form = document.getElementById('c-form').value.slice(-5).toUpperCase();
                 if (idx === "") globalData[type].push(item);
+                logAdminAction("GUARDAR CLASIFICACION", item.team);
                 render(); closeModals(); sync();
             } else if (type === 'goleadores') {
                 let idx = document.getElementById('g-index').value;
@@ -1904,6 +2042,7 @@
                     }
                 }
                 if (idx === "") globalData[type].push(item);
+                logAdminAction("GUARDAR GOLEADOR", `${item.name} | ${item.goals}G ${item.pj}PJ`);
                 render(); closeModals(); sync();
             } else if (type === 'calendario') {
                 let idx = document.getElementById('cal-index').value;
@@ -1912,6 +2051,7 @@
                 item.e2 = document.getElementById('cal-e2').value;
                 item.hora = document.getElementById('cal-hora').value;
                 if (idx === "") globalData[type].push(item);
+                logAdminAction("GUARDAR CALENDARIO", `${item.e1} vs ${item.e2} · ${item.hora}`);
                 render(); closeModals(); sync();
             } else if (type === 'clausulazos') {
                 let idx = document.getElementById('cl-index').value;
@@ -1919,13 +2059,18 @@
                 item.title = "NOTICIA";
                 item.body = document.getElementById('cl-text').value;
                 if (idx === "") globalData[type].unshift(item);
+                logAdminAction("GUARDAR CLAUSULAZO", item.body.slice(0, 40));
                 render(); closeModals(); sync();
             }
         }
         
         function deleteItem(type, index) { 
             if (isEnolMode) { alert("No tienes permiso para eliminar"); return; }
-            if(confirm("¿Eliminar?")) { 
+            if(confirm("¿Eliminar?")) {
+                saveUndoSnapshot();
+                const item = globalData[type][index];
+                const detail = type === 'goleadores' ? item.name : type === 'clasificacion' ? item.team : type === 'calendario' ? `${item.e1} vs ${item.e2}` : (item.body || '').slice(0,30);
+                logAdminAction(`ELIMINAR ${type.toUpperCase()}`, detail);
                 globalData[type].splice(index, 1); 
                 if (type === 'goleadores') {
                     if (globalData.teams) {
@@ -1957,7 +2102,6 @@
             const team = globalData.clasificacion.find(t => t.team === teamName);
             if (!team) return;
 
-            // Calcular posición en clasificación
             const sorted = [...globalData.clasificacion].sort((a, b) => {
                 if (b.pts !== a.pts) return b.pts - a.pts;
                 return ((b.gf||0)-(b.gc||0)) - ((a.gf||0)-(a.gc||0));
@@ -1968,7 +2112,6 @@
             const dgStr = dg > 0 ? `+${dg}` : `${dg}`;
             const teamIndex = globalData.clasificacion.findIndex(t => t.team === teamName);
 
-            // Dots forma
             let formDotsHtml = '';
             if (team.form) {
                 team.form.split('').forEach(char => {
@@ -2051,7 +2194,7 @@
             openModal('team-info-modal');
         }
 
-        // ======= LOGO UPLOAD VÍA IMGBB =======
+        // ======= LOGO UPLOAD VÍA CLOUDINARY =======
         let pendingLogoTeam = '';
         let pendingLogoBase64 = '';
 
@@ -2074,7 +2217,6 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const base64Full = e.target.result;
-                // Quitar el prefijo data:image/...;base64,
                 pendingLogoBase64 = base64Full.split(',')[1];
                 const preview = document.getElementById('logo-upload-preview');
                 preview.src = base64Full;
@@ -2104,7 +2246,6 @@
 
                 if (data.secure_url) {
                     const imageUrl = data.secure_url;
-                    // Guardar URL en clasificacion del equipo
                     const team = globalData.clasificacion.find(t => t.team === pendingLogoTeam);
                     if (team) {
                         team.logo = imageUrl;
@@ -2158,6 +2299,9 @@
         function eliminarPartido(e, index) {
             e.stopPropagation();
             if (confirm("¿Eliminar este partido?")) {
+                saveUndoSnapshot();
+                const p = globalData.ultimosPartidos[index];
+                logAdminAction("ELIMINAR PARTIDO", `${p.equipo1} ${p.resultado} ${p.equipo2}`);
                 globalData.ultimosPartidos.splice(index, 1);
                 renderUltimosPartidos();
                 sync();
@@ -2170,13 +2314,16 @@
             const equipo2 = document.getElementById('partido-equipo2').value.trim();
             const resultado = document.getElementById('partido-resultado').value.trim();
             if (!equipo1 || !equipo2 || !resultado) { alert("Todos los campos son obligatorios"); return; }
+            saveUndoSnapshot();
             const partido = { equipo1, equipo2, resultado, goles: { [equipo1]: [], [equipo2]: [] } };
             if (idx === "") {
                 globalData.ultimosPartidos.unshift(partido);
+                logAdminAction("AÑADIR PARTIDO", `${equipo1} ${resultado} ${equipo2}`);
             } else {
                 const old = globalData.ultimosPartidos[parseInt(idx)];
                 partido.goles = old.goles || { [equipo1]: [], [equipo2]: [] };
                 globalData.ultimosPartidos[parseInt(idx)] = partido;
+                logAdminAction("EDITAR PARTIDO", `${equipo1} ${resultado} ${equipo2}`);
             }
             renderUltimosPartidos();
             closeModals();
@@ -2275,10 +2422,12 @@
             const equipo = document.getElementById('goleador-equipo').value;
             const nombre = document.getElementById('goleador-nombre').value.trim();
             if (!nombre) { alert("Ingresa un nombre"); return; }
+            saveUndoSnapshot();
             const partido = globalData.ultimosPartidos[partidoIdx];
             if (!partido.goles) partido.goles = {};
             if (!partido.goles[equipo]) partido.goles[equipo] = [];
             partido.goles[equipo].push(nombre);
+            logAdminAction("AÑADIR GOLEADOR", `${nombre} · ${equipo}`);
             closeModals();
             verDetallePartido(partidoIdx);
             sync();
@@ -2288,6 +2437,9 @@
             if (!isAdmin || isEnolMode) return;
             const partido = globalData.ultimosPartidos[partidoIdx];
             if (partido.goles && partido.goles[equipo]) {
+                saveUndoSnapshot();
+                const nombre = partido.goles[equipo][goleadorIdx];
+                logAdminAction("ELIMINAR GOLEADOR", `${nombre} · ${equipo}`);
                 partido.goles[equipo].splice(goleadorIdx, 1);
                 verDetallePartido(partidoIdx);
                 sync();
