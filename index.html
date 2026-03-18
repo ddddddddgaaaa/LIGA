@@ -15,6 +15,7 @@
             font-family:Arial, sans-serif; 
             overflow-y: auto;
             font-size: 0.9rem; 
+            position: relative;
         }
 
         .header {
@@ -76,30 +77,38 @@
             }
         }
 
+        /* ========= BOTÓN ÚLTIMOS PARTIDOS REPOSICIONADO ========= */
         .ultimos-partidos-btn {
             position: fixed;
-            top: 10px;
-            left: 110px;
+            top: 15px;           /* más alto */
+            right: 20px;          /* más a la derecha */
+            left: auto;           /* anula left anterior */
             width: auto;
-            height: 35px;
-            padding: 0 15px;
+            height: 40px;
+            padding: 0 20px;
             background: #00e5ff;
             color: #000;
             border: none;
-            border-radius: 8px;
+            border-radius: 30px;  /* más redondeado */
             font-weight: bold;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             cursor: pointer;
-            box-shadow: 0 0 15px #00e5ff66;
+            box-shadow: 0 0 20px #00e5ffcc;
             z-index: 20;
             transition: 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         .ultimos-partidos-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px #00e5ff;
+            transform: scale(1.08);
+            box-shadow: 0 0 35px #00e5ff;
+            background: #1ef0ff;
         }
 
         /* ============ MODAL ÚLTIMOS PARTIDOS - PREMIUM REDESIGN ============ */
@@ -750,7 +759,197 @@
         .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; margin-top: 60px; }
         .plantilla-main-btn { background: #ff00ea; color: white; padding: 8px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px #ff00ea66; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .plantilla-main-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px #ff00ea; }
-        .watermark { position: fixed; top: 10px; left: 10px; font-size: 0.7rem; color: rgba(255, 255, 255, 0.2); z-index: 5; pointer-events: none; font-weight: bold; text-transform: uppercase; }
+        
+        /* ===== SELECTOR DE TEMAS (círculos de colores) ===== */
+        .theme-selector {
+            position: fixed;
+            top: 12px;
+            left: 140px; /* justo a la derecha de "Hecho por Vadym" (ancho aprox 120px) */
+            display: flex;
+            gap: 10px;
+            z-index: 25;
+            background: rgba(0,0,0,0.3);
+            padding: 5px 12px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .theme-dot {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .theme-dot:hover {
+            transform: scale(1.25);
+            box-shadow: 0 0 15px currentColor;
+        }
+        .theme-dot.yellow { background: #ffcc00; box-shadow: 0 0 8px #ffcc00; }
+        .theme-dot.blue { background: #3a86ff; box-shadow: 0 0 8px #3a86ff; }
+        .theme-dot.purple { background: #ff00ea; box-shadow: 0 0 8px #ff00ea; }
+        .theme-dot.green { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
+        
+        /* ===== DEFINICIÓN DE TEMAS (sobreescriben colores originales con !important) ===== */
+        body.theme-yellow .panel-title,
+        body.theme-yellow .edit-btn,
+        body.theme-yellow .modal-full h2,
+        body.theme-yellow .team-hero-pts,
+        body.theme-yellow .goleadores-more-indicator,
+        body.theme-yellow .player-goals-count,
+        body.theme-yellow .modal-content h2,
+        body.theme-yellow .modal-content h3,
+        body.theme-yellow .team-name-title,
+        body.theme-yellow .clasificacion-equipo td:last-child,
+        body.theme-yellow .goleadores-1,
+        body.theme-yellow .goleadores-2,
+        body.theme-yellow .goleadores-3,
+        body.theme-yellow .stat-value.magenta {
+            color: #ffcc00 !important;
+        }
+        body.theme-yellow .plantilla-main-btn,
+        body.theme-yellow .team-select-btn,
+        body.theme-yellow .dot-v,
+        body.theme-yellow .modal-content,
+        body.theme-yellow .partido-neon-card:hover,
+        body.theme-yellow .ultimos-partidos-btn,
+        body.theme-yellow .add-partido-btn,
+        body.theme-yellow .team-edit-btn {
+            border-color: #ffcc00 !important;
+        }
+        body.theme-yellow .plantilla-main-btn {
+            background: #ffcc00 !important;
+            box-shadow: 0 0 15px #ffcc0066 !important;
+        }
+        body.theme-yellow .ultimos-partidos-btn {
+            background: #ffcc00 !important;
+            box-shadow: 0 0 20px #ffcc00cc !important;
+        }
+        body.theme-yellow .add-partido-btn {
+            color: #ffcc00 !important;
+            border-color: #ffcc00 !important;
+        }
+        body.theme-yellow .team-edit-btn {
+            color: #ffcc00 !important;
+            border-color: rgba(255,204,0,0.3) !important;
+        }
+        body.theme-yellow .score-sep-dot {
+            background: #ffcc00 !important;
+            box-shadow: 0 0 5px #ffcc00 !important;
+        }
+
+        body.theme-blue .panel-title,
+        body.theme-blue .edit-btn,
+        body.theme-blue .modal-full h2,
+        body.theme-blue .team-hero-pts,
+        body.theme-blue .goleadores-more-indicator,
+        body.theme-blue .player-goals-count,
+        body.theme-blue .modal-content h2,
+        body.theme-blue .modal-content h3,
+        body.theme-blue .team-name-title,
+        body.theme-blue .clasificacion-equipo td:last-child,
+        body.theme-blue .goleadores-1,
+        body.theme-blue .goleadores-2,
+        body.theme-blue .goleadores-3,
+        body.theme-blue .stat-value.magenta {
+            color: #3a86ff !important;
+        }
+        body.theme-blue .plantilla-main-btn,
+        body.theme-blue .team-select-btn,
+        body.theme-blue .dot-v,
+        body.theme-blue .modal-content,
+        body.theme-blue .partido-neon-card:hover,
+        body.theme-blue .ultimos-partidos-btn,
+        body.theme-blue .add-partido-btn,
+        body.theme-blue .team-edit-btn {
+            border-color: #3a86ff !important;
+        }
+        body.theme-blue .plantilla-main-btn {
+            background: #3a86ff !important;
+            box-shadow: 0 0 15px #3a86ff66 !important;
+        }
+        body.theme-blue .ultimos-partidos-btn {
+            background: #3a86ff !important;
+            box-shadow: 0 0 20px #3a86ffcc !important;
+        }
+        body.theme-blue .add-partido-btn {
+            color: #3a86ff !important;
+            border-color: #3a86ff !important;
+        }
+        body.theme-blue .team-edit-btn {
+            color: #3a86ff !important;
+            border-color: rgba(58,134,255,0.3) !important;
+        }
+        body.theme-blue .score-sep-dot {
+            background: #3a86ff !important;
+            box-shadow: 0 0 5px #3a86ff !important;
+        }
+
+        body.theme-green .panel-title,
+        body.theme-green .edit-btn,
+        body.theme-green .modal-full h2,
+        body.theme-green .team-hero-pts,
+        body.theme-green .goleadores-more-indicator,
+        body.theme-green .player-goals-count,
+        body.theme-green .modal-content h2,
+        body.theme-green .modal-content h3,
+        body.theme-green .team-name-title,
+        body.theme-green .clasificacion-equipo td:last-child,
+        body.theme-green .goleadores-1,
+        body.theme-green .goleadores-2,
+        body.theme-green .goleadores-3,
+        body.theme-green .stat-value.magenta {
+            color: #00ff88 !important;
+        }
+        body.theme-green .plantilla-main-btn,
+        body.theme-green .team-select-btn,
+        body.theme-green .dot-v,
+        body.theme-green .modal-content,
+        body.theme-green .partido-neon-card:hover,
+        body.theme-green .ultimos-partidos-btn,
+        body.theme-green .add-partido-btn,
+        body.theme-green .team-edit-btn {
+            border-color: #00ff88 !important;
+        }
+        body.theme-green .plantilla-main-btn {
+            background: #00ff88 !important;
+            box-shadow: 0 0 15px #00ff8866 !important;
+        }
+        body.theme-green .ultimos-partidos-btn {
+            background: #00ff88 !important;
+            box-shadow: 0 0 20px #00ff88cc !important;
+        }
+        body.theme-green .add-partido-btn {
+            color: #00ff88 !important;
+            border-color: #00ff88 !important;
+        }
+        body.theme-green .team-edit-btn {
+            color: #00ff88 !important;
+            border-color: rgba(0,255,136,0.3) !important;
+        }
+        body.theme-green .score-sep-dot {
+            background: #00ff88 !important;
+            box-shadow: 0 0 5px #00ff88 !important;
+        }
+
+        /* Por defecto (púrpura) no necesita cambios, pero podemos asegurar */
+        body.theme-purple .score-sep-dot {
+            background: #ff00ea !important;
+            box-shadow: 0 0 5px #ff00ea !important;
+        }
+
+        .watermark { 
+            position: fixed; 
+            top: 10px; 
+            left: 10px; 
+            font-size: 0.7rem; 
+            color: rgba(255, 255, 255, 0.2); 
+            z-index: 5; 
+            pointer-events: none; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+        }
         .phone-btn { background: #00e5ff; color: #000; box-shadow: 0 0 15px #00e5ff66; }
         .phone-btn:hover { box-shadow: 0 0 25px #00e5ff; }
         .container { display:grid; grid-template-columns: repeat(4, 1fr); gap:15px; padding:20px; transition: 0.5s; }
@@ -1222,10 +1421,102 @@
         .pj-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px #00e5ff; }
         .pj-btn.minus { background: #ffaa00; box-shadow: 0 0 10px #ffaa00; }
         .pj-btn.minus:hover { box-shadow: 0 0 20px #ffaa00; }
+
+        /* ========= NUEVAS ANIMACIONES DE FONDO ========= */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(255,0,234,0.02) 0%, transparent 30%),
+                        radial-gradient(circle at 70% 60%, rgba(0,229,255,0.02) 0%, transparent 35%),
+                        repeating-linear-gradient(45deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 2px, transparent 2px, transparent 12px);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgPulse 16s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255,0,234,0.015) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 20%, rgba(0,229,255,0.015) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgShift 20s infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.02); }
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 5% 5%; }
+        }
+
+        /* Partículas flotantes (opcional) */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-particles span {
+            position: absolute;
+            display: block;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,0,234,0.2);
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff00ea, 0 0 20px #00e5ff;
+            animation: float 12s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(1); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+        }
     </style>
 </head>
-<body>
+<body class="theme-purple">
+    <!-- Partículas flotantes (añadidas sin borrar nada) -->
+    <div class="floating-particles">
+        <span style="left: 15%; animation-duration: 14s; animation-delay: 0s;"></span>
+        <span style="left: 30%; animation-duration: 18s; animation-delay: 2s;"></span>
+        <span style="left: 50%; animation-duration: 12s; animation-delay: 4s;"></span>
+        <span style="left: 70%; animation-duration: 16s; animation-delay: 1s;"></span>
+        <span style="left: 85%; animation-duration: 20s; animation-delay: 3s;"></span>
+        <span style="left: 10%; animation-duration: 22s; animation-delay: 5s;"></span>
+        <span style="left: 40%; animation-duration: 15s; animation-delay: 6s;"></span>
+        <span style="left: 60%; animation-duration: 19s; animation-delay: 7s;"></span>
+        <span style="left: 80%; animation-duration: 13s; animation-delay: 8s;"></span>
+        <span style="left: 95%; animation-duration: 17s; animation-delay: 9s;"></span>
+    </div>
+
     <div class="watermark">Hecho por Vadym</div>
+    <!-- Selector de temas (círculos de colores) -->
+    <div class="theme-selector">
+        <div class="theme-dot yellow" data-theme="yellow" onclick="setUserTheme('yellow')"></div>
+        <div class="theme-dot blue" data-theme="blue" onclick="setUserTheme('blue')"></div>
+        <div class="theme-dot purple" data-theme="purple" onclick="setUserTheme('purple')"></div>
+        <div class="theme-dot green" data-theme="green" onclick="setUserTheme('green')"></div>
+    </div>
+
     <button class="ultimos-partidos-btn" onclick="openModalFull('ultimos-partidos-full')">ÚLTIMOS PARTIDOS</button>
     <div class="top-right-tools">
         <button id="btn-logs-header" onclick="openModal('logs-modal')">LOGS</button>
@@ -1497,12 +1788,32 @@
             calendario: [], 
             teams: {}, 
             accessLogs: [],
-            ultimosPartidos: [] 
+            ultimosPartidos: [],
+            userThemes: {} // nuevo: guarda la tema de cada usuario
         };
         let isAdmin = false;
         let isEnolMode = false;
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
+
+        // ===== FUNCIONES PARA TEMAS =====
+        function applyTheme(theme) {
+            if (!theme) theme = 'purple';
+            document.body.className = ''; // limpia clases anteriores
+            document.body.classList.add('theme-' + theme);
+        }
+
+        function setUserTheme(theme) {
+            const userName = localStorage.getItem('user_name');
+            if (!userName) {
+                alert("Primero debes iniciar sesión seleccionando tu nombre.");
+                return;
+            }
+            if (!globalData.userThemes) globalData.userThemes = {};
+            globalData.userThemes[userName] = theme;
+            applyTheme(theme);
+            sync(); // guardar en la nube
+        }
 
         // ===== HISTORIAL DE ACCIONES ADMIN Y DESHACER =====
         let adminActionLog = []; // { time, action, detail }
@@ -1671,6 +1982,12 @@
                 document.getElementById('welcome-name').innerHTML = `BIENVENIDO ${name}`;
             }
             document.getElementById('main-header').classList.add('with-name');
+            // Aplicar tema guardado para este usuario
+            if (globalData.userThemes && globalData.userThemes[name]) {
+                applyTheme(globalData.userThemes[name]);
+            } else {
+                applyTheme('purple'); // por defecto
+            }
             closeModals();
             await sync();
         }
@@ -1728,7 +2045,8 @@
         function login() {
             const u = document.getElementById('user').value;
             const p = document.getElementById('pass').value;
-            if(u === 'Ы' && p === 'И') {
+            // Nuevo password: 10 10 (antes Ы И)
+            if(u === '10' && p === '10') {
                 isAdmin = true;
                 isEnolMode = false;
                 document.querySelectorAll('.edit-btn').forEach(b => b.style.display = 'block');
@@ -1790,6 +2108,8 @@
                 const data = await res.json();
                 if (data) {
                     globalData = data;
+                    // Asegurar userThemes
+                    if (!globalData.userThemes) globalData.userThemes = {};
                     const equiposBase = ["Pingüinos Locos", "Atlético de Jhonsy", "Pajillas"];
                     if (!globalData.clasificacion) globalData.clasificacion = [];
                     equiposBase.forEach(teamName => {
@@ -1817,6 +2137,12 @@
                             document.getElementById('welcome-name').innerHTML = `BIENVENIDO ${savedName}`;
                         }
                         document.getElementById('main-header').classList.add('with-name');
+                        // Aplicar tema guardado para el usuario
+                        if (globalData.userThemes && globalData.userThemes[savedName]) {
+                            applyTheme(globalData.userThemes[savedName]);
+                        } else {
+                            applyTheme('purple');
+                        }
                     }
                 }
             } catch (e) { console.error("Error loading"); }
