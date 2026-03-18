@@ -36,64 +36,43 @@
             opacity: 0.06;
         }
 
-        .welcome-name {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #00e5ff;
-            font-size: 4.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 9px;
-            text-shadow: 0 0 40px #00e5ff, 0 0 80px #00e5ff55;
-            z-index: 15;
-            background: rgba(10,10,35,0.68);
-            padding: 22px 70px;
-            border-radius: 45px;
-            border: 3px solid #00e5ff66;
-            backdrop-filter: blur(12px);
-            pointer-events: none;
+        .welcome-name { 
+            position: fixed; 
+            top: 15px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            color: #00e5ff; 
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            text-shadow: 0 0 10px #00e5ff; 
+            z-index: 15; 
+            background: rgba(10,10,20,0.8); 
+            padding: 5px 20px; 
+            border-radius: 20px; 
+            border: 1px solid #00e5ff44; 
+            backdrop-filter: blur(5px); 
+            pointer-events: none; 
             white-space: nowrap;
-            max-width: 96vw;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            box-shadow: 0 0 70px rgba(0,229,255,0.45);
-        }
-
-        @media (max-width: 800px) {
-            .welcome-name {
-                font-size: 3.6rem;
-                padding: 18px 55px;
-                letter-spacing: 7px;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .welcome-name {
-                font-size: 2.9rem;
-                padding: 15px 45px;
-                letter-spacing: 5px;
-            }
         }
 
         /* ========= BOTÓN ÚLTIMOS PARTIDOS REPOSICIONADO ========= */
         .ultimos-partidos-btn {
             position: fixed;
-            top: 15px;           /* más alto */
-            right: 20px;          /* más a la derecha */
-            left: auto;           /* anula left anterior */
+            top: 15px;
+            right: 20px;
+            left: auto;
             width: auto;
             height: 40px;
             padding: 0 20px;
-            background: #00e5ff;
+            background: rgb(var(--c1));
             color: #000;
             border: none;
-            border-radius: 30px;  /* más redondeado */
+            border-radius: 30px;
             font-weight: bold;
             font-size: 0.8rem;
             cursor: pointer;
-            box-shadow: 0 0 20px #00e5ffcc;
+            box-shadow: 0 0 20px rgba(var(--c1),0.7);
             z-index: 20;
             transition: 0.3s;
             text-transform: uppercase;
@@ -107,8 +86,8 @@
         }
         .ultimos-partidos-btn:hover {
             transform: scale(1.08);
-            box-shadow: 0 0 35px #00e5ff;
-            background: #1ef0ff;
+            box-shadow: 0 0 35px rgba(var(--c1),1);
+            background: rgb(var(--c1));
         }
 
         /* ============ MODAL ÚLTIMOS PARTIDOS - PREMIUM REDESIGN ============ */
@@ -299,7 +278,6 @@
         }
         .partido-neon-card:hover::before { opacity: 1; }
 
-        /* Partido número badge */
         .partido-meta {
             position: absolute;
             top: 11px;
@@ -324,7 +302,6 @@
         }
         .partido-neon-card:hover .partido-click-hint { color: rgba(0,229,255,0.4); }
 
-        /* Cuerpo tarjeta */
         .partido-card-body {
             padding: 32px 20px 16px;
             display: flex;
@@ -365,7 +342,6 @@
             letter-spacing: 2px;
         }
 
-        /* Score separator */
         .score-separator {
             display: flex;
             flex-direction: column;
@@ -385,11 +361,10 @@
             width: 3px;
             height: 3px;
             border-radius: 50%;
-            background: rgba(255,0,234,0.5);
-            box-shadow: 0 0 5px #ff00ea;
+            background: rgba(var(--c1),0.5);
+            box-shadow: 0 0 5px rgb(var(--c1));
         }
 
-        /* Footer tarjeta */
         .partido-card-footer {
             padding: 10px 18px 12px;
             border-top: 1px solid rgba(255,255,255,0.04);
@@ -445,7 +420,6 @@
             color: #ff4444;
         }
 
-        /* Empty state */
         .partidos-empty {
             grid-column: 1 / -1;
             text-align: center;
@@ -552,7 +526,6 @@
             letter-spacing: 3px;
         }
 
-        /* Sección goleadores */
         .detalle-section-label {
             font-family: 'Rajdhani', sans-serif;
             font-size: 0.6rem;
@@ -756,42 +729,84 @@
 
         .top-right-tools .tool-icon[title="Admin Login"] { display: none; }
 
-        .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; margin-top: 60px; }
-        .plantilla-main-btn { background: #ff00ea; color: white; padding: 8px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px #ff00ea66; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
-        .plantilla-main-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px #ff00ea; }
+        .top-nav { text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 10px; margin-top: 60px; flex-wrap: wrap; }
+        .plantilla-main-btn { background: rgb(var(--c1)); color: white; padding: 8px 25px; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; box-shadow: 0 0 15px rgba(var(--c1),0.4); transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
+        .plantilla-main-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px rgba(var(--c1),0.8); }
         
-        /* ===== SELECTOR DE TEMAS (círculos de colores) ===== */
+        /* ===== SELECTOR DE TEMAS AMPLIADO ===== */
         .theme-selector {
             position: fixed;
             top: 12px;
-            left: 140px; /* justo a la derecha de "Hecho por Vadym" (ancho aprox 120px) */
+            left: 140px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             z-index: 25;
             background: rgba(0,0,0,0.3);
-            padding: 5px 12px;
+            padding: 5px 10px;
             border-radius: 40px;
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: nowrap;
+            overflow: visible;
         }
         .theme-dot {
-            width: 26px;
-            height: 26px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             border: 2px solid rgba(255,255,255,0.2);
+            flex-shrink: 0;
+            position: relative;
         }
         .theme-dot:hover {
-            transform: scale(1.25);
-            box-shadow: 0 0 15px currentColor;
+            transform: scale(1.3);
         }
+        .theme-dot[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 0.55rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+            letter-spacing: 1px;
+            pointer-events: none;
+        }
+        /* Colores originales */
         .theme-dot.yellow { background: #ffcc00; box-shadow: 0 0 8px #ffcc00; }
         .theme-dot.blue { background: #3a86ff; box-shadow: 0 0 8px #3a86ff; }
         .theme-dot.purple { background: #ff00ea; box-shadow: 0 0 8px #ff00ea; }
         .theme-dot.green { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
-        
-        /* ===== DEFINICIÓN DE TEMAS (sobreescriben colores originales con !important) ===== */
+        /* Nuevos colores */
+        .theme-dot.white { background: #ffffff; box-shadow: 0 0 8px rgba(255,255,255,0.6); }
+        .theme-dot.dark { background: #1a1a2e; box-shadow: 0 0 8px #444; border: 2px solid rgba(255,255,255,0.3); }
+        .theme-dot.orange { background: #ff6b00; box-shadow: 0 0 8px #ff6b00; }
+        .theme-dot.red { background: #ff2244; box-shadow: 0 0 8px #ff2244; }
+        .theme-dot.teal { background: #00d4b4; box-shadow: 0 0 8px #00d4b4; }
+        .theme-dot.pink { background: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
+
+        body.theme-yellow .modal-full { background: #141000 !important; }
+        body.theme-blue   .modal-full { background: #000814 !important; }
+        body.theme-green  .modal-full { background: #001408 !important; }
+        body.theme-white  .modal-full { background: #0d0d18 !important; }
+        body.theme-dark   .modal-full { background: #040408 !important; }
+        body.theme-orange .modal-full { background: #140a00 !important; }
+        body.theme-red    .modal-full { background: #120006 !important; }
+        body.theme-teal   .modal-full { background: #00100e !important; }
+        body.theme-pink   .modal-full { background: #120008 !important; }
+
+        /* ===== FONDOS OSCUROS CON TINTE POR TEMA ===== */
+        body.theme-yellow { background: #141000 !important; }
+        body.theme-blue   { background: #000814 !important; }
+        body.theme-green  { background: #001408 !important; }
+        /* purple es el default (#0a0a14) — sin cambios */
+
+        /* ===== DEFINICIÓN DE TEMAS ORIGINALES (sin cambios) ===== */
         body.theme-yellow .panel-title,
         body.theme-yellow .edit-btn,
         body.theme-yellow .modal-full h2,
@@ -933,12 +948,336 @@
             box-shadow: 0 0 5px #00ff88 !important;
         }
 
-        /* Por defecto (púrpura) no necesita cambios, pero podemos asegurar */
         body.theme-purple .score-sep-dot {
             background: #ff00ea !important;
             box-shadow: 0 0 5px #ff00ea !important;
         }
 
+        /* ===== MACRO: genera tema con fondo tintado y TODOS los botones del color ===== */
+        /* COLOR = acento, BG = fondo oscuro con tinte del color */
+
+        /* Mixin helper — cada tema sigue este patrón:
+           - body bg: color muy oscuro + tinte del acento (~10% saturado)
+           - panel border: acento semitransparente (como purple original usa #ff00ea44)
+           - panel-title / textos clave: acento
+           - TODOS los botones de acción: fondo = acento, color = #000 o #fff
+           - welcome-name, modal-content border: acento
+           - score-sep-dot: acento
+        */
+
+        /* ── TEMA BLANCO (fondo gris-azul oscuro, acento blanco brillante) ── */
+        body.theme-white { background: #0d0d18 !important; }
+        body.theme-white .panel { border-color: rgba(220,220,255,0.35) !important; }
+        body.theme-white .panel-title,
+        body.theme-white .edit-btn,
+        body.theme-white .modal-full h2,
+        body.theme-white .team-hero-pts,
+        body.theme-white .goleadores-more-indicator,
+        body.theme-white .player-goals-count,
+        body.theme-white .modal-content h2,
+        body.theme-white .modal-content h3,
+        body.theme-white .team-name-title,
+        body.theme-white .stat-value.magenta,
+        body.theme-white .header { color: #e8e8ff !important; text-shadow: 0 0 12px rgba(220,220,255,0.6) !important; }
+        body.theme-white .plantilla-main-btn { background: #e8e8ff !important; color: #0d0d18 !important; box-shadow: 0 0 15px rgba(220,220,255,0.5) !important; border-color: #e8e8ff !important; }
+        body.theme-white .plantilla-main-btn:hover { box-shadow: 0 0 25px #e8e8ff !important; }
+        body.theme-white .ultimos-partidos-btn { background: #e8e8ff !important; color: #0d0d18 !important; box-shadow: 0 0 20px rgba(220,220,255,0.6) !important; border-color: #e8e8ff !important; }
+        body.theme-white .add-partido-btn { color: #e8e8ff !important; border-color: rgba(220,220,255,0.5) !important; }
+        body.theme-white .score-sep-dot { background: #e8e8ff !important; box-shadow: 0 0 5px #e8e8ff !important; }
+        body.theme-white .team-edit-btn { color: #e8e8ff !important; border-color: rgba(220,220,255,0.3) !important; }
+        body.theme-white .team-select-btn { border-color: rgba(220,220,255,0.4) !important; }
+        body.theme-white .name-chip:hover { background: #e8e8ff !important; color: #0d0d18 !important; }
+        body.theme-white .partido-neon-card:hover { border-color: rgba(220,220,255,0.3) !important; }
+        body.theme-white .modal-content { border-color: rgba(220,220,255,0.4) !important; }
+        body.theme-white .welcome-name { color: #e8e8ff !important; border-color: rgba(220,220,255,0.4) !important; text-shadow: 0 0 10px rgba(220,220,255,0.5) !important; }
+        body.theme-white button:not(.close-btn):not(.team-close-btn):not(.goleador-acciones button):not(.partido-admin-tools button):not(.btn-del-partido):not(.btn-add-goleador) { border-color: rgba(220,220,255,0.2) !important; }
+
+        /* ── TEMA OSCURO (fondo casi negro puro, acento gris-plata) ── */
+        body.theme-dark { background: #040408 !important; }
+        body.theme-dark .panel { border-color: rgba(180,180,220,0.15) !important; background: rgba(12,12,20,0.95) !important; }
+        body.theme-dark .panel-title,
+        body.theme-dark .edit-btn,
+        body.theme-dark .modal-full h2,
+        body.theme-dark .team-hero-pts,
+        body.theme-dark .goleadores-more-indicator,
+        body.theme-dark .player-goals-count,
+        body.theme-dark .modal-content h2,
+        body.theme-dark .modal-content h3,
+        body.theme-dark .team-name-title,
+        body.theme-dark .stat-value.magenta,
+        body.theme-dark .header { color: #9090c0 !important; text-shadow: 0 0 10px rgba(144,144,192,0.4) !important; }
+        body.theme-dark .plantilla-main-btn { background: #4a4a70 !important; color: #e0e0ff !important; box-shadow: 0 0 15px rgba(74,74,112,0.5) !important; border-color: #4a4a70 !important; }
+        body.theme-dark .ultimos-partidos-btn { background: #4a4a70 !important; color: #e0e0ff !important; box-shadow: 0 0 20px rgba(74,74,112,0.6) !important; border-color: #4a4a70 !important; }
+        body.theme-dark .add-partido-btn { color: #9090c0 !important; border-color: rgba(144,144,192,0.4) !important; }
+        body.theme-dark .score-sep-dot { background: #9090c0 !important; box-shadow: 0 0 5px #9090c0 !important; }
+        body.theme-dark .team-edit-btn { color: #9090c0 !important; border-color: rgba(144,144,192,0.25) !important; }
+        body.theme-dark .team-select-btn { border-color: rgba(144,144,192,0.25) !important; }
+        body.theme-dark .name-chip:hover { background: #4a4a70 !important; }
+        body.theme-dark .modal-content { border-color: rgba(144,144,192,0.3) !important; }
+        body.theme-dark .welcome-name { color: #9090c0 !important; border-color: rgba(144,144,192,0.3) !important; }
+
+        /* ── TEMA NARANJA (fondo oscuro con tinte naranja cálido) ── */
+        body.theme-orange { background: #140a00 !important; }
+        body.theme-orange .panel { border-color: rgba(255,107,0,0.3) !important; }
+        body.theme-orange .panel-title,
+        body.theme-orange .edit-btn,
+        body.theme-orange .modal-full h2,
+        body.theme-orange .team-hero-pts,
+        body.theme-orange .goleadores-more-indicator,
+        body.theme-orange .player-goals-count,
+        body.theme-orange .modal-content h2,
+        body.theme-orange .modal-content h3,
+        body.theme-orange .team-name-title,
+        body.theme-orange .stat-value.magenta,
+        body.theme-orange .header { color: #ff6b00 !important; text-shadow: 0 0 15px rgba(255,107,0,0.5) !important; }
+        body.theme-orange .plantilla-main-btn { background: #ff6b00 !important; color: #fff !important; box-shadow: 0 0 15px rgba(255,107,0,0.5) !important; border-color: #ff6b00 !important; }
+        body.theme-orange .plantilla-main-btn:hover { box-shadow: 0 0 25px #ff6b00 !important; }
+        body.theme-orange .ultimos-partidos-btn { background: #ff6b00 !important; color: #fff !important; box-shadow: 0 0 20px rgba(255,107,0,0.6) !important; border-color: #ff6b00 !important; }
+        body.theme-orange .add-partido-btn { color: #ff6b00 !important; border-color: rgba(255,107,0,0.5) !important; }
+        body.theme-orange .score-sep-dot { background: #ff6b00 !important; box-shadow: 0 0 5px #ff6b00 !important; }
+        body.theme-orange .team-edit-btn { color: #ff6b00 !important; border-color: rgba(255,107,0,0.3) !important; }
+        body.theme-orange .team-select-btn { border-color: rgba(255,107,0,0.4) !important; }
+        body.theme-orange .name-chip:hover { background: #ff6b00 !important; }
+        body.theme-orange .partido-neon-card:hover { border-color: rgba(255,107,0,0.3) !important; }
+        body.theme-orange .modal-content { border-color: rgba(255,107,0,0.4) !important; }
+        body.theme-orange .welcome-name { color: #ff6b00 !important; border-color: rgba(255,107,0,0.4) !important; text-shadow: 0 0 10px rgba(255,107,0,0.5) !important; }
+        body.theme-orange .dot-v { background: #ff6b00 !important; }
+
+        /* ── TEMA ROJO (fondo oscuro con tinte rojo profundo) ── */
+        body.theme-red { background: #120006 !important; }
+        body.theme-red .panel { border-color: rgba(255,34,68,0.3) !important; }
+        body.theme-red .panel-title,
+        body.theme-red .edit-btn,
+        body.theme-red .modal-full h2,
+        body.theme-red .team-hero-pts,
+        body.theme-red .goleadores-more-indicator,
+        body.theme-red .player-goals-count,
+        body.theme-red .modal-content h2,
+        body.theme-red .modal-content h3,
+        body.theme-red .team-name-title,
+        body.theme-red .stat-value.magenta,
+        body.theme-red .header { color: #ff2244 !important; text-shadow: 0 0 15px rgba(255,34,68,0.5) !important; }
+        body.theme-red .plantilla-main-btn { background: #ff2244 !important; color: #fff !important; box-shadow: 0 0 15px rgba(255,34,68,0.5) !important; border-color: #ff2244 !important; }
+        body.theme-red .plantilla-main-btn:hover { box-shadow: 0 0 25px #ff2244 !important; }
+        body.theme-red .ultimos-partidos-btn { background: #ff2244 !important; color: #fff !important; box-shadow: 0 0 20px rgba(255,34,68,0.6) !important; border-color: #ff2244 !important; }
+        body.theme-red .add-partido-btn { color: #ff2244 !important; border-color: rgba(255,34,68,0.5) !important; }
+        body.theme-red .score-sep-dot { background: #ff2244 !important; box-shadow: 0 0 5px #ff2244 !important; }
+        body.theme-red .team-edit-btn { color: #ff2244 !important; border-color: rgba(255,34,68,0.3) !important; }
+        body.theme-red .team-select-btn { border-color: rgba(255,34,68,0.4) !important; }
+        body.theme-red .name-chip:hover { background: #ff2244 !important; }
+        body.theme-red .partido-neon-card:hover { border-color: rgba(255,34,68,0.3) !important; }
+        body.theme-red .modal-content { border-color: rgba(255,34,68,0.4) !important; }
+        body.theme-red .welcome-name { color: #ff2244 !important; border-color: rgba(255,34,68,0.4) !important; text-shadow: 0 0 10px rgba(255,34,68,0.5) !important; }
+        body.theme-red .dot-v { background: #ff2244 !important; }
+
+        /* ── TEMA TEAL (fondo oscuro con tinte verde-mar) ── */
+        body.theme-teal { background: #00100e !important; }
+        body.theme-teal .panel { border-color: rgba(0,212,180,0.3) !important; }
+        body.theme-teal .panel-title,
+        body.theme-teal .edit-btn,
+        body.theme-teal .modal-full h2,
+        body.theme-teal .team-hero-pts,
+        body.theme-teal .goleadores-more-indicator,
+        body.theme-teal .player-goals-count,
+        body.theme-teal .modal-content h2,
+        body.theme-teal .modal-content h3,
+        body.theme-teal .team-name-title,
+        body.theme-teal .stat-value.magenta,
+        body.theme-teal .header { color: #00d4b4 !important; text-shadow: 0 0 15px rgba(0,212,180,0.5) !important; }
+        body.theme-teal .plantilla-main-btn { background: #00d4b4 !important; color: #000 !important; box-shadow: 0 0 15px rgba(0,212,180,0.5) !important; border-color: #00d4b4 !important; }
+        body.theme-teal .plantilla-main-btn:hover { box-shadow: 0 0 25px #00d4b4 !important; }
+        body.theme-teal .ultimos-partidos-btn { background: #00d4b4 !important; color: #000 !important; box-shadow: 0 0 20px rgba(0,212,180,0.6) !important; border-color: #00d4b4 !important; }
+        body.theme-teal .add-partido-btn { color: #00d4b4 !important; border-color: rgba(0,212,180,0.5) !important; }
+        body.theme-teal .score-sep-dot { background: #00d4b4 !important; box-shadow: 0 0 5px #00d4b4 !important; }
+        body.theme-teal .team-edit-btn { color: #00d4b4 !important; border-color: rgba(0,212,180,0.3) !important; }
+        body.theme-teal .team-select-btn { border-color: rgba(0,212,180,0.4) !important; }
+        body.theme-teal .name-chip:hover { background: #00d4b4 !important; color: #000 !important; }
+        body.theme-teal .partido-neon-card:hover { border-color: rgba(0,212,180,0.3) !important; }
+        body.theme-teal .modal-content { border-color: rgba(0,212,180,0.4) !important; }
+        body.theme-teal .welcome-name { color: #00d4b4 !important; border-color: rgba(0,212,180,0.4) !important; text-shadow: 0 0 10px rgba(0,212,180,0.5) !important; }
+        body.theme-teal .dot-v { background: #00d4b4 !important; }
+
+        /* ── TEMA ROSA (fondo oscuro con tinte rosa) ── */
+        body.theme-pink { background: #120008 !important; }
+        body.theme-pink .panel { border-color: rgba(255,105,180,0.3) !important; }
+        body.theme-pink .panel-title,
+        body.theme-pink .edit-btn,
+        body.theme-pink .modal-full h2,
+        body.theme-pink .team-hero-pts,
+        body.theme-pink .goleadores-more-indicator,
+        body.theme-pink .player-goals-count,
+        body.theme-pink .modal-content h2,
+        body.theme-pink .modal-content h3,
+        body.theme-pink .team-name-title,
+        body.theme-pink .stat-value.magenta,
+        body.theme-pink .header { color: #ff69b4 !important; text-shadow: 0 0 15px rgba(255,105,180,0.5) !important; }
+        body.theme-pink .plantilla-main-btn { background: #ff69b4 !important; color: #fff !important; box-shadow: 0 0 15px rgba(255,105,180,0.5) !important; border-color: #ff69b4 !important; }
+        body.theme-pink .plantilla-main-btn:hover { box-shadow: 0 0 25px #ff69b4 !important; }
+        body.theme-pink .ultimos-partidos-btn { background: #ff69b4 !important; color: #fff !important; box-shadow: 0 0 20px rgba(255,105,180,0.6) !important; border-color: #ff69b4 !important; }
+        body.theme-pink .add-partido-btn { color: #ff69b4 !important; border-color: rgba(255,105,180,0.5) !important; }
+        body.theme-pink .score-sep-dot { background: #ff69b4 !important; box-shadow: 0 0 5px #ff69b4 !important; }
+        body.theme-pink .team-edit-btn { color: #ff69b4 !important; border-color: rgba(255,105,180,0.3) !important; }
+        body.theme-pink .team-select-btn { border-color: rgba(255,105,180,0.4) !important; }
+        body.theme-pink .name-chip:hover { background: #ff69b4 !important; }
+        body.theme-pink .partido-neon-card:hover { border-color: rgba(255,105,180,0.3) !important; }
+        body.theme-pink .modal-content { border-color: rgba(255,105,180,0.4) !important; }
+        body.theme-pink .welcome-name { color: #ff69b4 !important; border-color: rgba(255,105,180,0.4) !important; text-shadow: 0 0 10px rgba(255,105,180,0.5) !important; }
+        body.theme-pink .dot-v { background: #ff69b4 !important; }
+
+        /* ===== MOBILE FIXES ===== */
+        @media (max-width: 768px) {
+            /* Theme selector - más compacto en móvil */
+            .theme-selector {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 58px;
+                gap: 6px;
+                padding: 4px 10px;
+            }
+
+            /* Botón últimos partidos en móvil */
+            .ultimos-partidos-btn {
+                top: 10px;
+                right: 10px;
+                font-size: 0.7rem;
+                padding: 0 12px;
+                height: 36px;
+                letter-spacing: 1px;
+            }
+
+            /* Watermark */
+            .watermark {
+                font-size: 0.6rem;
+                top: 15px;
+                left: 8px;
+            }
+
+            /* Top nav */
+            .top-nav {
+                margin-top: 95px;
+                gap: 8px;
+                padding: 0 10px;
+            }
+            .plantilla-main-btn {
+                font-size: 0.75rem;
+                padding: 7px 16px;
+            }
+
+            /* Container principal - stack vertical en móvil */
+            .container {
+                display: flex !important;
+                flex-direction: column !important;
+                padding: 10px !important;
+                gap: 12px !important;
+            }
+            .panel {
+                min-height: 280px;
+                max-height: 380px;
+            }
+            .panel:nth-child(3),
+            .panel:nth-child(4) { flex: unset; }
+
+            /* Header welcome */
+            .welcome-name {
+                font-size: 2.2rem;
+                padding: 12px 25px;
+                letter-spacing: 4px;
+                top: 46%;
+            }
+
+            /* Modales en móvil */
+            .modal-content {
+                width: 95vw !important;
+                max-width: 95vw !important;
+                padding: 18px !important;
+                margin: 10px;
+            }
+
+            /* Detalle partido en móvil */
+            .detalle-score-num { font-size: 3.5rem !important; }
+            .detalle-team-name { font-size: 0.6rem !important; }
+            .goleadores-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+
+            /* Tabla clasificación en móvil - ocultar columnas menos importantes */
+            table { font-size: 0.65rem !important; }
+            th { font-size: 0.6rem !important; padding: 4px 3px !important; }
+            td { padding: 5px 3px !important; font-size: 0.75rem !important; }
+
+            /* Top right tools */
+            .top-right-tools {
+                top: 10px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                display: none; /* hidden on mobile, shown only for admins via JS */
+            }
+            .top-right-tools.admin-visible {
+                display: flex !important;
+                left: auto;
+                transform: none;
+                right: 10px;
+                top: 50px;
+                flex-direction: column;
+                gap: 5px;
+                align-items: flex-end;
+            }
+
+            /* Team stats en móvil */
+            .team-stats-main { grid-template-columns: repeat(3,1fr) !important; }
+            .team-stat-box .stat-value { font-size: 1.5rem !important; }
+
+            /* Modal full */
+            .modal-full .modal-header { 
+                padding: 15px 12px 12px !important;
+                flex-direction: row;
+                align-items: center;
+            }
+            .modal-full h2 { font-size: 1.8rem !important; letter-spacing: 4px !important; }
+            .modal-full-actions { padding: 10px 12px !important; }
+
+            /* Player grid */
+            .player-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+            .player-card { min-height: 75px !important; }
+            .player-name { font-size: 0.65rem !important; }
+
+            /* Admin controls más grandes para touch */
+            .btn-mini { font-size: 0.9rem !important; padding: 4px !important; }
+            .admin-team-controls-buttons { gap: 6px !important; }
+            .pj-btn { min-width: 80px !important; font-size: 0.75rem !important; padding: 7px 10px !important; }
+
+            /* Score en tarjetas de partido */
+            .partido-neon-team .team-score { font-size: 3rem !important; }
+            .partido-neon-team .team-name { font-size: 0.6rem !important; letter-spacing: 1.5px !important; }
+
+            /* Team info modal */
+            .team-card-hero { height: 140px !important; }
+            .team-hero-logo { width: 70px !important; height: 70px !important; }
+            .team-hero-name { font-size: 1.6rem !important; }
+
+            /* Buttons en modales */
+            button { padding: 10px !important; font-size: 0.8rem !important; }
+        }
+
+        @media (max-width: 400px) {
+            .theme-selector { left: 5px; transform: none; gap: 5px; }
+            .theme-dot { width: 18px; height: 18px; }
+            .plantilla-main-btn { font-size: 0.7rem; padding: 6px 12px; }
+        }
+
+        /* ===== FIX MODAL OVERLAY EN MÓVIL ===== */
+        .modal {
+            align-items: flex-start !important;
+            padding: 20px 10px;
+            overflow-y: auto;
+        }
+        @media (max-width: 768px) {
+            .modal { 
+                padding: 10px 5px;
+                align-items: flex-start !important;
+            }
+        }
+
+        /* ===== RESTO ESTILOS ORIGINALES ===== */
         .watermark { 
             position: fixed; 
             top: 10px; 
@@ -950,55 +1289,55 @@
             font-weight: bold; 
             text-transform: uppercase; 
         }
-        .phone-btn { background: #00e5ff; color: #000; box-shadow: 0 0 15px #00e5ff66; }
-        .phone-btn:hover { box-shadow: 0 0 25px #00e5ff; }
+        .phone-btn { background: rgb(var(--c2)); color: #000; box-shadow: 0 0 15px rgba(var(--c2),0.4); }
+        .phone-btn:hover { box-shadow: 0 0 25px rgba(var(--c2),0.8); }
         .container { display:grid; grid-template-columns: repeat(4, 1fr); gap:15px; padding:20px; transition: 0.5s; }
         .container.mobile-mode { display: flex; flex-direction: column; overflow-y: auto; padding: 10px; }
         .container.mobile-mode .panel { min-height: 400px; margin-bottom: 15px; flex-shrink: 0; }
-        .panel { background:rgba(20,20,40,0.8); border:1px solid #ff00ea44; border-radius:15px; padding:15px; position:relative; display:flex; flex-direction:column; backdrop-filter: blur(10px); height: 100%; overflow: hidden; }
-        .panel-title { text-align:center; color:#ff00ea; font-size:1.2rem; margin-bottom:15px; font-weight:bold; text-transform: uppercase; }
+        .panel { background:rgba(20,20,40,0.8); border:1px solid rgba(var(--c1),0.27); border-radius:15px; padding:15px; position:relative; display:flex; flex-direction:column; backdrop-filter: blur(10px); height: 100%; overflow: hidden; }
+        .panel-title { text-align:center; color:rgb(var(--c1)); font-size:1.2rem; margin-bottom:15px; font-weight:bold; text-transform: uppercase; text-shadow: 0 0 10px rgba(var(--c1),0.5); }
        
         .panel:nth-child(3) { flex: 0.7; }
         .panel:nth-child(4) { flex: 1.3; }
        
-        .data-box { flex-grow:1; background:rgba(0,0,0,0.3); border-radius:10px; overflow-y:auto; padding:10px; border: 1px solid rgba(255, 0, 234, 0.1); }
+        .data-box { flex-grow:1; background:rgba(0,0,0,0.3); border-radius:10px; overflow-y:auto; padding:10px; border: 1px solid rgba(var(--c1),0.1); }
         .data-box::-webkit-scrollbar { width: 6px; }
-        .data-box::-webkit-scrollbar-thumb { background: #ff00ea; border-radius: 10px; }
+        .data-box::-webkit-scrollbar-thumb { background: rgb(var(--c1)); border-radius: 10px; }
        
         .team-cell { display: flex; align-items: center; gap: 8px; }
-        .team-logo-small { width: 35px; height: 35px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.1); border: 2px solid #ff00ea66; }
+        .team-logo-small { width: 35px; height: 35px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.1); border: 2px solid rgba(var(--c1),0.4); }
         .team-name-with-logo { font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        .team-select-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid #ff00ea; color: white; padding: 15px; margin: 8px 0; border-radius: 15px; width: 100%; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.8rem; }
-        .team-select-btn:hover { transform: scale(1.02); background: rgba(255,0,234,0.1); }
-        .team-logo-select { width: 60px; height: 60px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.1); border: 2px solid #ff00ea; margin-bottom: 5px; }
+        .team-select-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgb(var(--c1)); color: white; padding: 15px; margin: 8px 0; border-radius: 15px; width: 100%; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.8rem; }
+        .team-select-btn:hover { transform: scale(1.02); background: rgba(var(--c1),0.1); }
+        .team-logo-select { width: 60px; height: 60px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.1); border: 2px solid rgb(var(--c1)); margin-bottom: 5px; }
         .team-name-select { font-size: 1rem; letter-spacing: 1px; }
        
-        .team-logo-big { width: 100px; height: 100px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.1); border: 3px solid #ff00ea; margin-bottom: 15px; }
+        .team-logo-big { width: 100px; height: 100px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.1); border: 3px solid rgb(var(--c1)); margin-bottom: 15px; }
         .team-header-with-logo { display: flex; flex-direction: column; align-items: center; gap: 10px; }
        
-        .team-header-logo { width: 80px; height: 80px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.1); border: 3px solid #ff00ea; margin: 10px auto; }
+        .team-header-logo { width: 80px; height: 80px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.1); border: 3px solid rgb(var(--c1)); margin: 10px auto; }
         .team-title-with-logo { display: flex; flex-direction: column; align-items: center; gap: 5px; }
        
-        .clausulazo-item { background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; padding: 8px; border-left: 3px solid #ff00ea; border-radius: 4px; font-size: 0.8rem; }
+        .clausulazo-item { background: rgba(255,255,255,0.03); margin-bottom: 8px; padding: 8px; border-left: 3px solid rgb(var(--c1)); border-radius: 4px; font-size: 0.8rem; }
         .edit-btn { position:absolute; top:10px; right:10px; cursor:pointer; font-size:1rem; display:none; opacity:0.5; z-index: 10; transition: 0.3s; }
         .edit-btn:hover { opacity:1; transform: scale(1.2); }
         .player-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .player-card { background: #1a237e; border-radius: 10px; padding: 12px; text-align: center; border-bottom: 4px solid #ff00ea; position: relative; min-height: 90px; display: flex; flex-direction: column; justify-content: center; }
+        .player-card { background: #1a237e; border-radius: 10px; padding: 12px; text-align: center; border-bottom: 4px solid rgb(var(--c1)); position: relative; min-height: 90px; display: flex; flex-direction: column; justify-content: center; }
         .player-name { font-weight: bold; font-size: 0.75rem; color: white; text-transform: uppercase; }
-        .player-goals-count { font-size: 0.7rem; color: #ff00ea; font-weight: bold; }
-        .player-pj-count { font-size: 0.65rem; color: #00e5ff; font-weight: bold; margin-top: 2px; }
+        .player-goals-count { font-size: 0.7rem; color: rgb(var(--c1)); font-weight: bold; }
+        .player-pj-count { font-size: 0.65rem; color: rgb(var(--c2)); font-weight: bold; margin-top: 2px; }
         .captain-tag { color: #ffcc00; font-size: 0.6rem; font-weight: bold; letter-spacing: 1px; margin-top: 2px; }
         .player-admin-tools { position: absolute; top: 5px; right: 5px; display: none; }
         .btn-p-edit { color: #00e5ff; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
         .btn-p-del { color: #ff4444; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
         table { width:100%; border-collapse:collapse; font-size:0.75rem; }
-        th { color:#ff00ea; border-bottom:1px solid #ff00ea44; padding:6px; position: sticky; top: 0; background: #141428; z-index: 5; font-size:0.75rem; }
+        th { color:rgb(var(--c1)); border-bottom:1px solid rgba(var(--c1),0.27); padding:6px; position: sticky; top: 0; background: #141428; z-index: 5; font-size:0.75rem; }
         td { padding:8px; text-align:center; border-bottom:1px solid #ffffff05; font-size:1.1rem; }
         .admin-controls { display: none; margin-left: 5px; }
         .btn-mini { background: none; border: none; cursor: pointer; font-size: 0.75rem; padding: 2px; display: inline-block; margin: 0 2px; }
         .btn-del { color: #ff4444; }
-        .btn-edit { color: #00e5ff; }
+        .btn-edit { color: rgb(var(--c2)); }
         .dinero-txt { color: #00ff88; font-weight: bold; }
         .form-dots { display: flex; justify-content: center; gap: 4px; }
         .dot { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
@@ -1007,26 +1346,27 @@
         .dot-e { background: #6c757d; }
         .dot:last-child { border: 2px solid white; box-shadow: 0 0 5px white; }
         .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:3000; align-items:center; justify-content:center; }
-        .modal-content { background:#1a1a2e; padding:30px; border:2px solid #ff00ea; border-radius:25px; width:550px; text-align:center; box-shadow: 0 0 30px #ff00ea66; max-height: 85vh; overflow-y: auto; position: relative; }
-        input, textarea { width:100%; padding:10px; margin:8px 0; background:#0a0a14; border:1px solid #ff00ea44; color:white; border-radius:8px; }
-        button { width:100%; padding:12px; background:#ff00ea; border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; }
+        .modal-content { background:#1a1a2e; padding:30px; border:2px solid rgb(var(--c1)); border-radius:25px; width:550px; text-align:center; box-shadow: 0 0 30px rgba(var(--c1),0.4); max-height: 85vh; overflow-y: auto; position: relative; }
+        input, textarea { width:100%; padding:10px; margin:8px 0; background:#0a0a14; border:1px solid rgba(var(--c1),0.27); color:white; border-radius:8px; }
+        button { width:100%; padding:12px; background:rgb(var(--c1)); border:none; color:white; font-weight:bold; cursor:pointer; border-radius:8px; margin-top:10px; }
         .top-right-tools { position: fixed; top: 10px; right: 10px; display: flex; gap: 10px; align-items: center; z-index: 20; }
         .tool-icon { cursor: pointer; font-size: 1.3rem; opacity: 0.3; transition: 0.3s; }
         .tool-icon:hover { opacity: 1; transform: scale(1.1); }
         .names-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
-        .name-chip { font-size: 0.75rem; background: rgba(255,0,234,0.1); padding: 5px 12px; border-radius: 15px; cursor: pointer; transition: 0.2s; border: 1px solid rgba(255,0,234,0.3); color: white; font-weight: bold; }
-        .name-chip:hover { background: #ff00ea; transform: scale(1.1); }
+        .name-chip { font-size: 0.75rem; background: rgba(var(--c1),0.1); padding: 5px 12px; border-radius: 15px; cursor: pointer; transition: 0.2s; border: 1px solid rgba(var(--c1),0.3); color: white; font-weight: bold; }
+        .name-chip:hover { background: rgb(var(--c1)); transform: scale(1.1); }
         .log-item { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #ffffff11; font-size: 0.75rem; text-align: left; }
         #btn-logs-header { display: none; background: #7000ff; color: white; padding: 4px 12px; border-radius: 10px; font-size: 0.65rem; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; }
        
-        .team-group { margin: 15px 0; padding: 12px; border: 1px solid #ff00ea44; border-radius: 12px; background: rgba(255,0,234,0.03); }
-        .team-group h3 { color: #00e5ff; font-size: 1.1rem; margin-bottom: 10px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
-        #add-player-btn { background: #00e5ff; color: #000; border: none; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; margin: 15px auto; display: block; box-shadow: 0 0 15px #00e5ff66; }
-        #add-player-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px #00e5ff; }
+        .team-group { margin: 15px 0; padding: 12px; border: 1px solid rgba(var(--c1),0.27); border-radius: 12px; background: rgba(var(--c1),0.03); }
+        .team-group h3 { color: rgb(var(--c2)); font-size: 1.1rem; margin-bottom: 10px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        #add-player-btn { background: rgb(var(--c2)); color: #000; border: none; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; margin: 15px auto; display: block; box-shadow: 0 0 15px rgba(var(--c2),0.4); }
+        #add-player-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(var(--c2),0.8); }
         #invitado-btn { background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; margin: 5px auto 0; display: block; width: 200px; box-shadow: 0 0 15px #6c757d66; }
         #invitado-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px #6c757d; }
         #full-logs-modal .modal-content { width: 95%; max-width: 1200px; height: 95vh; padding: 20px; overflow-y: auto; }
         #full-logs-list { max-height: none; }
+
         /* ============ TEAM INFO CARD - PREMIUM REDESIGN ============ */
         #team-info-modal .modal-content {
             width: 600px;
@@ -1046,7 +1386,6 @@
             position: relative;
         }
 
-        /* Hero banner con logo */
         .team-card-hero {
             position: relative;
             height: 180px;
@@ -1171,12 +1510,10 @@
             text-transform: uppercase;
         }
 
-        /* Stats body */
         .team-card-body {
             padding: 20px 24px 24px;
         }
 
-        /* Fila principal de stats */
         .team-stats-main {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1216,7 +1553,6 @@
         .stat-value.cyan { color: #00e5ff; text-shadow: 0 0 15px rgba(0,229,255,0.3); }
         .stat-value.magenta { color: #ff00ea; text-shadow: 0 0 15px rgba(255,0,234,0.4); }
 
-        /* Goles fila */
         .team-stats-goals {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -1224,7 +1560,6 @@
             margin-bottom: 16px;
         }
 
-        /* Forma */
         .team-form-section {
             margin-bottom: 16px;
         }
@@ -1270,7 +1605,6 @@
         .form-dot-big.dot-e { background: rgba(108,117,125,0.15); border: 2px solid #6c757d; color: #6c757d; }
         .form-dot-big:last-child { border-width: 2px; box-shadow: 0 0 20px currentColor; }
 
-        /* Dinero */
         .team-money-bar {
             background: rgba(0,255,136,0.05);
             border: 1px solid rgba(0,255,136,0.15);
@@ -1298,7 +1632,6 @@
             text-shadow: 0 0 15px rgba(0,255,136,0.4);
         }
 
-        /* Botón editar */
         .team-edit-btn {
             width: 100%;
             font-family: 'Rajdhani', sans-serif;
@@ -1342,7 +1675,6 @@
             color: rgba(255,255,255,0.4);
         }
 
-        /* Logo upload modal */
         .logo-upload-zone {
             border: 2px dashed rgba(255,0,234,0.3);
             border-radius: 16px;
@@ -1396,7 +1728,6 @@
             font-size: 0.8rem;
         }
 
-        /* Legacy kept */
         .team-info-card { background: rgba(0,0,0,0.3); border-radius: 20px; padding: 30px; margin: 20px 0; border: 2px solid #ff00ea44; }
         .team-info-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 30px 0; }
         .stat-item { background: rgba(255,0,234,0.1); border-radius: 15px; padding: 20px; text-align: center; }
@@ -1414,7 +1745,6 @@
         .clasificacion-2 td { color: #d0d0d0 !important; font-size: 1.1rem !important; font-weight: bold; background: rgba(200,200,200,0.04) !important; }
         .clasificacion-3 td { color: #cd7f32 !important; font-size: 1.1rem !important; font-weight: bold; background: rgba(205,127,50,0.06) !important; }
         .clasificacion-other td { color: #a0a0a0 !important; font-size: 1.1rem !important; background: rgba(160,160,160,0.02) !important; }
-        .welcome-name { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); color: #00e5ff; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px #00e5ff; z-index: 15; background: rgba(10,10,20,0.8); padding: 5px 20px; border-radius: 20px; border: 1px solid #00e5ff44; backdrop-filter: blur(5px); pointer-events: none; }
         .logo-preview { max-width: 100px; max-height: 100px; margin: 10px auto; border-radius: 10px; border: 2px solid #ff00ea; display: block; }
         .admin-team-controls-buttons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
         .pj-btn { background: #00e5ff; color: #000; border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.8rem; box-shadow: 0 0 10px #00e5ff; flex: 1 1 auto; min-width: 100px; }
@@ -1422,7 +1752,23 @@
         .pj-btn.minus { background: #ffaa00; box-shadow: 0 0 10px #ffaa00; }
         .pj-btn.minus:hover { box-shadow: 0 0 20px #ffaa00; }
 
-        /* ========= NUEVAS ANIMACIONES DE FONDO ========= */
+        /* ========= CSS VARIABLES POR TEMA ========= */
+        body {
+            --c1: 255,0,234;   /* color primario (magenta por defecto) */
+            --c2: 0,229,255;   /* color secundario (cyan por defecto) */
+        }
+        body.theme-purple { --c1: 255,0,234;   --c2: 0,229,255; }
+        body.theme-yellow { --c1: 255,204,0;   --c2: 255,160,0; }
+        body.theme-blue   { --c1: 58,134,255;  --c2: 0,200,255; }
+        body.theme-green  { --c1: 0,255,136;   --c2: 0,220,180; }
+        body.theme-white  { --c1: 200,200,255; --c2: 160,160,220; }
+        body.theme-dark   { --c1: 120,120,180; --c2: 80,80,140; }
+        body.theme-orange { --c1: 255,107,0;   --c2: 255,180,0; }
+        body.theme-red    { --c1: 255,34,68;   --c2: 200,0,80; }
+        body.theme-teal   { --c1: 0,212,180;   --c2: 0,255,200; }
+        body.theme-pink   { --c1: 255,105,180; --c2: 220,60,140; }
+
+        /* ========= ANIMACIONES DE FONDO ========= */
         body::before {
             content: '';
             position: fixed;
@@ -1430,9 +1776,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 40%, rgba(255,0,234,0.02) 0%, transparent 30%),
-                        radial-gradient(circle at 70% 60%, rgba(0,229,255,0.02) 0%, transparent 35%),
-                        repeating-linear-gradient(45deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 2px, transparent 2px, transparent 12px);
+            background: radial-gradient(circle at 30% 40%, rgba(var(--c1),0.035) 0%, transparent 30%),
+                        radial-gradient(circle at 70% 60%, rgba(var(--c2),0.03) 0%, transparent 35%),
+                        repeating-linear-gradient(45deg, rgba(255,255,255,0.004) 0px, rgba(255,255,255,0.004) 2px, transparent 2px, transparent 12px);
             pointer-events: none;
             z-index: 0;
             animation: bgPulse 16s ease-in-out infinite alternate;
@@ -1445,8 +1791,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(255,0,234,0.015) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 20%, rgba(0,229,255,0.015) 0%, transparent 40%);
+            background: radial-gradient(circle at 20% 80%, rgba(var(--c1),0.025) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 20%, rgba(var(--c2),0.02) 0%, transparent 40%);
             pointer-events: none;
             z-index: 0;
             animation: bgShift 20s infinite alternate;
@@ -1462,7 +1808,6 @@
             100% { background-position: 5% 5%; }
         }
 
-        /* Partículas flotantes (opcional) */
         .floating-particles {
             position: fixed;
             top: 0;
@@ -1479,9 +1824,9 @@
             display: block;
             width: 2px;
             height: 2px;
-            background: rgba(255,0,234,0.2);
+            background: rgba(var(--c1),0.25);
             border-radius: 50%;
-            box-shadow: 0 0 10px #ff00ea, 0 0 20px #00e5ff;
+            box-shadow: 0 0 10px rgba(var(--c1),0.8), 0 0 20px rgba(var(--c2),0.4);
             animation: float 12s linear infinite;
         }
 
@@ -1494,7 +1839,7 @@
     </style>
 </head>
 <body class="theme-purple">
-    <!-- Partículas flotantes (añadidas sin borrar nada) -->
+    <!-- Partículas flotantes -->
     <div class="floating-particles">
         <span style="left: 15%; animation-duration: 14s; animation-delay: 0s;"></span>
         <span style="left: 30%; animation-duration: 18s; animation-delay: 2s;"></span>
@@ -1509,16 +1854,23 @@
     </div>
 
     <div class="watermark">Hecho por Vadym</div>
-    <!-- Selector de temas (círculos de colores) -->
+
+    <!-- Selector de temas AMPLIADO (10 colores) -->
     <div class="theme-selector">
-        <div class="theme-dot yellow" data-theme="yellow" onclick="setUserTheme('yellow')"></div>
-        <div class="theme-dot blue" data-theme="blue" onclick="setUserTheme('blue')"></div>
-        <div class="theme-dot purple" data-theme="purple" onclick="setUserTheme('purple')"></div>
-        <div class="theme-dot green" data-theme="green" onclick="setUserTheme('green')"></div>
+        <div class="theme-dot yellow" title="AMARILLO" onclick="setUserTheme('yellow')"></div>
+        <div class="theme-dot blue" title="AZUL" onclick="setUserTheme('blue')"></div>
+        <div class="theme-dot purple" title="PÚRPURA" onclick="setUserTheme('purple')"></div>
+        <div class="theme-dot green" title="VERDE" onclick="setUserTheme('green')"></div>
+        <div class="theme-dot white" title="BLANCO" onclick="setUserTheme('white')"></div>
+        <div class="theme-dot dark" title="OSCURO" onclick="setUserTheme('dark')"></div>
+        <div class="theme-dot orange" title="NARANJA" onclick="setUserTheme('orange')"></div>
+        <div class="theme-dot red" title="ROJO" onclick="setUserTheme('red')"></div>
+        <div class="theme-dot teal" title="TEAL" onclick="setUserTheme('teal')"></div>
+        <div class="theme-dot pink" title="ROSA" onclick="setUserTheme('pink')"></div>
     </div>
 
     <button class="ultimos-partidos-btn" onclick="openModalFull('ultimos-partidos-full')">ÚLTIMOS PARTIDOS</button>
-    <div class="top-right-tools">
+    <div class="top-right-tools" id="top-right-tools">
         <button id="btn-logs-header" onclick="openModal('logs-modal')">LOGS</button>
         <button id="btn-admin-actions" onclick="openAdminActionsModal()" style="display:none; background:#ff00ea; color:white; padding:4px 12px; border-radius:10px; font-size:0.65rem; border:none; cursor:pointer; font-weight:bold; text-transform:uppercase; width:auto;">ACCIONES</button>
         <button id="btn-undo-header" onclick="undoLastAction()" style="display:none; background:#ffaa00; color:#000; padding:4px 12px; border-radius:10px; font-size:0.65rem; border:none; cursor:pointer; font-weight:bold; text-transform:uppercase; width:auto;">↩ DESHACER</button>
@@ -1754,17 +2106,7 @@
         </div>
     </div>
     
-    <!-- Modal de autenticación de Enol -->
-    <div id="enol-auth-modal" class="modal">
-        <div class="modal-content">
-            <h3>ACCESO PARA ENOL</h3>
-            <p style="color:#00e5ff; margin-bottom:15px;">Introduce tus credenciales</p>
-            <input type="text" id="enol-user" placeholder="Usuario">
-            <input type="password" id="enol-pass" placeholder="Contraseña">
-            <button onclick="enolLogin()">ENTRAR</button>
-            <button onclick="closeModals(); openModal('welcome-modal');">CANCELAR</button>
-        </div>
-    </div>
+    <!-- enol-auth-modal eliminado: Enol entra directamente -->
 
     <!-- Modal de acciones admin -->
     <div id="admin-actions-modal" class="modal">
@@ -1789,17 +2131,25 @@
             teams: {}, 
             accessLogs: [],
             ultimosPartidos: [],
-            userThemes: {} // nuevo: guarda la tema de cada usuario
+            userThemes: {}
         };
         let isAdmin = false;
         let isEnolMode = false;
         let currentOpenTeam = "";
         const captains = ["Enol", "Moreno", "Carlos Fernández"];
 
+        // ===== MOBILE: mostrar herramientas admin si es necesario =====
+        function updateMobileAdminTools() {
+            const tools = document.getElementById('top-right-tools');
+            if (isAdmin && !isEnolMode) {
+                tools.classList.add('admin-visible');
+            }
+        }
+
         // ===== FUNCIONES PARA TEMAS =====
         function applyTheme(theme) {
             if (!theme) theme = 'purple';
-            document.body.className = ''; // limpia clases anteriores
+            document.body.className = '';
             document.body.classList.add('theme-' + theme);
         }
 
@@ -1812,12 +2162,12 @@
             if (!globalData.userThemes) globalData.userThemes = {};
             globalData.userThemes[userName] = theme;
             applyTheme(theme);
-            sync(); // guardar en la nube
+            sync();
         }
 
         // ===== HISTORIAL DE ACCIONES ADMIN Y DESHACER =====
-        let adminActionLog = []; // { time, action, detail }
-        let undoStack = [];      // snapshots of globalData before each change
+        let adminActionLog = [];
+        let undoStack = [];
 
         function logAdminAction(action, detail) {
             const now = new Date();
@@ -1892,7 +2242,7 @@
                         const name = typeof p === 'object' ? p.n : p;
                         if (name) {
                             if (name === "Enol") {
-                                html += `<div class="name-chip" onclick="openModal('enol-auth-modal')">${name}</div>`;
+                                html += `<div class="name-chip" onclick="saveUserSession('Enol')">${name}</div>`;
                             } else {
                                 html += `<div class="name-chip" onclick="saveUserSession('${name.replace(/'/g, "\\'")}')">${name}</div>`;
                             }
@@ -1902,7 +2252,7 @@
                     if (teamName === "Pingüinos Locos") {
                         const defaultPlayers = ["Enol", "Eiden", "Fajardo", "Unai", "Andrés", "Javi"];
                         defaultPlayers.forEach(name => {
-                            if (name === "Enol") { html += `<div class="name-chip" onclick="openModal('enol-auth-modal')">${name}</div>`; }
+                            if (name === "Enol") { html += `<div class="name-chip" onclick="saveUserSession('Enol')">${name}</div>`; }
                             else { html += `<div class="name-chip" onclick="saveUserSession('${name}')">${name}</div>`; }
                         });
                     } else if (teamName === "Pajillas") {
@@ -1982,11 +2332,10 @@
                 document.getElementById('welcome-name').innerHTML = `BIENVENIDO ${name}`;
             }
             document.getElementById('main-header').classList.add('with-name');
-            // Aplicar tema guardado para este usuario
             if (globalData.userThemes && globalData.userThemes[name]) {
                 applyTheme(globalData.userThemes[name]);
             } else {
-                applyTheme('purple'); // por defecto
+                applyTheme('purple');
             }
             closeModals();
             await sync();
@@ -2045,7 +2394,6 @@
         function login() {
             const u = document.getElementById('user').value;
             const p = document.getElementById('pass').value;
-            // Nuevo password: 10 10 (antes Ы И)
             if(u === '10' && p === '10') {
                 isAdmin = true;
                 isEnolMode = false;
@@ -2055,6 +2403,7 @@
                 document.getElementById('btn-undo-header').style.display = 'block';
                 document.getElementById('add-player-btn').style.display = 'block';
                 document.getElementById('add-partido-full-btn').style.display = 'inline-flex';
+                updateMobileAdminTools();
                 render();
                 renderLogs();
                 closeModals();
@@ -2076,13 +2425,8 @@
                 return;
             }
             const iconMap = {
-                'AÑADIR': '➕',
-                'ELIMINAR': '🗑️',
-                'EDITAR': '✏️',
-                'GUARDAR': '💾',
-                '+1 PJ': '📈',
-                '-1 PJ': '📉',
-                '↩': '↩️'
+                'AÑADIR': '➕', 'ELIMINAR': '🗑️', 'EDITAR': '✏️', 'GUARDAR': '💾',
+                '+1 PJ': '📈', '-1 PJ': '📉', '↩': '↩️'
             };
             let html = '';
             adminActionLog.forEach((entry, idx) => {
@@ -2108,7 +2452,6 @@
                 const data = await res.json();
                 if (data) {
                     globalData = data;
-                    // Asegurar userThemes
                     if (!globalData.userThemes) globalData.userThemes = {};
                     const equiposBase = ["Pingüinos Locos", "Atlético de Jhonsy", "Pajillas"];
                     if (!globalData.clasificacion) globalData.clasificacion = [];
@@ -2137,7 +2480,6 @@
                             document.getElementById('welcome-name').innerHTML = `BIENVENIDO ${savedName}`;
                         }
                         document.getElementById('main-header').classList.add('with-name');
-                        // Aplicar tema guardado para el usuario
                         if (globalData.userThemes && globalData.userThemes[savedName]) {
                             applyTheme(globalData.userThemes[savedName]);
                         } else {
@@ -2164,31 +2506,21 @@
             openModal('team-list-modal');
         }
         
-        // ===== FIX: Inicializa jugadores por defecto en globalData.teams si el equipo está vacío =====
         function getDefaultPlayers(teamName) {
             if (teamName === "Pingüinos Locos") {
                 return [
-                    { n: "Enol", g: 0, pj: 0 },
-                    { n: "Eiden", g: 0, pj: 0 },
-                    { n: "Fajardo", g: 0, pj: 0 },
-                    { n: "Unai", g: 0, pj: 0 },
-                    { n: "Andrés", g: 0, pj: 0 },
-                    { n: "Javi", g: 0, pj: 0 }
+                    { n: "Enol", g: 0, pj: 0 }, { n: "Eiden", g: 0, pj: 0 }, { n: "Fajardo", g: 0, pj: 0 },
+                    { n: "Unai", g: 0, pj: 0 }, { n: "Andrés", g: 0, pj: 0 }, { n: "Javi", g: 0, pj: 0 }
                 ];
             } else if (teamName === "Pajillas") {
                 return [
-                    { n: "Carlos Fernández", g: 0, pj: 0 },
-                    { n: "Carlos Gutiérrez", g: 0, pj: 0 },
-                    { n: "Jacobo", g: 0, pj: 0 },
-                    { n: "Fran", g: 0, pj: 0 }
+                    { n: "Carlos Fernández", g: 0, pj: 0 }, { n: "Carlos Gutiérrez", g: 0, pj: 0 },
+                    { n: "Jacobo", g: 0, pj: 0 }, { n: "Fran", g: 0, pj: 0 }
                 ];
             } else if (teamName === "Atlético de Jhonsy") {
                 return [
-                    { n: "Moreno", g: 0, pj: 0 },
-                    { n: "Marc", g: 0, pj: 0 },
-                    { n: "Rodri", g: 0, pj: 0 },
-                    { n: "Pou", g: 0, pj: 0 },
-                    { n: "Ángel", g: 0, pj: 0 }
+                    { n: "Moreno", g: 0, pj: 0 }, { n: "Marc", g: 0, pj: 0 }, { n: "Rodri", g: 0, pj: 0 },
+                    { n: "Pou", g: 0, pj: 0 }, { n: "Ángel", g: 0, pj: 0 }
                 ];
             }
             return [];
@@ -2206,11 +2538,8 @@
         }
 
         function renderTeamPlayers() {
-            // Aseguramos que si el equipo está vacío, inicializamos con los defaults y guardamos
             ensureTeamPlayersInitialized(currentOpenTeam);
-
             let players = globalData.teams[currentOpenTeam] || [];
-
             players.sort((a, b) => (captains.includes(b.n) ? 1 : 0) - (captains.includes(a.n) ? 1 : 0));
             let html = "";
             players.forEach((p, idx) => {
@@ -2956,8 +3285,19 @@
             container.classList.toggle('mobile-mode');
             document.getElementById('toggle-view-btn').innerText = container.classList.contains('mobile-mode') ? "MODO IPAD" : "MODO MÓVIL";
         }
+
+        // Auto modo móvil en pantallas pequeñas
+        function checkMobileMode() {
+            const container = document.getElementById('main-container');
+            if (window.innerWidth <= 768) {
+                container.classList.add('mobile-mode');
+                document.getElementById('toggle-view-btn').innerText = "MODO IPAD";
+            }
+        }
         
         loadData();
+        checkMobileMode();
+        window.addEventListener('resize', checkMobileMode);
         
         let fromWelcome = false;
         document.querySelector('.admin-access-circle-left').addEventListener('click', () => { fromWelcome = true; });
